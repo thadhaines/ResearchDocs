@@ -77,7 +77,7 @@
 	\begin{enumerate}
 		\item An AMQP only solution decided upon for PY3<->IPY communication
 
-		\item A more realistic AMQP code process has been written and tested. This includes a more 'batch' style of message communication which would mimic process A sending many messages to process B before handing off control to process B. The coded situation shows the naturally parallel processing advantage of AMQP. 
+		\item A more realistic AMQP code process has been written and tested to send / receive many messages as a batch between Python3 and Ironpython. The coded experiment reveals the parallel processing advantage inherent with AMQP. 
 
 		\item Refactor started.
 
@@ -124,10 +124,7 @@
 		
 		\item Think about having all simulation parameters be defined in one file that is fed into simulation. i.e. Have all perturbance, AGC, LTD, etc., related code in a text file so python doesn't have to be a 'user' thing.
 		
-		\item Package code into library and refactor (think of a nice name):\\
-		Power System Long-Term Dynamic Simulation $\rightarrow$ PSLTDSim
-		
-		\item Investigate Runge-Kutta integration.. (probably inside scipy...)\\
+		\item Investigate Runge-Kutta integration. (probably inside scipy...)
 	%	\includegraphics[width=.7\linewidth]{rk4}
 		
 		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
