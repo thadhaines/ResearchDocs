@@ -88,23 +88,23 @@
 
 		\item Added simple code timing.
 
-		\item Terminal output reduced for non-debug runs.
+		\item Terminal output reduced for non-debug runs. Tested 2 machine 1 gov 60 second simulation:
 		\subitem Leads to speedup of $\approx$2 when running from Visual Studio
 		\subitem Only about $\approx$1.5 speedup from terminal runs
 		\subitem Equates to a simulation 6 to 14.75 times faster than real time (using 0.5 sec time step)
 		
 		\item New Fact: Github is now owned by Microsoft - allows for free private repos.
 
-		\item GitHub repository updated:
+		\item GitHub updated:
 		\subitem \verb|https://github.com/thadhaines/|
 		
 	\end{enumerate}
 \paragraph{Current Tasks:}
 	\begin{enumerate}
 		\item Continue refactor and incorporation of AMQP into simulation process.
-			\subitem Flow chart various processes to more clearly define where, and how, communication can be coded efficiently.
+			\subitem Work to clearly define where, and how, communication can be coded efficiently.
 		\item Experiment with ODE solver in numpy / scipy \verb|odeint| in Python 3
-			\subitem Make a tgov1 for LTD simulation
+			\subitem Make a tgov1 for LTD simulation using Python 3 ODE solver
 
 		\item Define Agent actions for AGC/LFC (ACE calculations), Shunt Control, $\beta$ calculation
 
