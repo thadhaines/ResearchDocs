@@ -77,7 +77,7 @@
 
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
-		\item An AMQP only solution completed for PY3 $\Leftrightarrow $ IPY $\Leftrightarrow $ PSLF communication.
+		\item AMQP solution completed for \\ PY3 $\Leftrightarrow $ IPY $\Leftrightarrow $ PSLF communication.
 			\begin{itemize}
 			\item Causes a slow down of 3-5 times compared to non-AMQP runs.
 			\item Current AMQP code runs at 2-3 times real time.
@@ -85,14 +85,14 @@
 
 		\item Code refactor seems complete.
 
-		\item Added ability to parse \verb|.ltd| files
+		\item Added ability to parse \verb|.ltd| files.
 			\begin{itemize}
 			\item ltd file $\triangleq$ a text file with LTD specific model parameters and perturbance settings. Similar to a dyd file, but different. (example on reverse)
 			\end{itemize}
 
-		\item \verb|matplotlib| plot functions created
-
-		\item Load Ramp Pertrubance agent created.
+		\item Load Ramp Pertrubance agent created. 
+		
+		\item \verb|matplotlib| plot functions created. (Ramp example on reverse)
 
 		\item $\beta$ (area frequency response characteristic) calculation added to Area agent
 
@@ -103,20 +103,22 @@
 \paragraph{Current Tasks:}
 	\begin{enumerate}
 	
-		\item Experiment with ODE solver in numpy / scipy \verb|odeint| in Python 3
+		\item Experiment with Python 3 ODE solver \\
+		(i.e. \verb|numpy| / \verb|scipy| / \verb|odeint| )
 			\begin{itemize}
-			\item Make a tgov1 model compatible with LTD simulations using Python 3 ODE solver
+			\item Make a tgov1 model compatible with LTD simulations
 			\item Use integrator for combined swing in AMQP code
-			\item Investigate Python 3 (scipy) integration methods and parameters
+		%	\item Investigate Python 3 (scipy) integration methods and parameters
 			\end{itemize}
 
 		\item Create an agent for every object: Shunt, SVD, Branch, Transformer, ...
 
 		\item Define Agent actions for \\ AGC/LFC (i.e. ACE calculations)
 
-		\item Formulate an experiment utilizing a multi-area model that can be verified in PSLF.
+		\item Formulate an experiment utilizing a multi-area model that can be validated with PSLF.
 
-		\item Investigate line current data
+		\item Investigate line current data and ULTC action in PSLF.
+		
 		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
 		
 
@@ -127,14 +129,14 @@
 
 \paragraph{Future Tasks:}(Little to No Progress since last time / Things coming down the pipe)
 	\begin{enumerate}
-		\item Think about Shunt Control \ Generic Agent control based on system state
+		\item Think about Shunt Control / Generic Agent control based on system state(s)
 
-		\item Flow chart AMQP process to more clearly explain what's happening.
+		\item Flow chart AMQP process to more clearly explain what's happening there.
 
-		\item Identify System Slack bus programmatically (maybe just assume in first area?)
-		\subitem OR calculate system slack error differently... An average of slack error?
+		\item Identify System Slack bus programmatically (currently assumes first slack if > 1)
+		\subitem AND/OR calculate system slack error differently $\rightarrow$ An average of slack errors?
 
-		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Matt request: Enable multiple dyd files to overwrite / replace previously defined agents/parameters
 		
 		%\subitem Can locate when only 1 Slack exists. If more than one Slack, maybe identify by generator with most busses under control? Proving more difficult than expected. Can identify in PSLF via the \verb|summ()| or \verb|isld()| commands. 
 		
@@ -142,12 +144,17 @@
 	\paragraph{Current Questions:}
 	\begin{enumerate}
 		
-		\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia but on Wecc/MiniWecc Scale?
+		\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale?
 		
 		\item Is there more available/relevant event data that may help us to verify simulations of specific instances (wind ramps or other behavior) that novel research will focus on?\\ (Heredia paper data helpful for some wind ramp data context)
 
 		\item Any progress on Wecc single gen per bus system, and/or miniWecc Area definitions?
+		\\
+		
+		
+		\includegraphics[width=\linewidth]{g4aSys}
 	\end{enumerate}
+
 \vfill\null
 
 \end{multicols}
@@ -155,9 +162,11 @@
 \pagebreak
 \begin{landscape}
 \begin{centering}
-\includegraphics[width=\linewidth]{pythonRamp}
+\includegraphics[width=\linewidth]{pythonRamp02}
+\vspace{-1em}
 \end{centering}
 \vspace{-1em}
+\paragraph{.ltd File Example:}
 \begin{Verbatim}
 # LTD simulation models / perturbances 
 # Commented and empty lines are ignored during parsing.
