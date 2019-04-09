@@ -1,0 +1,63 @@
+\documentclass[]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,calc,positioning}
+\usepackage{amsmath} % for dfrac
+
+\tikzset{
+    block/.style = {draw, rectangle,
+        minimum height=1.2cm,
+        minimum width=2cm},
+    input/.style = {coordinate,node distance=1cm},
+    output/.style = {coordinate,node distance=1cm},
+    sum/.style = {draw, circle, node distance=1cm},
+}
+
+\tikzset{% from https://tex.stackexchange.com/questions/161075/saturation-block
+  saturation block/.style={%
+    draw, 
+    path picture={
+      % Get the width and height of the path picture node
+      \pgfpointdiff{\pgfpointanchor{path picture bounding box}{north east}}%
+        {\pgfpointanchor{path picture bounding box}{south west}}
+      \pgfgetlastxy\x\y
+      % Scale the x and y vectors so that the range
+      % -1 to 1 is slightly shorter than the size of the node
+      \tikzset{x=\x*.4, y=\y*.4}
+      %
+      % Draw annotation
+      \draw (-1,0) -- (1,0) (0,-1) -- (0,1); 
+      \draw (-1,-.7) -- (-.7,-.7) -- (.7,.7) -- (1,.7);
+    }
+  }
+}
+
+\begin{document}
+        \begin{tikzpicture}[auto, node distance=1cm,>=triangle 45]
+        \node [input, name=input, label=$\omega_{PU}(t)$] {};
+        \node [sum, right=of input,label={55:$\Delta\omega_{PU}$}] (sum1) {$\Sigma$};
+        \node [block, right=of sum1] (gain) {$\dfrac{-1}{R}$};
+        \node [block, right=of gain] (state1) {$\dfrac{1}{1+\$T_1}$};
+        \node [block, right=of state1] (state2) {$\dfrac{1+\$T_2}{1+\$T_3}$};
+        \node [block, right=of state2] (sbase) {$S_{Base}$};
+        \node [sum, right= of sbase] (sum2) {$\Sigma$};
+        \node [saturation block, right=of sum2, minimum size=1cm, label=$MW_{cap}$] (mwcap){};
+        \node [output, right=of mwcap, label=$P_M(t)$] (output) {};
+        
+        \node [input, name=omega, below= of sum1,label={[label distance=.1cm]0:$\omega_{PU}(t-1)$} ] {};
+       	\node [input, name=Pm0, below= of sum2,label={[label distance=.1cm]0:$P_{M}
+       		(t-1)$} ]{};
+       
+        \draw [draw,->] (input) -- node[pos=0.8] {$+$} (sum1);
+        \draw [->] (omega) -- node[pos=0.8] {$-$} (sum1);
+        
+        \draw [->] (sum1) -- (gain) ;
+        \draw [->] (gain) -- (state1) ;
+        \draw [->] (state1) -- (state2) ;
+        \draw [->] (state2) -- (sbase) ;
+        \draw [->] (sbase) -- node[pos=0.8] {$+$} (sum2);
+        \draw [->] (Pm0) -- node[pos=0.8] {$+$} (sum2);
+        \draw [->] (sum2) -- (mwcap);
+        \draw [->] (mwcap) -- (output);
+        
+        \end{tikzpicture} 
+\end{document}
