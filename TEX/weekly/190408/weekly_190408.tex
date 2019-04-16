@@ -66,7 +66,7 @@
 \pagestyle{fancy} % for header stuffs
 \fancyhf{}
 \rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
-\chead{Talking Points \\ Week of April 8, 2019}
+\chead{Talking Points \\ Weeks of April 8th and 15th, 2019}
 \lhead{Research \\ }
 % spacing
 \headheight 29 pt
@@ -77,9 +77,18 @@
 
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
+		\item AMQP Agent 'reworked' $\rightarrow$ speed up:
+		\subitem ts = 0.5 sec $\rightarrow$ 9x  real time
+		\subitem ts = 1.0 sec $\rightarrow$ 17x real time 
+		
 		\item Python ODE solver utilized for system frequency calculation (runge kutta 45)
+		\subitem Takes multiple steps per time step
 
 		\item tgov1 model created and validated via steps and ramps of PSLF ee544 system.
+		\subitem lsim only solves next given time step
+		
+		\item Full WECC models received.
+		\item WECC dyd parsed for model type information (attached)
 		
 		\item More \verb|matplotlib| plot functions created.
 
@@ -89,10 +98,12 @@
 	\end{enumerate}
 \paragraph{Current Tasks:}
 	\begin{enumerate}
-	
-		\item Begin parsing WECC dyd and address associated code issues that arise.
-
-		\item Formulate feasible plan of action for casting WECC governors to LTD governors.
+		\item Formulate feasible plan of action for casting WECC governors to LTD governors. Something like:
+		\begin{enumerate}
+		\item Parse models of interest from dyd
+		\item Perform system test to generate LTD equivalent model (automate)
+		\item Export altered the dyd for LTD simulation. (PSDS would still use original the dyd, though 'could' use modified)
+		\end{enumerate}
 		
 		\item Create an agent for every object: Shunt, SVD, Branch, Transformer, ...
 
@@ -114,7 +125,8 @@
 \paragraph{Future Tasks:}(Little to No Progress since last time / Things coming down the pipe)
 	\begin{enumerate}
 		\item Think about Shunt Control / Generic Agent control based on system state(s)
-
+		\item Add import mirror / bypass mirror init sequence option. Will prevent repeated WECC mirror creations.
+		
 		\item Flow chart AMQP process to more clearly explain what's happening there/ find possible speed improvements.
 
 		\item Identify System Slack bus programmatically (currently assumes first slack if > 1)
@@ -127,15 +139,17 @@
 	\end{enumerate}
 	\paragraph{Current Questions:}
 	\begin{enumerate}
+	 	\item Speed Goal? \\
+	 	Faster than, or similar to, speed of PSDS.
 		
 		\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? Yes.
 		
-		\item Is there more available/relevant event data that may help us to verify simulations of specific instances (wind ramps or other behavior) that novel research will focus on?\\ (Heredia paper data helpful for some wind ramp data context)
+		\item Is there more available/relevant event data that may help us to verify simulations of specific instances (wind ramps or other behavior) that novel research will focus on? %(Heredia paper data helpful for some wind ramp data context)
 
 		\item  Any progress / continued interest in miniWecc Area definitions?
 
 		\item Any progress on Wecc single gen per bus system?
-		\\ Will this actually matter? PSLF handles distribution of Pe in power flow solution per bus, and LTD code distributes electrical power per generator... Voltage issues feel probable...
+		\\ Will this actually matter? PSLF handles distribution of Pe in power flow solution per bus, and LTD code distributes electrical power per generator... Voltage issues maybe, but power should be okay.
 		
 		
 %		\includegraphics[width=\linewidth]{g4aSys}
