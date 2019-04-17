@@ -78,8 +78,9 @@
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
 		\item AMQP Agent 'reworked' $\rightarrow$ speed up:
-		\subitem ts = 0.5 sec $\rightarrow$ 9x  real time
-		\subitem ts = 1.0 sec $\rightarrow$ 17x real time 
+		\subitem ts = 0.5 sec $\rightarrow$ 6.9 x  real time
+		\subitem ts = 1.0 sec $\rightarrow$ 13.6 x real time 
+		\subitem ts = 2.0 sec $\rightarrow$ 25.4 x real time 
 		
 		\item Python ODE solver utilized for system frequency calculation (runge kutta 45)
 		\subitem Takes multiple steps per time step
@@ -88,9 +89,10 @@
 		\subitem lsim only solves next given time step
 		
 		\item Full WECC models received.
-		\item WECC dyd parsed for model type information (attached)
+		\subitem Case summaries compiled for comparison (attached)
+		\subitem WECC dyd parsed for model type information (attached)
 		
-		\item More \verb|matplotlib| plot functions created.
+	%	\item More \verb|matplotlib| plot functions created.
 
 		\item GitHub updated:\\
 		\verb|https://github.com/thadhaines/PSLTDSim/|
@@ -102,7 +104,7 @@
 		\begin{enumerate}
 		\item Parse models of interest from dyd
 		\item Perform system test to generate LTD equivalent model (automate)
-		\item Export altered the dyd for LTD simulation. (PSDS would still use original the dyd, though 'could' use modified)
+		\item Export altered dyd for LTD simulation. (PSDS would still use original the dyd, though 'could' use modified)
 		\end{enumerate}
 		
 		\item Create an agent for every object: Shunt, SVD, Branch, Transformer, ...
@@ -140,7 +142,7 @@
 	\paragraph{Current Questions:}
 	\begin{enumerate}
 	 	\item Speed Goal? \\
-	 	Faster than, or similar to, speed of PSDS.
+	 	Faster than, similar to, or reasonably near the speed of PSDS for same simulation case and length.
 		
 		\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? Yes.
 		
@@ -158,6 +160,25 @@
 \vfill\null
 
 \end{multicols}
+
+\pagebreak
+\vspace{-1em}
+	\begin{figure}[ht!]
+	\begin{center}
+		\includegraphics[width=.9\linewidth]{PY3ramp1sec}  \vspace{-2em}
+		\caption{Python Ramp Simulation Single tgov1 Output - 1.0 second time step}
+		\label{2gov1}\vspace{1.em}
+		
+		\includegraphics[width=.75\linewidth]{ramp1sec}  \vspace{-1em}
+		\caption{Ramp Simulation Comparison - Single Governor - 1.0 second time step}
+		\label{2gov2}\vspace{1.em}
+		
+		\includegraphics[width=.75\linewidth]{ramp2sec}  \vspace{-1em}
+		\caption{Ramp Simulation Comparison - Single Governor - 2.0 second time step}
+		\label{2gov3}\vspace{1em}
+	\end{center}
+\end{figure}
+
 	\begin{comment}
 \pagebreak
 

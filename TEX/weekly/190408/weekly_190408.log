@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6880 64-bit)  (format=lualatex 2018.11.24)  16 APR 2019 04:26
+This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6880 64-bit)  (format=lualatex 2018.11.24)  17 APR 2019 08:47
  restricted system commands enabled.
 **weekly_190408.tex
 (./weekly_190408.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.546 seconds
+luaotfload | main : initialization completed in 0.545 seconds
 ("C:/Users/heyth/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:/Users/heyth/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/size12.clo"
@@ -1350,45 +1350,69 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 75.
 ("C:/Users/heyth/AppData/Local/Programs/MiKTeX 2.9/tex/latex/amsfonts/umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 5519) in paragraph at lines 91--92
-[]\TU/lmr/m/n/12 WECC dyd parsed for model type
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
+[]| \TU/lmr/m/n/12 Case sum-maries com-piled for
  []
 
 
-Overfull \hbox (26.99475pt too wide) in paragraph at lines 95--97
+Overfull \hbox (26.99475pt too wide) in paragraph at lines 97--99
 []\TU/lmtt/m/n/12 https://github.com/thadhaines/PSLTDSim/ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--103
+Underfull \hbox (badness 10000) in paragraph at lines 103--105
 \TU/lmr/m/n/12 cast-ing WECC gov-er-nors to LTD
  []
 
 
-Underfull \hbox (badness 5147) in paragraph at lines 112--113
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+[]\TU/lmr/m/n/12 Ex-port al-tered dyd for LTD
+ []
+
+
+Underfull \hbox (badness 5147) in paragraph at lines 114--115
 []\TU/lmr/m/n/12 For-mu-late an ex-per-i-ment uti-liz-ing a
  []
 
 
-Overfull \hbox (8.07513pt too wide) in paragraph at lines 132--133
+Overfull \hbox (8.07513pt too wide) in paragraph at lines 134--135
 []\TU/lmr/m/n/12 Iden-tify Sys-tem Slack bus pro-gram-mat-i-cally
  []
 
 [1{C:/Users/heyth/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 ]
+<PY3ramp1sec.pdf, id=12, 1023.3432pt x 544.1931pt>
+File: PY3ramp1sec.pdf Graphic file (type pdf)
+<use PY3ramp1sec.pdf>
+Package luatex.def Info: PY3ramp1sec.pdf  used on input line 168.
+(luatex.def)             Requested size: 452.0456pt x 240.39232pt.
+<ramp1sec.pdf, id=13, 894.34125pt x 512.91624pt>
+File: ramp1sec.pdf Graphic file (type pdf)
+<use ramp1sec.pdf>
+Package luatex.def Info: ramp1sec.pdf  used on input line 172.
+(luatex.def)             Requested size: 376.70721pt x 216.04947pt.
+<ramp2sec.pdf, id=14, 894.34125pt x 512.91624pt>
+File: ramp2sec.pdf Graphic file (type pdf)
+<use ramp2sec.pdf>
+Package luatex.def Info: ramp2sec.pdf  used on input line 176.
+(luatex.def)             Requested size: 376.70721pt x 216.04947pt.
+
+
+LaTeX Warning: Float too large for page by 51.73878pt on input line 180.
+
 Excluding 'comment' comment. 
 AED: lastpage setting LastPage
-(./weekly_190408.aux))
+[2<./PY3ramp1sec.pdf><./ramp1sec.pdf><./ramp2sec.pdf>] (./weekly_190408.aux))
 
 Here is how much of LuaTeX's memory you used:
- 36324 strings out of 494324
+ 36352 strings out of 494324
  100000,953878 words of node,token memory allocated
  553 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 9 attribute, 61 glue_spec,
  9 attribute_list, 2 write nodes
-   avail lists: 2:529,3:498,4:151,5:495,6:102,7:9005,8:2,9:491,10:6,11:555
- 39568 multiletter control sequences out of 65536+200000
+   avail lists: 2:505,3:498,4:139,5:501,6:105,7:9320,8:2,9:500,10:6,11:582
+ 39584 multiletter control sequences out of 65536+200000
  51 fonts using 7297375 bytes
  55i,12n,67p,432b,585s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/users/heyth/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmmon
@@ -1396,9 +1420,9 @@ o12-regular.otf><c:/users/heyth/appdata/local/programs/miktex 2.9/fonts/opentype
 /public/lm/lmroman12-bold.otf><c:/users/heyth/appdata/local/programs/miktex 2.9/
 fonts/opentype/public/lm/lmroman12-regular.otf><C:/Users/heyth/AppData/Local/Pro
 grams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on weekly_190408.pdf (1 page, 30331 bytes).
+Output written on weekly_190408.pdf (2 pages, 215280 bytes).
 
-PDF statistics: 34 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 112 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
