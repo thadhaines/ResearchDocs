@@ -76,81 +76,22 @@
 \begin{document}
 	\begin{figure}[ht!]
 			\begin{center}
-				\includegraphics[width=\linewidth]{fcomp}\vspace{-1em}
-				\caption{All PSDS frequencies and LTD frequency response.}\vspace{1em}
+				\includegraphics[width=.95\linewidth]{fcomp.png}\vspace{-1em}
+				\caption{All PSDS bus frequencies and LTD system frequency response.}\vspace{1em}
 				\label{fcomp}		 
 		
-				\includegraphics[width=\linewidth]{aveF}  \vspace{-1em}
-				\caption{Averaged PSDS system response against LTD frequency.}\vspace{+.5em}
+				\includegraphics[width=.95\linewidth]{aveFg}  \vspace{-1em}
+				\caption{Averaged PSDS system response against LTD frequency. (Difference at $t(90) \approx$ 2.84E-05).}\vspace{+.5em}
 				\label{aveF}
 					
-				\includegraphics[width=\linewidth]{redDif}  \vspace{-1em}
-				\caption{Relative difference of PSDS - LTD as a percent $\left( \text{i.e. }  \dfrac{f_{PSDS}- f_{LTD}}{f_{PSDS}} \times 100\% \right)$.}
+				\includegraphics[width=.95\linewidth]{relDif}  \vspace{-1em}
+				\caption{Relative difference of PSDS - LTD as a percent $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 100\% \right)$.}
 				\label{redDif}
 			\end{center}
 		\end{figure}
 
 \begin{comment}
 
-Python Code:
-\begin{lstlisting}[language=Python]
-import numpy as np
-import scipy.signal as sig
-import matplotlib.pyplot as plt
-import scipy.io as sio
-
-# Inputs
-Pref = .5 # will be a PU of Pref from Generator
-delta_w = 0.0
-
-# Simulation Parameters
-t = np.linspace(0,30,101)
-R = 0.05
-Vmax = 1.0
-Vmin = 0.0
-T1 = 0.5
-T2 = 3.0
-T3 = 10.0
-Dt = 0.0
-
-# System Creations
-sys1 = sig.TransferFunction(1,[T1, 1])
-sys2 = sig.TransferFunction([T2, 1],[T3, 1])
-
-# Input to system
-u = (Pref-delta_w)/R
-
-# First Block
-_, y1, x1 = sig.lsim2(sys1, [u]*t.size, t)
-
-# limit Valve position
-for x in range(t.size):
-    if y1[x]>Vmax:
-        y1[x] = Vmax
-    elif y1[x]<Vmin:
-        y1[x] = Vmin
-
-# Second block
-_, y2, x2 = sig.lsim2(sys2, y1, t)
-
-# Addition of damping
-y2 = y2 + [delta_w*Dt]*y2.size
-
-# Plot output
-plt.plot(t,y2, label="Pmech Out")
-plt.plot(t,[u*R]*t.size, label="Pref In")
-plt.title('SciPy Simulated Tgov1')
-plt.ylabel(r'$P_{mech}$ [PU]')
-plt.xlabel('Time [sec]')
-plt.grid()
-plt.legend()
-plt.show()
-
-# Output data dictionary as .mat
-pyTgov = {'t_py': t,
-          'y_py': y2,}
-sio.savemat('tgovTest', pyTgov)
-\end{lstlisting}
 
 \end{comment}
 
