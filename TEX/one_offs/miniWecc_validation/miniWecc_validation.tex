@@ -73,26 +73,84 @@
 \headheight 29 pt
 \headsep 6 pt
 
+\newcommand{\figW}{1}
+\newcommand{\figH}{.26}
 \begin{document}
-	\begin{figure}[ht!]
-			\begin{center}
-				\includegraphics[width=.95\linewidth]{fcomp.png}\vspace{-1em}
-				\caption{All PSDS bus frequencies and LTD system frequency response.}\vspace{1em}
-				\label{fcomp}		 
-		
-				\includegraphics[width=.95\linewidth]{aveFg}  \vspace{-1em}
-				\caption{Averaged PSDS system response against LTD frequency. (Difference at $t(90) \approx$ 2.84E-05).}\vspace{+.5em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth,height=\figH\textheight]{fcomp.png}\vspace{-1em}
+			\caption{All PSDS bus frequencies and LTD system frequency response.}
+			\label{fcomp}		 
+	\end{figure}\vspace{-2em}
+	\begin{figure}[h!]
+				\centering
+				\includegraphics[width=\figW\linewidth,height=\figH\textheight]{aveFg}  \vspace{-2em}
+				\caption{Averaged PSDS system response against LTD frequency. (Difference at $t(90) \approx$ 2.84E-5).} 
 				\label{aveF}
-					
-				\includegraphics[width=.95\linewidth]{relDif}  \vspace{-1em}
+	\end{figure}\vspace{-2em}
+	\begin{figure}[h!]	
+				\centering
+				\includegraphics[width=\figW\linewidth,height=\figH\textheight]{relDif}  \vspace{-1.5em}
 				\caption{Relative difference of PSDS - LTD as a percent $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 100\% \right)$.}
 				\label{redDif}
-			\end{center}
-		\end{figure}
+	\end{figure}
 
-\begin{comment}
+\pagebreak
+\begin{minipage}{.3\linewidth}
+\paragraph{MiniWECC Model:}
+\begin{description}
+\item[Buses] 120
+\item[Generators] 34
+\item[Loads] 23
+\item [Generation] 107,509 MW
+\item[Load] 105,985 MW
+\end{description}
+\end{minipage}       
+\hspace{3em}
+\begin{minipage}{.5\linewidth}
+\paragraph{Simulation Results (60 Second Run): } \
 
+\begin{tabular}{r l l}
+	& PSDS & LTD \\
+Timestep & 4.167 ms & 1 sec \\
+Produced Data File Size & 35,492 KB & 423 KB \\
+Simulation Run Time & 41.42 sec & 11.75 sec \\
+Speed up from PSDS & 1 & 3.52
+\end{tabular}
+\end{minipage}  
+                 
 
-\end{comment}
+\paragraph{Possible reasons for Steady State Variance} 
+\subparagraph{1. Mishandled Machine Parameters:} PSDS and LTD Generator H and MWcap were verified as being the same for all machines in system.
+
+\subparagraph{2. AMQP JSON message behavior:}
+The coded AMQP procedure sends data as a json message and as shown below, a value with many decimals is rounded to be represented as a floating point (Line 6), and then truncated when added to a dictionary (Line 9). This rounded and truncated value is what is sent as the AMQP message (Line 11). Note that Python reports these values as the same (Lines 12-17). The \verb|numpy| (numerical python) package may have an alternate approach to this rounding / truncation behavior.
+
+\begin{lstlisting}
+>>> import json
+>>> lval = 123.123456789012345678901234567890
+>>> lval
+123.12345678901235
+>>> print('%.30f' % lval)
+123.123456789012351464407402090728
+>>> msg = {'mval': lval}
+>>> msg
+{'mval': 123.12345678901235}
+>>> print(json.dumps(msg))
+{"mval": 123.12345678901235}
+>>> 123.123456789012345678901234567890-123.123456789012351464407402090728
+0.0
+>>> print('%.30e' % (123.123456789012345678901234567890 -  lval))
+0.000000000000000000000000000000e+00
+>>> 123.123456789012345678901234567890 ==  123.12345678901235
+True
+\end{lstlisting}
+
+\subparagraph{3. Slack Tolerance:}
+Decreasing the slack tolerance to 0.001 MW ( from 1 MW) had no effect on relative difference - though did increase simulation time by $\approx$7x due to the number of power flows required to solve each time step.
+
+\subparagraph{4. Simulation Length:}
+The simulation was run for 120 seconds and relative difference was found to vary slightly over time but stay between 3.3E-3\% and 2.1E-3\%.
+
 
 \end{document}
