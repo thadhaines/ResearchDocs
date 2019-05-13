@@ -151,6 +151,32 @@ Decreasing the slack tolerance to 0.001 MW ( from 1 MW) had no effect on relativ
 
 \subparagraph{4. Simulation Length:}
 The simulation was run for 120 seconds and relative difference was found to vary slightly over time but stay between 3.3E-3\% and 2.1E-3\%.
+\subparagraph{5. Integration method} Euler and RK-45 were found to have similar results and did not change relative difference.
 
+\pagebreak
+\paragraph{6. Differences in load distribution:} As shown in Figure \ref{pmnorm}, the steady state mechanical output does not change by the same amount in the two simulation environments. How this may affect steady state frequency is not entirely clear at the moment.
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth]{nomalizedPM}\vspace{-1em}
+			\caption{Normalized $P_M$ from all machines in system. $\left( \text{i.e. }\dfrac{P_m(t)}{P_m(0)} \right)$}
+			\label{pmnorm}		 
+	\end{figure}\vspace{-.5em}
+
+The table below quantified this difference for the two generators that had the largest \% change from $t(0)$.
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} llll @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		 Generator & PSDS  & LTD  & Difference  \\
+		\midrule		
+		WA-GEN (slack top line) & 1.257  & 1.115  & 0.011   \\
+		SDG GEN (lower line) & 1.115  & 1.12  & 0.005  \\
+		\bottomrule
+	\end{tabular}
+	%\caption{Another Table.}
+	%\label{tab:exp2}
+\end{table}
 
 \end{document}

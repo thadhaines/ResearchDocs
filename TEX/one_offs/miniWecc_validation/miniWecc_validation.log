@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  8 MAY 2019 11:24
+This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  13 MAY 2019 13:31
  restricted system commands enabled.
 **miniWecc_validation.tex
 (./miniWecc_validation.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.971 seconds
+luaotfload | main : initialization completed in 1.003 seconds
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cls
 "
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -1416,19 +1416,25 @@ Overfull \hbox (10.13805pt too wide) in paragraph at lines 113--120
 [][] 
  []
 
-
+[2]
+<nomalizedPM.pdf, id=42, 766.865pt x 481.8pt>
+File: nomalizedPM.pdf Graphic file (type pdf)
+<use nomalizedPM.pdf>
+Package luatex.def Info: nomalizedPM.pdf  used on input line 160.
+(luatex.def)             Requested size: 502.27629pt x 315.57028pt.
+ 
 AED: lastpage setting LastPage
-[2] (./miniWecc_validation.aux))
+[3<./nomalizedPM.pdf>] (./miniWecc_validation.aux))
 
 Here is how much of LuaTeX's memory you used:
- 37000 strings out of 494300
+ 37009 strings out of 494300
  125017,953878 words of node,token memory allocated
  560 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 65 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:3,2:1408,3:77,4:359,5:1988,6:43,7:3746,8:43,9:3212,10:7,11:208
+   avail lists: 1:3,2:1415,3:81,4:359,5:1995,6:44,7:3878,8:43,9:3214,10:7,11:220
 ,12:1
- 40218 multiletter control sequences out of 65536+200000
+ 40223 multiletter control sequences out of 65536+200000
  56 fonts using 7947015 bytes
  55i,12n,67p,500b,594s stack positions out of 5000i,500n,10000p,200000b,50000s
 <d:/users/jhaines/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmm
@@ -1443,9 +1449,9 @@ s/type1/public/amsfonts/cm/cmmi12.pfb><D:/Users/jhaines/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/Users/jhaines/AppData/Loc
 al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Users/jhaine
 s/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on miniWecc_validation.pdf (2 pages, 241833 bytes).
+Output written on miniWecc_validation.pdf (3 pages, 975309 bytes).
 
-PDF statistics: 88 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
