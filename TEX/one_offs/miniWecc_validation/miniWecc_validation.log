@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  13 MAY 2019 13:31
+This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  15 MAY 2019 13:05
  restricted system commands enabled.
 **miniWecc_validation.tex
 (./miniWecc_validation.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.003 seconds
+luaotfload | main : initialization completed in 0.986 seconds
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cls
 "
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -1397,46 +1397,57 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <fcomp.png, id=4, 797.98125pt x 335.75438pt>
 File: fcomp.png Graphic file (type png)
 <use fcomp.png>
-Package luatex.def Info: fcomp.png  used on input line 81.
+Package luatex.def Info: fcomp.png  used on input line 83.
 (luatex.def)             Requested size: 502.28032pt x 183.20024pt.
 <aveFg.pdf, id=5, 801.99625pt x 340.27126pt>
 File: aveFg.pdf Graphic file (type pdf)
 <use aveFg.pdf>
-Package luatex.def Info: aveFg.pdf  used on input line 87.
+Package luatex.def Info: aveFg.pdf  used on input line 89.
 (luatex.def)             Requested size: 502.2866pt x 183.19856pt.
-<relDif.pdf, id=6, 794.97pt x 340.27126pt>
+<relDif.pdf, id=6, 795.97375pt x 340.27126pt>
 File: relDif.pdf Graphic file (type pdf)
 <use relDif.pdf>
-Package luatex.def Info: relDif.pdf  used on input line 93.
-(luatex.def)             Requested size: 502.28938pt x 183.19856pt.
+Package luatex.def Info: relDif.pdf  used on input line 95.
+(luatex.def)             Requested size: 502.26773pt x 183.19856pt.
  [1{D:/Users/jhaines/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 <./fcomp.png><./aveFg.pdf><./relDif.pdf>]
-Overfull \hbox (10.13805pt too wide) in paragraph at lines 113--120
+Overfull \hbox (10.13805pt too wide) in paragraph at lines 115--122
 [][] 
  []
 
 [2]
-<nomalizedPM.pdf, id=42, 766.865pt x 481.8pt>
+<nomalizedPM.pdf, id=42, 801.99625pt x 312.16624pt>
 File: nomalizedPM.pdf Graphic file (type pdf)
 <use nomalizedPM.pdf>
-Package luatex.def Info: nomalizedPM.pdf  used on input line 160.
-(luatex.def)             Requested size: 502.27629pt x 315.57028pt.
+Package luatex.def Info: nomalizedPM.pdf  used on input line 162.
+(luatex.def)             Requested size: 502.27629pt x 195.5083pt.
+<pmCompare.pdf, id=43, 787.94376pt x 325.215pt>
+File: pmCompare.pdf Graphic file (type pdf)
+<use pmCompare.pdf>
+Package luatex.def Info: pmCompare.pdf  used on input line 185.
+(luatex.def)             Requested size: 502.27629pt x 207.30817pt.
+ [3<./nomalizedPM.pdf><./pmCompare.pdf>]
+<tsComp.pdf, id=65, 801.99625pt x 340.27126pt>
+File: tsComp.pdf Graphic file (type pdf)
+<use tsComp.pdf>
+Package luatex.def Info: tsComp.pdf  used on input line 214.
+(luatex.def)             Requested size: 502.27629pt x 213.11034pt.
  
 AED: lastpage setting LastPage
-[3<./nomalizedPM.pdf>] (./miniWecc_validation.aux))
+[4<./tsComp.pdf>] (./miniWecc_validation.aux))
 
 Here is how much of LuaTeX's memory you used:
- 37009 strings out of 494300
+ 37028 strings out of 494300
  125017,953878 words of node,token memory allocated
  560 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 65 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:3,2:1415,3:81,4:359,5:1995,6:44,7:3878,8:43,9:3214,10:7,11:220
+   avail lists: 1:4,2:1415,3:81,4:359,5:1995,6:44,7:3878,8:46,9:3214,10:7,11:220
 ,12:1
- 40223 multiletter control sequences out of 65536+200000
+ 40234 multiletter control sequences out of 65536+200000
  56 fonts using 7947015 bytes
- 55i,12n,67p,500b,594s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,13n,67p,500b,594s stack positions out of 5000i,500n,10000p,200000b,50000s
 <d:/users/jhaines/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmm
 ono10-regular.otf><d:/users/jhaines/appdata/local/programs/miktex 2.9/fonts/open
 type/public/lm/lmroman10-regular.otf><d:/users/jhaines/appdata/local/programs/mi
@@ -1449,9 +1460,9 @@ s/type1/public/amsfonts/cm/cmmi12.pfb><D:/Users/jhaines/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/Users/jhaines/AppData/Loc
 al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Users/jhaine
 s/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on miniWecc_validation.pdf (3 pages, 975309 bytes).
+Output written on miniWecc_validation.pdf (4 pages, 1113952 bytes).
 
-PDF statistics: 101 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 124 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

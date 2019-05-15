@@ -76,6 +76,8 @@
 \newcommand{\figW}{1}
 \newcommand{\figH}{.26}
 \begin{document}
+Simulation results with time step = 1.0 second.
+
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\figW\linewidth,height=\figH\textheight]{fcomp.png}\vspace{-1em}
@@ -91,7 +93,7 @@
 	\begin{figure}[h!]	
 				\centering
 				\includegraphics[width=\figW\linewidth,height=\figH\textheight]{relDif}  \vspace{-1.5em}
-				\caption{Relative difference of PSDS - LTD as a percent $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 100\% \right)$.}
+				\caption{Relative difference of PSDS - LTD as a percent $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 60 \text{Hz} \right)$.}
 				\label{redDif}
 	\end{figure}
 
@@ -154,7 +156,7 @@ The simulation was run for 120 seconds and relative difference was found to vary
 \subparagraph{5. Integration method} Euler and RK-45 were found to have similar results and did not change relative difference.
 
 \pagebreak
-\paragraph{6. Differences in load distribution:} As shown in Figure \ref{pmnorm}, the steady state mechanical output does not change by the same amount in the two simulation environments. How this may affect steady state frequency is not entirely clear at the moment.
+\paragraph{6. Differences in load distribution:} As shown in Figure \ref{pmnorm}, the steady state mechanical output does not change by the same amount in the two simulation environments. 
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\linewidth]{nomalizedPM}\vspace{-1em}
@@ -166,17 +168,52 @@ The table below quantified this difference for the two generators that had the l
 
 \begin{table}[!ht]
 	\centering
-	\begin{tabular}{@{} llll @{}} 	
+	\begin{tabular}{@{} lrrrr @{}} 	
 		\toprule % @ signs to remove extra L R space
 		\footnotesize % this will affect the table font (makse it 10pt)
-		 Generator & PSDS  & LTD  & Difference  \\
+		 Generator & PSDS  & LTD  & \% $\Delta$ Dif. & MW Dif.  \\
 		\midrule		
-		WA-GEN (slack top line) & 1.257  & 1.115  & 0.011   \\
-		SDG GEN (lower line) & 1.115  & 1.12  & 0.005  \\
+		WA-GEN (slack top line) & 1.257  & 1.115  & 0.011   & 5.1\\
+		SDG GEN (lower line) & 1.115  & 1.120  & 0.005 & 2.2 \\
 		\bottomrule
 	\end{tabular}
-	%\caption{Another Table.}
-	%\label{tab:exp2}
+
 \end{table}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth]{pmCompare}\vspace{-1em}
+			\caption{$P_M$ from the machines that changed the most from $t(0)$.}
+			\label{pmCompare}		 
+	\end{figure}\vspace{-.5em}
+
+\pagebreak
+\paragraph{7. Time step resolution:} Changing the time step affects accuracy, size of data collected, and simulation run time. The following data was collected from a 90 second simulation. LTD uses rk45 integration and 0.5 MW slack tolerance --- it is also run from the command line.The PSDS system has exciters and PSS included in dyd file.
+Note: Data from PSDS in a .chf file; data from PSLTDSim (LTD) as a .mir file.
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} lrrrrrrr @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		  & Time step  & \shortstack{Simulation\\ Time [sec] } & \shortstack{Data File \\Size [KB] }  & \shortstack{Real time \\Speed up}& \shortstack{ PSDS\\Speed up} & \shortstack{Reduction \\ of file size}  & \shortstack{Steady State $f$ \\ varience [Hz]}\\
+		\midrule		
+		PSDS	& 4.167 ms &  56.12   & 35,070 & 1.60& 1 & 1 & 0\\
+		LTD		&	2 sec	& 13.79   &	238 &6.53&4.07 & 147.35 & NA \\ % miniWECC_loadStep01F.mir
+		LTD		&	1 sec	& 27.22   &	479 &3.31&2.06 & 73.21& 9.50E-4\\ % miniWECC_loadStep02F.mir
+		LTD		&	0.5 sec	& 53.56   &	871 &1.68&1.05 & 40.26 & 9.71E-4\\ % miniWECC_loadStep03F.mir
+		LTD		&	0.25 sec	& 104.76   &	1,655 &0.86&0.54 & 21.19& 9.77E-4\\ % miniWECC_loadStep04F.mir
+		\bottomrule
+	\end{tabular}
+\end{table} 
+
+The steady state varience for the 2 LTD second case is not available as the system frequency is still oscillating at t(90).
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth]{tsComp}\vspace{-1em}
+			\caption{Comparison of system frequency among different time steps.}
+			\label{tsComp}		 
+	\end{figure}\vspace{-.5em}
 
 \end{document}
