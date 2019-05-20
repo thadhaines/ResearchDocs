@@ -6,3 +6,6 @@
 *.sqlite
 /.vs/VSWorkspaceState.json
 /.vs/ProjectSettings.json
+*.aux
+*.log
+*.gz

@@ -93,7 +93,7 @@ Simulation results with time step = 1.0 second.
 	\begin{figure}[h!]	
 				\centering
 				\includegraphics[width=\figW\linewidth,height=\figH\textheight]{relDif}  \vspace{-1.5em}
-				\caption{Relative difference of PSDS - LTD as a percent $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 60 \text{Hz} \right)$.}
+				\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 60 \text{Hz} \right)$.}
 				\label{redDif}
 	\end{figure}
 
@@ -189,13 +189,12 @@ The table below quantified this difference for the two generators that had the l
 
 \pagebreak
 \paragraph{7. Time step resolution:} Changing the time step affects accuracy, size of data collected, and simulation run time. The following data was collected from a 90 second simulation. LTD uses rk45 integration and 0.5 MW slack tolerance --- it is also run from the command line.The PSDS system has exciters and PSS included in dyd file.
-Note: Data from PSDS in a .chf file; data from PSLTDSim (LTD) as a .mir file.
 
 \begin{table}[!ht]
 	\centering
+	\footnotesize % this will affect the table font (makse it 10pt)
 	\begin{tabular}{@{} lrrrrrrr @{}} 	
 		\toprule % @ signs to remove extra L R space
-		\footnotesize % this will affect the table font (makse it 10pt)
 		  & Time step  & \shortstack{Simulation\\ Time [sec] } & \shortstack{Data File \\Size [KB] }  & \shortstack{Real time \\Speed up}& \shortstack{ PSDS\\Speed up} & \shortstack{Reduction \\ of file size}  & \shortstack{Steady State $f$ \\ varience [Hz]}\\
 		\midrule		
 		PSDS	& 4.167 ms &  56.12   & 35,070 & 1.60& 1 & 1 & 0\\
@@ -206,13 +205,18 @@ Note: Data from PSDS in a .chf file; data from PSLTDSim (LTD) as a .mir file.
 		\bottomrule
 	\end{tabular}
 \end{table} 
-
-The steady state varience for the 2 LTD second case is not available as the system frequency is still oscillating at t(90).
-
+\vspace{-1em}
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\linewidth]{tsComp}\vspace{-1em}
 			\caption{Comparison of system frequency among different time steps.}
+			\label{tsComp}		 
+	\end{figure}\vspace{-.5em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth]{tsCompRelF}\vspace{-1em}
+			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
 			\label{tsComp}		 
 	\end{figure}\vspace{-.5em}
 

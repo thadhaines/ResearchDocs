@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  15 MAY 2019 13:05
+This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  20 MAY 2019 16:51
  restricted system commands enabled.
 **miniWecc_validation.tex
 (./miniWecc_validation.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.986 seconds
+luaotfload | main : initialization completed in 0.993 seconds
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cls
 "
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -1243,7 +1243,11 @@ Package: subfigure 2002/07/30 v2.1.4 subfigure package
 ure.cfg")
 \subfig@top=\skip77
 \subfig@bottom=\skip78
-) (./miniWecc_validation.aux)
+) (./miniWecc_validation.aux
+
+LaTeX Warning: Label `tsComp' multiply defined.
+
+)
 \openout1 = miniWecc_validation.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
@@ -1262,11 +1266,11 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
 LaTeX Font Info:    ... okay on input line 78.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 78.
-
-("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/ts1cmr.fd"
+ ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 78.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
 *geometry* verbose mode - [ preamble ] result:
@@ -1431,22 +1435,31 @@ Package luatex.def Info: pmCompare.pdf  used on input line 185.
 <tsComp.pdf, id=65, 801.99625pt x 340.27126pt>
 File: tsComp.pdf Graphic file (type pdf)
 <use tsComp.pdf>
-Package luatex.def Info: tsComp.pdf  used on input line 214.
+Package luatex.def Info: tsComp.pdf  used on input line 211.
 (luatex.def)             Requested size: 502.27629pt x 213.11034pt.
+<tsCompRelF.pdf, id=66, 795.97375pt x 340.27126pt>
+File: tsCompRelF.pdf Graphic file (type pdf)
+<use tsCompRelF.pdf>
+Package luatex.def Info: tsCompRelF.pdf  used on input line 218.
+(luatex.def)             Requested size: 502.27629pt x 214.71469pt.
  
 AED: lastpage setting LastPage
-[4<./tsComp.pdf>] (./miniWecc_validation.aux))
+[4<./tsComp.pdf><./tsCompRelF.pdf>] (./miniWecc_validation.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+)
 
 Here is how much of LuaTeX's memory you used:
- 37028 strings out of 494300
+ 37074 strings out of 494300
  125017,953878 words of node,token memory allocated
- 560 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 65 glue_spec,
- 8 attribute_list, 2 write nodes
-   avail lists: 1:4,2:1415,3:81,4:359,5:1995,6:44,7:3878,8:46,9:3214,10:7,11:220
+ 564 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 9 attribute, 65 glue_spec,
+ 9 attribute_list, 2 write nodes
+   avail lists: 1:4,2:1413,3:81,4:359,5:1995,6:44,7:3878,8:46,9:3214,10:7,11:220
 ,12:1
- 40234 multiletter control sequences out of 65536+200000
- 56 fonts using 7947015 bytes
+ 40252 multiletter control sequences out of 65536+200000
+ 80 fonts using 9436431 bytes
  55i,13n,67p,500b,594s stack positions out of 5000i,500n,10000p,200000b,50000s
 <d:/users/jhaines/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmm
 ono10-regular.otf><d:/users/jhaines/appdata/local/programs/miktex 2.9/fonts/open
@@ -1456,13 +1469,15 @@ ktex 2.9/fonts/opentype/public/lm/lmmono12-regular.otf><d:/users/jhaines/appdata
 /jhaines/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmroman12-re
 gular.otf><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmex10.pfb><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmmi12.pfb><D:/Users/jhaines/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/Users/jhaines/AppData/Loc
-al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Users/jhaine
-s/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on miniWecc_validation.pdf (4 pages, 1113952 bytes).
+s/type1/public/amsfonts/cm/cmmi10.pfb><D:/Users/jhaines/AppData/Local/Programs/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/Users/jhaines/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/Users/jhain
+es/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D
+:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb>
+Output written on miniWecc_validation.pdf (4 pages, 1137143 bytes).
 
-PDF statistics: 124 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 138 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
