@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  20 MAY 2019 16:51
+This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  22 MAY 2019 13:14
  restricted system commands enabled.
 **miniWecc_validation.tex
 (./miniWecc_validation.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.993 seconds
+luaotfload | main : initialization completed in 1.081 seconds
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cls
 "
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -1243,34 +1243,118 @@ Package: subfigure 2002/07/30 v2.1.4 subfigure package
 ure.cfg")
 \subfig@top=\skip77
 \subfig@bottom=\skip78
-) (./miniWecc_validation.aux
-
-LaTeX Warning: Label `tsComp' multiply defined.
-
 )
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/spreadtab/spread
+tab.sty"
+Package: spreadtab 2019/02/27 v0.5 Spreadsheet features for table environments (
+CT)
+
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/xstring/xstring.
+sty"
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/generic/xstring/xstrin
+g.tex"
+\integerpart=\count328
+\decimalpart=\count329
+)
+Package: xstring 2018/12/09 v1.81 String manipulations (CT)
+)
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp.sty"
+Package: fp 1995/04/02
+
+`Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/defpattern.st
+y"
+Package: defpattern 1994/10/12
+\actioncount=\count330
+)
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-basic.sty"
+Package: fp-basic 1996/05/13
+\FP@xs=\count331
+\FP@xia=\count332
+\FP@xib=\count333
+\FP@xfa=\count334
+\FP@xfb=\count335
+\FP@rega=\count336
+\FP@regb=\count337
+\FP@regs=\count338
+\FP@times=\count339
+)
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-addons.sty
+"
+Package: fp-addons 1995/03/15
+) ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-snap.sty
+"
+Package: fp-snap 1995/04/05
+) ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-exp.sty"
+Package: fp-exp 1995/04/03
+)
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-trigo.sty"
+Package: fp-trigo 1995/04/14
+) ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-pas.sty"
+Package: fp-pas 1994/08/29
+)
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-random.sty
+"
+Package: fp-random 1995/02/23
+\FPseed=\count340
+) ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-eqn.sty"
+Package: fp-eqn 1995/04/03
+) ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-upn.sty"
+Package: fp-upn 1996/10/21
+) ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fp/fp-eval.sty
+"
+Package: fp-eval 1995/04/03
+)) spreadtab message: FP calc engine now active
+\ST@count=\count341
+\ST@colcount=\count342
+\ST@colcount@i=\count343
+\ST@rowcount=\count344
+\ST@rowcount@i=\count345
+\ST@intpart=\count346
+)
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/numprint/numprin
+t.sty"
+Package: numprint 2012/08/20 v1.39 Print numbers (HH)
+\c@nprt@mantissa@digitsbefore=\count347
+\c@nprt@mantissa@digitsafter=\count348
+\c@nprt@exponent@digitsbefore=\count349
+\c@nprt@exponent@digitsafter=\count350
+\nprt@digitwidth=\skip79
+\nprt@sepwidth=\skip80
+\nprt@decimalwidth=\skip81
+\nprt@blockwidth=\skip82
+\nprt@digittoks=\toks42
+\nprt@pretoks=\toks43
+\nprt@posttoks=\toks44
+\nprt@thisdigit=\count351
+\nprt@curpos=\count352
+\nprt@rndpos=\count353
+\c@nprt@digitsfirstblock=\count354
+\c@nprt@blockcnt=\count355
+\c@nprt@cntprint=\count356
+ No configuration file `numprint.cfg' found.) (./miniWecc_validation.aux)
 \openout1 = miniWecc_validation.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 78.
- ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/ts1cmr.fd"
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 80.
+("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 78.
-
+LaTeX Font Info:    ... okay on input line 80.
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
 *geometry* verbose mode - [ preamble ] result:
@@ -1307,22 +1391,22 @@ LaTeX Font Info:    ... okay on input line 78.
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 78.
+(lastpage)             ! on input line 80.
 
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/context/base/supp-pdf.
 mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count328
+\scratchcounter=\count357
 \scratchdimen=\dimen317
 \scratchbox=\box97
-\nofMPsegments=\count329
-\nofMParguments=\count330
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count331
+\nofMPsegments=\count358
+\nofMParguments=\count359
+\everyMPshowfont=\toks45
+\MPscratchCnt=\count360
 \MPscratchDim=\dimen318
-\MPnumerator=\count332
-\makeMPintoPDFobject=\count333
-\everyMPtoPDFconversion=\toks43
+\MPnumerator=\count361
+\makeMPintoPDFobject=\count362
+\everyMPtoPDFconversion=\toks46
 )
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/oberdiek/epstopd
 f-base.sty"
@@ -1368,7 +1452,7 @@ Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks44
+\pdftexcmds@toks=\toks47
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
 8.
@@ -1385,14 +1469,14 @@ Dictionary: translator-basic-dictionary, Language: English
 abbreviations.cfg"
 File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 )
-\c@lstlisting=\count334
-LaTeX Font Info:    Try loading font information for U+msa on input line 78.
+\c@lstlisting=\count363
+LaTeX Font Info:    Try loading font information for U+msa on input line 80.
 
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/amsfonts/umsa.fd
 "
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 78.
+LaTeX Font Info:    Try loading font information for U+msb on input line 80.
 
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/amsfonts/umsb.fd
 "
@@ -1401,22 +1485,22 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <fcomp.png, id=4, 797.98125pt x 335.75438pt>
 File: fcomp.png Graphic file (type png)
 <use fcomp.png>
-Package luatex.def Info: fcomp.png  used on input line 83.
+Package luatex.def Info: fcomp.png  used on input line 85.
 (luatex.def)             Requested size: 502.28032pt x 183.20024pt.
 <aveFg.pdf, id=5, 801.99625pt x 340.27126pt>
 File: aveFg.pdf Graphic file (type pdf)
 <use aveFg.pdf>
-Package luatex.def Info: aveFg.pdf  used on input line 89.
+Package luatex.def Info: aveFg.pdf  used on input line 91.
 (luatex.def)             Requested size: 502.2866pt x 183.19856pt.
 <relDif.pdf, id=6, 795.97375pt x 340.27126pt>
 File: relDif.pdf Graphic file (type pdf)
 <use relDif.pdf>
-Package luatex.def Info: relDif.pdf  used on input line 95.
+Package luatex.def Info: relDif.pdf  used on input line 97.
 (luatex.def)             Requested size: 502.26773pt x 183.19856pt.
  [1{D:/Users/jhaines/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 <./fcomp.png><./aveFg.pdf><./relDif.pdf>]
-Overfull \hbox (10.13805pt too wide) in paragraph at lines 115--122
+Overfull \hbox (10.13805pt too wide) in paragraph at lines 117--124
 [][] 
  []
 
@@ -1424,43 +1508,74 @@ Overfull \hbox (10.13805pt too wide) in paragraph at lines 115--122
 <nomalizedPM.pdf, id=42, 801.99625pt x 312.16624pt>
 File: nomalizedPM.pdf Graphic file (type pdf)
 <use nomalizedPM.pdf>
-Package luatex.def Info: nomalizedPM.pdf  used on input line 162.
+Package luatex.def Info: nomalizedPM.pdf  used on input line 164.
 (luatex.def)             Requested size: 502.27629pt x 195.5083pt.
 <pmCompare.pdf, id=43, 787.94376pt x 325.215pt>
 File: pmCompare.pdf Graphic file (type pdf)
 <use pmCompare.pdf>
-Package luatex.def Info: pmCompare.pdf  used on input line 185.
+Package luatex.def Info: pmCompare.pdf  used on input line 187.
 (luatex.def)             Requested size: 502.27629pt x 207.30817pt.
  [3<./nomalizedPM.pdf><./pmCompare.pdf>]
+
+New spreadtab: \begin{tabular}{lrrrrrrr}
+* reading tab: ok
+* computing formulas:
+     cell C2
+     cell D2
+     cell E2
+     cell F2
+     cell G2
+     cell C3
+     cell D3
+     cell E3
+     cell F3
+     cell G3
+     cell C4
+     cell D4
+     cell E4
+     cell F4
+     cell G4
+     cell C5
+     cell D5
+     cell E5
+     cell F5
+     cell G5
+     cell C6
+     cell D6
+     cell E6
+     cell F6
+     cell G6
+* building tab: ok
+End of spreadtab: \end{tabular}
+
 <tsComp.pdf, id=65, 801.99625pt x 340.27126pt>
 File: tsComp.pdf Graphic file (type pdf)
 <use tsComp.pdf>
-Package luatex.def Info: tsComp.pdf  used on input line 211.
+Package luatex.def Info: tsComp.pdf  used on input line 225.
 (luatex.def)             Requested size: 502.27629pt x 213.11034pt.
 <tsCompRelF.pdf, id=66, 795.97375pt x 340.27126pt>
 File: tsCompRelF.pdf Graphic file (type pdf)
 <use tsCompRelF.pdf>
-Package luatex.def Info: tsCompRelF.pdf  used on input line 218.
+Package luatex.def Info: tsCompRelF.pdf  used on input line 232.
 (luatex.def)             Requested size: 502.27629pt x 214.71469pt.
- 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
 AED: lastpage setting LastPage
-[4<./tsComp.pdf><./tsCompRelF.pdf>] (./miniWecc_validation.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
-)
+[4<./tsComp.pdf>] [5<./tsCompRelF.pdf>] (./miniWecc_validation.aux))
 
 Here is how much of LuaTeX's memory you used:
- 37074 strings out of 494300
- 125017,953878 words of node,token memory allocated
+ 38872 strings out of 494300
+ 125017,1144653 words of node,token memory allocated
  564 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 9 attribute, 65 glue_spec,
  9 attribute_list, 2 write nodes
-   avail lists: 1:4,2:1413,3:81,4:359,5:1995,6:44,7:3878,8:46,9:3214,10:7,11:220
+   avail lists: 1:4,2:1413,3:86,4:359,5:1995,6:44,7:3878,8:80,9:3214,10:7,11:220
 ,12:1
- 40252 multiletter control sequences out of 65536+200000
+ 41938 multiletter control sequences out of 65536+200000
  80 fonts using 9436431 bytes
- 55i,13n,67p,500b,594s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,13n,67p,500b,627s stack positions out of 5000i,500n,10000p,200000b,50000s
 <d:/users/jhaines/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmm
 ono10-regular.otf><d:/users/jhaines/appdata/local/programs/miktex 2.9/fonts/open
 type/public/lm/lmroman10-regular.otf><d:/users/jhaines/appdata/local/programs/mi
@@ -1471,13 +1586,16 @@ gular.otf><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmex10.pfb><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmmi10.pfb><D:/Users/jhaines/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/Users/jhaines/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/Users/jhain
-es/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><D:/Users/jhain
+es/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D
 :/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb>
-Output written on miniWecc_validation.pdf (4 pages, 1137143 bytes).
+/cmr12.pfb><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><D:/Users/jhaines/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on miniWecc_validation.pdf (5 pages, 1165610 bytes).
 
-PDF statistics: 138 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 153 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

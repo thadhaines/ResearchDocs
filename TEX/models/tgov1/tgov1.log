@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  9 MAY 2019 11:58
+This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6930 64-bit)  (format=lualatex 2019.1.9)  22 MAY 2019 14:47
  restricted system commands enabled.
 **tgov1.tex
 (./tgov1.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.998 seconds
+luaotfload | main : initialization completed in 1.046 seconds
 
 ("D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/tex/latex/standalone/stand
 alone.cls"
@@ -707,25 +707,26 @@ Package grfext Info: Graphics extension search list:
 aux))
 
 Here is how much of LuaTeX's memory you used:
- 15675 strings out of 494300
+ 15696 strings out of 494300
  100000,460012 words of node,token memory allocated
- 7990 words of node memory still in use:
-   162 hlist, 5 vlist, 5 rule, 32 math, 292 glue, 19 kern, 66 glyph, 579 attribu
-te, 48 glue_spec, 579 attribute_list, 1 write, 280 pdf_literal, 38 pdf_colorstac
+ 9886 words of node memory still in use:
+   203 hlist, 5 vlist, 5 rule, 38 math, 365 glue, 27 kern, 77 glyph, 730 attribu
+te, 48 glue_spec, 730 attribute_list, 1 write, 351 pdf_literal, 48 pdf_colorstac
 k nodes
-   avail lists: 1:1,2:25,3:282,4:43,5:37,6:1,7:400,8:12,9:171
- 19247 multiletter control sequences out of 65536+200000
+   avail lists: 1:1,2:25,3:353,4:53,5:45,6:1,7:490,8:12,9:212
+ 19268 multiletter control sequences out of 65536+200000
  27 fonts using 1469327 bytes
  55i,7n,67p,432b,827s stack positions out of 5000i,500n,10000p,200000b,50000s
 <D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr10.pfb><D:/Users/jhaines/AppData/Local/Programs
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Users/jhaines/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tgov1.pdf (1 page, 46159 bytes).
+blic/amsfonts/cm/cmmi5.pfb><D:/Users/jhaines/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmmi7.pfb><D:/Users/jhaines/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Users/jhaines/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Users/jhain
+es/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on tgov1.pdf (1 page, 56699 bytes).
 
-PDF statistics: 29 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 33 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

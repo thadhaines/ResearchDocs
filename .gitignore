@@ -9,3 +9,4 @@
 *.aux
 *.log
 *.gz
+/visio/~$$full_code.~vsdx

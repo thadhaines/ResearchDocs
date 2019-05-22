@@ -37,6 +37,11 @@
 \usepackage{float}
 \usepackage{fancyvrb}	% for Verbatim (a tab respecting verbatim)
 \usepackage{enumitem}	% for [resume] functionality of enumerate
+\usepackage{spreadtab} 	% for using formulas in tables}
+\usepackage{numprint}	% for number format in spread tab
+
+% Caption formating footnotesize ~ 10 pt in a 12 pt document
+\usepackage[font={small}]{caption}
 
 %% package config 
 \sisetup{output-exponent-marker=\ensuremath{\mathrm{E}}} % for engineer E
@@ -66,7 +71,7 @@
 \pagestyle{fancy} % for header stuffs
 \fancyhf{}
 \rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
-\chead{Talking Points \\ Week of May 20th, 2019}
+\chead{Talking Points \\ Week of May 27th, 2019}
 \lhead{Research \\ }
 % spacing
 \headheight 29 pt
@@ -77,16 +82,14 @@
 
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
-		\item MiniWECC step test results
+
+		\item Rework tgov1 model to account for \verb|Pref| completed.
+
+		\item MiniWECC step test results re-validated using different time steps.
+
+		\item Code flowchart being compiled to aid in further development (timing).
+
 		
-		\item Matt approach of ggov1 model attempted.
-
-		\item Code flowchart being compiled to aid in further development.
-
-		\item Shunts and Branches added to Mirror
-		\item custom \verb|single2float| function added to reduce casting error during PSLF$\longrightarrow$LTD value exchange
-
-		\item \verb|shelve| used for python data storage (instead of \verb|pickle|)
 	%	\item More \verb|matplotlib| plot functions created.
 
 		\item GitHub updated:\\
@@ -95,22 +98,24 @@
 	\end{enumerate}
 \paragraph{Current Tasks:}
 	\begin{enumerate}
-		\item Formulate feasible plan of action for casting WECC governors to LTD governors. Something like:
-		\begin{enumerate}
-		\item Parse models of interest from dyd
-		\item Perform system test to generate LTD equivalent model (automate)
-		\item Export altered dyd for LTD simulation. (PSDS would still use original the dyd, though 'could' use modified)
-		\end{enumerate}
-		
-		\item Create an agent for every object: SVD, Transformer, ...
-		\item Add logging to Shunt and Branch
-		\item Add perturbance agents for Generator, Shunt, Branch...
+		\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
 
+		\item Add logging to Shunt and Branch Agents
+		
+		\item Add perturbance Agents for Generator/Slack, Shunt, Branch, \ldots
 		\item Define Agent actions for \\ AGC/LFC (i.e. ACE calculations)
 
-		\item Formulate an experiment utilizing a multi-area model that can be validated with PSDS.
+		\item Think about Shunt Control / Generic Agent control based on system state(s)
 
-		\item Investigate line current data and ULTC action in PSLF.
+		\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Something like:
+		\begin{enumerate}
+		\item Parse models of interest from dyd.
+		\item Automate one machine infinite bus test in PSDS.
+		\item Generate/Calculate LTD equivalent model parameters from results
+		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
+		\end{enumerate}
+		
+		
 
 		
 		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
@@ -123,19 +128,21 @@
 
 \paragraph{Future Tasks:}(Little to No Progress since last time / Things coming down the pipe)
 	\begin{enumerate}
-		\item Think about Shunt Control / Generic Agent control based on system state(s)
-		\item Add import mirror / bypass mirror init sequence option. Will prevent repeated WECC mirror creations.
-
-		\item Identify System Slack bus programmatically (currently assumes first slack if > 1)
+		\item Formulate an experiment utilizing a multi-area model that can be validated with PSDS.
+		\item Identify System Slack bus programmatically (currently assumes first slack == global slack if > 1 slack found)
 		\subitem AND/OR calculate system slack error differently $\rightarrow$ An average of slack errors?
 
+		\item Create an agent for every object: \\ SVD, Transformer, \ldots
+		\item Add import mirror / bypass mirror init sequence option. Will prevent repeated WECC mirror creations.
+		%\item Investigate line current data and ULTC action in PSLF.
 		\item Matt request: Enable multiple dyd files to overwrite / replace previously defined agents/parameters
-		
+		\item Matt request: Allow for variable time steps.
 		%\subitem Can locate when only 1 Slack exists. If more than one Slack, maybe identify by generator with most busses under control? Proving more difficult than expected. Can identify in PSLF via the \verb|summ()| or \verb|isld()| commands. 
 		
 	\end{enumerate}
 	\paragraph{Current Questions:}
 	\begin{enumerate}
+	\item Does $\Delta \omega=1-\omega$ in \\ $\dot{\omega}=\dfrac{1}{2H_{sys}}\left(\dfrac{P_{acc}}{\omega} - D_{sys}\Delta \omega \right)$ ?
 		\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? 
 		
 		\item Is there more available/relevant event data that may help us to verify simulations of specific instances (wind ramps or other behavior) that novel research will focus on? %(Heredia paper data helpful for some wind ramp data context)
@@ -148,93 +155,71 @@
 		
 %		\includegraphics[width=\linewidth]{g4aSys}
 	\end{enumerate}
-\paragraph{'Goals':}
+\paragraph{Goals:}
 	\begin{enumerate}
-	\item Speed$\longrightarrow$ Order of Magnitude faster than PSDS
+	\item Speed$\longrightarrow$ Order of Magnitude faster than PSDS (not met --- only $\approx$3x faster)
 	\end{enumerate}
 
 \vfill\null
 
 \end{multicols}
 \pagebreak
-\paragraph{Time step resolution:} Changing the time step affects accuracy, size of data collected, and simulation run time. The following data was collected from a 90 second simulation. LTD uses rk45 integration and 0.5 MW slack tolerance --- it is also run from the command line.The PSDS system has exciters and PSS included in dyd file.
+\paragraph{7. Time step resolution:} NOTE: Code changed after all previously listed test were ran.
+
+Changing the time step affects accuracy, size of data collected, and simulation run time. The following data was collected from a 90 second simulation. LTD uses rk45 integration and 0.5 MW slack tolerance --- it is also run from the command line.The PSDS system has exciters and PSS included in dyd file.
+Theoretical steady state frequency was calculated as 
+
+$f = 1+\Delta f = 1 + \frac{\Delta P}{S_{base}\beta} = 1 + \frac{-1200 MW}{100 \times 15,555} = 0.999228543876567 = 59.953712632594019 Hz  $
 
 \begin{table}[!ht]
 	\centering
 	\footnotesize % this will affect the table font (makse it 10pt)
-	\begin{tabular}{@{} lrrrrrrr @{}} 	
+	%\STautoround{2}
+\renewcommand\STprintnum[1]{\numprint{#1}}
+ \nprounddigits{2}
+
+	\npthousandsep{,}
+	\npdecimalsign{.}
+	\begin{spreadtab}{{tabular}{lrrrrrrr}}
 		\toprule % @ signs to remove extra L R space
-		  & Time step  & \shortstack{Simulation\\ Time [sec] } & \shortstack{Data File \\Size [KB] }  & \shortstack{Real time \\Speed up}& \shortstack{ PSDS\\Speed up} & \shortstack{Reduction \\ of file size}  & \shortstack{Steady State $f$ \\ varience [Hz]}\\
+		  & @Time step  & @\shortstack{Simulation\\ Time [sec] } &@ \shortstack{Data File \\Size [KB] }  &@ \shortstack{Real time \\Speed up}& @\shortstack{ PSDS\\Speed up} & @\shortstack{Reduction \\ of file size}  & @ \shortstack{Steady State  \\ $f$ error [Hz]}\\
 		\midrule		
-		PSDS	& 4.167 ms &  56.12   & 35,070 & 1.60& 1 & 1 & 0\\
-		LTD		&	2 sec	& 13.79   &	238 &6.53&4.07 & 147.35 & NA \\ % miniWECC_loadStep01F.mir
-		LTD		&	1 sec	& 27.22   &	479 &3.31&2.06 & 73.21& 9.50E-4\\ % miniWECC_loadStep02F.mir
-		LTD		&	0.5 sec	& 53.56   &	871 &1.68&1.05 & 40.26 & 9.71E-4\\ % miniWECC_loadStep03F.mir
-		LTD		&	0.25 sec	& 104.76   &	1,655 &0.86&0.54 & 21.19& 9.77E-4\\ % miniWECC_loadStep04F.mir
+		@PSDS	& @4.167 ms 		&  56.12   	& 35070 	& \STcopy{v}{90/C2}		& 1 					& 1 					& @ 0.0034\\
+		@LTD		&@	2 sec		& 9.41   	&	300 	& 	 					& \STcopy{v}{56.12/c3} 	& \STcopy{v}{!d!2/d3}	& @ 0.0017 \\ % miniWECC_loadStep01F.mir
+		@LTD		&@	1 sec		& 17.39   	&	496 	&  						&  						& 						& @ 0.0017 \\ % miniWECC_loadSte@ p02F.mir
+		@LTD		&@	0.5 sec		& 33.05   	&	888 	&  						&  						& 						& @ 0.0017\\ % miniWECC_loadStep03F.mir
+		@LTD		&@	0.25 sec	& 63.67   	&	1672 	&   					&  						& 						& @ 0.0017\\ % miniWECC_loadStep04F.mir
 		\bottomrule
-	\end{tabular}
+	\end{spreadtab}
 \end{table} 
-\vspace{-1em}
 	\begin{figure}[h!]
 			\centering
-			\includegraphics[width=\linewidth]{tsComp}\vspace{-1em}
-			\caption{Comparison of system frequency among different time steps.}
-			\label{tsComp}		 
+			\includegraphics[width=\linewidth]{tgov1}\vspace{-.5em}
+			\caption{Updated tgov1 model.}
+			\label{tgov1}		 
 	\end{figure}\vspace{-.5em}
+\vspace{-1em}
+\pagebreak
+\newcommand{\figW}{.9}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{fComp}\vspace{-.5em}
+			\caption{Frequency response to a 1,200 MW load step.}
+			\label{systemf}		 
+	\end{figure}\vspace{-2em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{tsWComp}\vspace{-.5em}
+			\caption{Average frequency of different time steps during a 1,200 MW load step.}
+			\label{tsComp}		 
+	\end{figure}\vspace{-2em}
 
 	\begin{figure}[h!]
 			\centering
-			\includegraphics[width=\linewidth]{tsCompRelF}\vspace{-1em}
+			\includegraphics[width=\figW\linewidth]{tsWCompRelF}\vspace{-.5em}
 			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
-			\label{tsComp}		 
+			\label{relF}		 
 	\end{figure}\vspace{-.5em}
 
-\begin{comment}
-\pagebreak
-\vspace{-1em}
-	\begin{figure}[ht!]
-	\begin{center}
-		\includegraphics[width=.9\linewidth]{PY3ramp1sec}  \vspace{-2em}
-		\caption{Python Ramp Simulation Single tgov1 Output - 1.0 second time step}
-		\label{2gov1}\vspace{1.em}
-		
-		\includegraphics[width=.75\linewidth]{ramp1sec}  \vspace{-1em}
-		\caption{Ramp Simulation Comparison - Single Governor - 1.0 second time step}
-		\label{2gov2}\vspace{1.em}
-		
-		\includegraphics[width=.75\linewidth]{ramp2sec}  \vspace{-1em}
-		\caption{Ramp Simulation Comparison - Single Governor - 2.0 second time step}
-		\label{2gov3}\vspace{1em}
-	\end{center}
-\end{figure}
 
-
-\pagebreak
-
-\begin{landscape}
-\begin{centering}
-%\includegraphics[width=\linewidth]{pythonRamp02}
-\vspace{-1em}
-\end{centering}
-\vspace{-1em}
-\paragraph{.ltd File Example:}
-\begin{Verbatim}
-# LTD simulation models / perturbances 
-# Commented and empty lines are ignored during parsing.
-# Double quoted variable names in model parameters also ignored
-
-# pgov1  busnum busnam basekv id : #9 mwcap droop k1
-#pgov1   21 "21" 22.00 "1 " : #9 mwcap=100.0 "droop" 0.05 "k1" 1.0
-pgov1   11 "11" 22.00 "1 " : #9 mwcap=100.0 0.05 1.0
-
-# Perturbances
-# target bus id(optional) : pertType attribute time val abs(optional)
-load 3 : "pertType" step  "pertTarget" p "startTime" 21 "newVal" -1 rel
-load 3 : "pertType" ramp "pertTarget" p "startTime" 2 "RAtime" 5 "RAval" -2 "holdtime" 3 "RBtime" 3 "RBval" 3
-\end{Verbatim}
-\end{landscape}
-
- 	place for comments
-
-	\end{comment}
 \end{document}
