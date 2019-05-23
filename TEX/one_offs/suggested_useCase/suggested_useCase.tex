@@ -1,0 +1,146 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\geometry{
+	letterpaper, 
+	portrait, 
+	top=.75in,
+	left=.8in,
+	right=.75in,
+	bottom=.5in		} 	% Page Margins
+	
+%% additional packages for nice things
+\usepackage{amsmath} 	% for most math
+\usepackage{commath} 	% for abs
+\usepackage{lastpage}	% for page count
+\usepackage{amssymb} 	% for therefore
+\usepackage{graphicx} 	% for image handling
+\usepackage{wrapfig} 	% wrap figures
+\usepackage[none]{hyphenat} % for no hyphenations
+\usepackage{booktabs} 	% enhanced table qualities
+\usepackage{array} 		% for >{} column characterisctis
+\usepackage{physics} 	% for easier derivative \dv....
+\usepackage{tikz} 		% for graphic@!
+\usepackage{circuitikz} % for circuits!
+\usetikzlibrary{arrows.meta} % for loads
+\usepackage[thicklines]{cancel}	% for cancels
+\usepackage{xcolor}		% for color cancels
+\usepackage[per-mode=fraction]{siunitx} % for si units and num
+\usepackage{fancyhdr} 	% for header
+\usepackage{comment}	% for ability to comment out large sections
+\usepackage{multicol}	% for multiple columns using multicols
+\usepackage[framed,numbered]{matlab-prettifier} % matlab sytle listing
+\usepackage{marvosym} 	% for boltsymbol lightning
+\usepackage{pdflscape} 	% for various landscape pages in portrait docs.
+\usepackage{float}
+\usepackage{fancyvrb}	% for Verbatim (a tab respecting verbatim)
+\usepackage{enumitem}	% for [resume] functionality of enumerate
+\usepackage{spreadtab} 	% for using formulas in tables}
+\usepackage{numprint}	% for number format in spread tab
+
+% Caption formating footnotesize ~ 10 pt in a 12 pt document
+\usepackage[font={small}]{caption}
+
+%% package config 
+\sisetup{output-exponent-marker=\ensuremath{\mathrm{E}}} % for engineer E
+\renewcommand{\CancelColor}{\color{red}}	% for color cancels
+\lstset{aboveskip=2pt,belowskip=2pt} % for more compact table
+\def\arraystretch{1.4} % adjust size of arrays
+%\arraycolsep=1.4pt\def
+\setlength{\parindent}{0cm} % Remove indentation from paragraphs
+\setlength{\columnsep}{0.5cm}
+\lstset{
+	style      = Matlab-editor,
+	basicstyle = \ttfamily\footnotesize, % if you want to use Courier - not really used?
+}
+\renewcommand*{\pd}[3][]{\ensuremath{\dfrac{\partial^{#1} #2}{\partial #3}}} % for larger pd fracs
+\renewcommand{\real}[1]{\mathbb{R}\left\{ #1 \right\}}	% for REAL symbol
+\newcommand{\imag}[1]{\mathbb{I}\left\{ #1 \right\}}	% for IMAG symbol
+\definecolor{m}{rgb}{1,0,1}	% for MATLAB matching magenta
+	
+%% custom macros
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} % for simple \numberthis command
+\newcommand{\equal}{=} % so circuitikz can have an = in the labels
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%% Header
+\pagestyle{fancy} % for header stuffs
+\fancyhf{}
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Suggested Use Cases for LTD\\ Interpretation }
+\lhead{Research \\ }
+% spacing
+\headheight 29 pt
+\headsep 6 pt
+
+\begin{document}
+\begin{multicols}{2}
+	
+\paragraph{Step Controller}
+\begin{itemize}
+	\item Control Action: Change any settable quantity on any controllable device existing in the powerflow basecase.
+	\item Basic Requirements
+	\begin{enumerate}
+		\item Settable via: \% Change, absolute change, relative change
+	\end{enumerate}
+	\item Feature Requests
+	\begin{enumerate}
+		\item Ability to add custom control law
+		\item Ability to use arbitrary Inputs
+	\end{enumerate}
+	\item Basic Example 
+	\begin{enumerate}
+		\item Step load up 5\% at t = $t_1$
+		\item Open branch at t = $t_1$
+	\end{enumerate}
+\end{itemize}
+
+\paragraph{Ramp Controller}
+\begin{itemize}
+	\item Control Action: Change any non-binary settable quantity on any controllable device existing in the powerflow basecase.
+	\item Basic Requirements
+	\begin{enumerate}
+		\item Settable via: \% Change, absolute change, relative change
+		\item Time inputs: start time, ramp A time, hold time, ramp B time
+		\item NOTE: Hold time and ramp B time can be zero for single ramp operation.
+	\end{enumerate}
+	\item Feature Requests
+	\begin{enumerate}
+		\item Ability to add custom control law
+		\item Ability to use arbitrary Inputs
+	\end{enumerate}
+	\item Basic Example: Ramp Pgen up 5\% at t = $t_1$ over $t_2$ seconds
+	\item Advanced Example: Ramp Pgen up 20 MW at t = $t_1$ over $t_2$ seconds, hold for $t_3$ seconds before ramping down 15\% after $t_4$ seconds.
+\end{itemize}
+
+\vfill\null
+\columnbreak
+
+\paragraph{Definite Time (Digital Relay) Controller}
+\begin{itemize}
+	\item Control Action: Change the status bit on any controllable device existing in the powerflow basecase. (Shunts, Branches, etc\ldots)
+	\item Basic Requirements
+	\begin{enumerate}
+		\item Binary or `Analog' settable reference input(s) (bus voltage level, MW output, system frequency \ldots) 
+		\item Threshold inputs: set level (turn on), reset level (turn off)
+		\item Time inputs: set time (time $\pm$ set level before turning on), reset time (time $\mp$ reset level before turning off), reclose time (time required after a reset before a set can be performed)
+		\item NOTE: reclose time can be set to zero.
+	\end{enumerate}
+	\item Feature Requests
+	\begin{enumerate}
+		\item Ability to add custom control law
+		\item Ability to use arbitrary Inputs
+	\end{enumerate}
+	\item Basic Example: Using a voltage sensitive basecase with an available shunt cap; ramp real power of a load. When but voltage at the cap drops below 0.95 PU for 30 seconds, insert cap.
+	\item Advanced Example: Using a voltage sensitive basecase with a wind power plant (WWP) and an available shunt cap on the low side of the WPP transformer; ramp WPP up commensurate hydro down. When WPP high-side voltage drops below 0.95 for 30 seconds \textbf{AND} WPP MW export is positive, insert cap.
+\end{itemize}
+
+\vfill\null
+
+\end{multicols}
+
+\end{document}
