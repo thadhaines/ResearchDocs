@@ -19,7 +19,6 @@
 \usepackage{graphicx} 	% for image handling
 \usepackage{wrapfig} 	% wrap figures
 \usepackage[none]{hyphenat} % for no hyphenations
-\usepackage{booktabs} 	% enhanced table qualities
 \usepackage{array} 		% for >{} column characterisctis
 \usepackage{physics} 	% for easier derivative \dv....
 \usepackage{tikz} 		% for graphic@!
@@ -34,11 +33,17 @@
 \usepackage[framed,numbered]{matlab-prettifier} % matlab sytle listing
 \usepackage{marvosym} 	% for boltsymbol lightning
 \usepackage{pdflscape} 	% for various landscape pages in portrait docs.
-\usepackage{float}
+%\usepackage{float}
 \usepackage{fancyvrb}	% for Verbatim (a tab respecting verbatim)
 \usepackage{enumitem}	% for [resume] functionality of enumerate
 \usepackage{spreadtab} 	% for using formulas in tables}
 \usepackage{numprint}	% for number format in spread tab
+
+% For table formatting
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{floatrow}
+\floatsetup[table]{capposition=top} % put table captions on top of tables
 
 % Caption formating footnotesize ~ 10 pt in a 12 pt document
 \usepackage[font={small}]{caption}
@@ -47,7 +52,6 @@
 \sisetup{output-exponent-marker=\ensuremath{\mathrm{E}}} % for engineer E
 \renewcommand{\CancelColor}{\color{red}}	% for color cancels
 \lstset{aboveskip=2pt,belowskip=2pt} % for more compact table
-\def\arraystretch{1.4} % adjust size of arrays
 %\arraycolsep=1.4pt\def
 \setlength{\parindent}{0cm} % Remove indentation from paragraphs
 \setlength{\columnsep}{0.5cm}
@@ -87,17 +91,19 @@
 
 		\item MiniWECC step test results re-validated using different time steps.
 
-		\item Code flowchart being compiled to aid in further development (timing).
-
+		\item AMQP messages can now handle a non-converging system gracefully.
 		
 	%	\item More \verb|matplotlib| plot functions created.
 
 		\item GitHub updated:\\
-		\verb|https://github.com/thadhaines/PSLTDSim/|
+		\verb|https://github.com/thadhaines/|
 		
 	\end{enumerate}
 \paragraph{Current Tasks:}
 	\begin{enumerate}
+
+		\item Compile Code flowchart to aid in further development.
+
 		\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
 
 		\item Add logging to Shunt and Branch Agents
@@ -107,47 +113,19 @@
 
 		\item Think about Shunt Control / Generic Agent control based on system state(s)
 
-		\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Something like:
-		\begin{enumerate}
-		\item Parse models of interest from dyd.
-		\item Automate one machine infinite bus test in PSDS.
-		\item Generate/Calculate LTD equivalent model parameters from results
-		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
-		\end{enumerate}
-		
-		
-
-		
 		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
 		
 
 	\end{enumerate}
-%\pagebreak
-\vfill\null
-\columnbreak
 
-\paragraph{Future Tasks:}(Little to No Progress since last time / Things coming down the pipe)
-	\begin{enumerate}
-		\item Formulate an experiment utilizing a multi-area model that can be validated with PSDS.
-		\item Identify System Slack bus programmatically (currently assumes first slack == global slack if > 1 slack found)
-		\subitem AND/OR calculate system slack error differently $\rightarrow$ An average of slack errors?
-
-		\item Create an agent for every object: \\ SVD, Transformer, \ldots
-		\item Add import mirror / bypass mirror init sequence option. Will prevent repeated WECC mirror creations.
-		%\item Investigate line current data and ULTC action in PSLF.
-		\item Matt request: Enable multiple dyd files to overwrite / replace previously defined agents/parameters
-		\item Matt request: Allow for variable time steps.
-		%\subitem Can locate when only 1 Slack exists. If more than one Slack, maybe identify by generator with most busses under control? Proving more difficult than expected. Can identify in PSLF via the \verb|summ()| or \verb|isld()| commands. 
-		
-	\end{enumerate}
 	\paragraph{Current Questions:}
 	\begin{enumerate}
 	\item Does $\Delta \omega=1-\omega$ in \\ $\dot{\omega}=\dfrac{1}{2H_{sys}}\left(\dfrac{P_{acc}}{\omega} - D_{sys}\Delta \omega \right)$ ?
-		\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? 
+	%	\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? 
 		
-		\item Is there more available/relevant event data that may help us to verify simulations of specific instances (wind ramps or other behavior) that novel research will focus on? %(Heredia paper data helpful for some wind ramp data context)
+	%	\item Is there more available/relevant event data that may help us to verify simulations of specific instances (wind ramps or other behavior) that novel research will focus on? %(Heredia paper data helpful for some wind ramp data context)
 
-		\item  Any progress / continued interest in miniWecc Area definitions?
+	%	\item  Any progress / continued interest in miniWecc Area definitions?
 
 	%	\item Any progress on Wecc single gen per bus system?
 	%	\\ Will this actually matter? PSLF handles distribution of Pe in power flow solution per bus, and LTD code distributes electrical power per generator... Voltage issues maybe, but power should be okay.
@@ -160,23 +138,92 @@
 	\item Speed$\longrightarrow$ Order of Magnitude faster than PSDS (not met --- only $\approx$3x faster)
 	\end{enumerate}
 
+%\pagebreak
+\vfill\null
+\columnbreak
+
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+		\item Formulate an experiment utilizing a multi-area model that can be validated with PSDS.
+		\item Identify System Slack bus programmatically (currently assumes first slack == global slack if > 1 slack found)
+		\subitem AND/OR calculate system slack error differently $\rightarrow$ An average of slack errors?
+
+		\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Something like:
+		\begin{enumerate}
+		\item Parse models of interest from dyd.
+		\item Create dyd from parsed model.
+		\item Automate Pref step for a one machine infinite bus test in PSDS.
+		\item Generate/Calculate LTD equivalent model parameters from results (this will use MATLAB and \verb|jfind|)
+		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
+		\end{enumerate}
+
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Create an agent for every object: \\ SVD, Transformer, \ldots
+		
+		%\item Investigate line current data and ULTC action in PSLF.
+	\end{enumerate}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+		
+		%\subitem Can locate when only 1 Slack exists. If more than one Slack, maybe identify by generator with most busses under control? Proving more difficult than expected. Can identify in PSLF via the \verb|summ()| or \verb|isld()| commands. 
+		
+
+
+
 \vfill\null
 
 \end{multicols}
 \pagebreak
-\paragraph{7. Time step resolution:} NOTE: Code changed after all previously listed test were ran.
+\paragraph{Updated Tgov1 model:} Previous attempt at model revisted to account for $P_{REF}$.
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth]{tgov1}\vspace{-.5em}
+			\caption{Corrected tgov1 model.}
+			\label{tgov1}		 
+	\end{figure}\vspace{-.5em}
+\vspace{-1em}
 
-Changing the time step affects accuracy, size of data collected, and simulation run time. The following data was collected from a 90 second simulation. LTD uses rk45 integration and 0.5 MW slack tolerance --- it is also run from the command line.The PSDS system has exciters and PSS included in dyd file.
-Theoretical steady state frequency was calculated as 
+\paragraph{Time step resolution re-validation:} The \verb|distPacc| function was corrected to eliminate a number of power-flow solutions and the new tgov1 model was used for the 90 second 1,200 miniWECC step test.
+LTD uses no damping, rk45 integration, and 0.5 MW slack tolerance --- it is also run from the command line.
+The PSDS system has exciters and PSS included.
 
-$f = 1+\Delta f = 1 + \frac{\Delta P}{S_{base}\beta} = 1 + \frac{-1200 MW}{100 \times 15,555} = 0.999228543876567 = 59.953712632594019 Hz  $
+%%% custom commands for nicer units
+\newcommand{\mw}{\ensuremath{\text{ MW}}}
+\newcommand{\hz}{\ensuremath{\text{ Hz}}}
+\newcommand{\pu}{\ensuremath{\text{ Pu}}}
+\newcommand{\sbase}{\ensuremath{\text{S}_{\text{Base}}}}
+\newcommand{\fbase}{\ensuremath{f_{\text{Base}}}}
+\newcommand{\mbase}[1]{\ensuremath{\text{M}_{\text{Base}_{#1}}}}
+\newcommand{\hsys}{\ensuremath{\text{ H}_{\text{sys}}}}
+Theoretical steady state frequency was calculated as
+\begin{align*}
+f_{ss} &= f_{ref}+\Delta f = f_{ref} + \frac{\Delta P}{S_{base}\beta} \\
+f_{ss} &= 1\pu + \frac{-1200\mw}{100\mw \times 15,555\pu} \\
+f_{ss} &\approx .9992285\pu = 59.9537126\hz 
+\end{align*}
+When $R$ is a\pu\ value, $\beta$ for $N$ governor equipped machines, is calculated as
+\begin{align*}
+\beta &= \sum_{i=1}^{N} \dfrac{1}{R_i \frac{\sbase}{\mbase{i}}}
+% from glover section 12.2 page 659
+\end{align*}
+
+In a system with $N$ generators, weighted\pu\ PSDS system frequency, $f_{w}$, was calculated as
+\begin{align*}
+f_{w}\pu &= \sum_{i=1}^{N} \dfrac{f_i}{\fbase} \dfrac{H_{i}\mbase{i}}{\hsys}\\
+\text{where} \hsys &= \sum_{i=1}^{N}H_i\mbase{i}
+\end{align*}
+
 
 \begin{table}[!ht]
 	\centering
 	\footnotesize % this will affect the table font (makse it 10pt)
-	%\STautoround{2}
-\renewcommand\STprintnum[1]{\numprint{#1}}
- \nprounddigits{2}
+	\renewcommand\STprintnum[1]{\numprint{#1}}
+ 	\nprounddigits{2}
 
 	\npthousandsep{,}
 	\npdecimalsign{.}
@@ -191,35 +238,31 @@ $f = 1+\Delta f = 1 + \frac{\Delta P}{S_{base}\beta} = 1 + \frac{-1200 MW}{100 \
 		@LTD		&@	0.25 sec	& 63.67   	&	1672 	&   					&  						& 						& @ 0.0017\\ % miniWECC_loadStep04F.mir
 		\bottomrule
 	\end{spreadtab}
+	\caption{Results from MiniWECC load step.}
+	\label{tab:timestep miniwecc test}
 \end{table} 
-	\begin{figure}[h!]
-			\centering
-			\includegraphics[width=\linewidth]{tgov1}\vspace{-.5em}
-			\caption{Updated tgov1 model.}
-			\label{tgov1}		 
-	\end{figure}\vspace{-.5em}
-\vspace{-1em}
+
 \pagebreak
-\newcommand{\figW}{.9}
+\newcommand{\figW}{1}
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\figW\linewidth]{fComp}\vspace{-.5em}
-			\caption{Frequency response to a 1,200 MW load step.}
+			\caption{System frequency response to a 1,200 MW load step.}
 			\label{systemf}		 
-	\end{figure}\vspace{-2em}
+	\end{figure}%\vspace{-0em}
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\figW\linewidth]{tsWComp}\vspace{-.5em}
 			\caption{Average frequency of different time steps during a 1,200 MW load step.}
 			\label{tsComp}		 
-	\end{figure}\vspace{-2em}
+	\end{figure}%\vspace{-0em}
 
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\figW\linewidth]{tsWCompRelF}\vspace{-.5em}
 			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
 			\label{relF}		 
-	\end{figure}\vspace{-.5em}
+	\end{figure}%\vspace{-.5em}
 
 
 \end{document}

@@ -33,7 +33,7 @@
 
 \begin{document}
         \begin{tikzpicture}[auto, node distance=1cm,>=triangle 45]
-        \node [input, name=input, label=$\omega_{REF_{PU}}$] {};
+        \node [input, name=input, label=$\omega_{\text{ref}_{PU}}$] {};
         \node [sum, right=of input] (sum1) {$\Sigma$};
 \coordinate [right=of sum1]  (deltaw) {};
 \node [above=-.8em of deltaw,label={$\Delta\omega_{PU}$}]  (deltaWlabel){};
@@ -52,7 +52,7 @@
         \node [output, right=of sum2, label=$P_M$] (output) {};
         
         \node [input, name=omega, above= of sum1,label={[label distance=.1cm]0:$\omega_{PU}$} ] {};
-       	\node [input, name=Pref, above= of sumP,label={[label distance=.1cm]0:$P_{REF}$} ] {};
+       	\node [input, name=Pref, above= of sumP,label={[label distance=.1cm]0:$P_{\text{ref}}$} ] {};
 
 
         \draw [draw,->] (input) -- node[pos=0.8] {$+$} (sum1);
