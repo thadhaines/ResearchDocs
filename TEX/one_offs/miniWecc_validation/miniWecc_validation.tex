@@ -38,6 +38,8 @@
 \usepackage{fancyvrb}	% for Verbatim (a tab respecting verbatim)
 \usepackage{enumitem}	% for [resume] functionality of enumerate
 \usepackage{subfigure}
+\usepackage{spreadtab} 	% for using formulas in tables}
+\usepackage{numprint}
 
 %% package config 
 \sisetup{output-exponent-marker=\ensuremath{\mathrm{E}}} % for engineer E
@@ -93,7 +95,7 @@ Simulation results with time step = 1.0 second.
 	\begin{figure}[h!]	
 				\centering
 				\includegraphics[width=\figW\linewidth,height=\figH\textheight]{relDif}  \vspace{-1.5em}
-				\caption{Relative difference of PSDS - LTD as a percent $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 60 \text{Hz} \right)$.}
+				\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|\dfrac{f_{PSDS}(t)- f_{LTD}(t)}{f_{PSDS}(t)}\right| \times 60 \text{Hz} \right)$.}
 				\label{redDif}
 	\end{figure}
 
@@ -188,32 +190,48 @@ The table below quantified this difference for the two generators that had the l
 	\end{figure}\vspace{-.5em}
 
 \pagebreak
-\paragraph{7. Time step resolution:} Changing the time step affects accuracy, size of data collected, and simulation run time. The following data was collected from a 90 second simulation. LTD uses rk45 integration and 0.5 MW slack tolerance --- it is also run from the command line.The PSDS system has exciters and PSS included in dyd file.
-Note: Data from PSDS in a .chf file; data from PSLTDSim (LTD) as a .mir file.
+\paragraph{7. Time step resolution:} NOTE: Code changed after all previously listed test were ran.
+
+Changing the time step affects accuracy, size of data collected, and simulation run time. The following data was collected from a 90 second simulation. LTD uses rk45 integration and 0.5 MW slack tolerance --- it is also run from the command line.The PSDS system has exciters and PSS included in dyd file.
+Theoretical steady state frequency was calculated as 
+
+$f = 1+\Delta f = 1 + \frac{\Delta P}{S_{base}\beta} = 1 + \frac{-1200 MW}{100 \times 15,555} = 0.999228543876567 = 59.953712632594019 Hz  $
 
 \begin{table}[!ht]
 	\centering
-	\begin{tabular}{@{} lrrrrrrr @{}} 	
-		\toprule % @ signs to remove extra L R space
-		\footnotesize % this will affect the table font (makse it 10pt)
-		  & Time step  & \shortstack{Simulation\\ Time [sec] } & \shortstack{Data File \\Size [KB] }  & \shortstack{Real time \\Speed up}& \shortstack{ PSDS\\Speed up} & \shortstack{Reduction \\ of file size}  & \shortstack{Steady State $f$ \\ varience [Hz]}\\
-		\midrule		
-		PSDS	& 4.167 ms &  56.12   & 35,070 & 1.60& 1 & 1 & 0\\
-		LTD		&	2 sec	& 13.79   &	238 &6.53&4.07 & 147.35 & NA \\ % miniWECC_loadStep01F.mir
-		LTD		&	1 sec	& 27.22   &	479 &3.31&2.06 & 73.21& 9.50E-4\\ % miniWECC_loadStep02F.mir
-		LTD		&	0.5 sec	& 53.56   &	871 &1.68&1.05 & 40.26 & 9.71E-4\\ % miniWECC_loadStep03F.mir
-		LTD		&	0.25 sec	& 104.76   &	1,655 &0.86&0.54 & 21.19& 9.77E-4\\ % miniWECC_loadStep04F.mir
-		\bottomrule
-	\end{tabular}
-\end{table} 
+	\footnotesize % this will affect the table font (makse it 10pt)
+	%\STautoround{2}
+\renewcommand\STprintnum[1]{\numprint{#1}}
+ \nprounddigits{2}
 
-The steady state varience for the 2 LTD second case is not available as the system frequency is still oscillating at t(90).
+	\npthousandsep{,}
+	\npdecimalsign{.}
+	\begin{spreadtab}{{tabular}{lrrrrrrr}}
+		\toprule % @ signs to remove extra L R space
+		  & @Time step  & @\shortstack{Simulation\\ Time [sec] } &@ \shortstack{Data File \\Size [KB] }  &@ \shortstack{Real time \\Speed up}& @\shortstack{ PSDS\\Speed up} & @\shortstack{Reduction \\ of file size}  & @ \shortstack{Steady State  \\ $f$ error [Hz]}\\
+		\midrule		
+		@PSDS	& @4.167 ms 		&  56.12   	& 35070 	& \STcopy{v}{90/C2}		& 1 					& 1 					& @ 0.0034\\
+		@LTD		&@	2 sec		& 9.41   	&	300 	& 	 					& \STcopy{v}{56.12/c3} 	& \STcopy{v}{!d!2/d3}	& @ 0.0017 \\ % miniWECC_loadStep01F.mir
+		@LTD		&@	1 sec		& 17.39   	&	496 	&  						&  						& 						& @ 0.0017 \\ % miniWECC_loadSte@ p02F.mir
+		@LTD		&@	0.5 sec		& 33.05   	&	888 	&  						&  						& 						& @ 0.0017\\ % miniWECC_loadStep03F.mir
+		@LTD		&@	0.25 sec	& 63.67   	&	1672 	&   					&  						& 						& @ 0.0017\\ % miniWECC_loadStep04F.mir
+		\bottomrule
+	\end{spreadtab}
+\end{table} 
+\vspace{-1em}
 
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\linewidth]{tsComp}\vspace{-1em}
 			\caption{Comparison of system frequency among different time steps.}
 			\label{tsComp}		 
+	\end{figure}\vspace{-.5em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth]{tsCompRelF}\vspace{-1em}
+			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
+			\label{tsComprelF}		 
 	\end{figure}\vspace{-.5em}
 
 \end{document}

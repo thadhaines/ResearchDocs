@@ -6,4 +6,8 @@
 *.sqlite
 /.vs/VSWorkspaceState.json
 /.vs/ProjectSettings.json
+*.aux
+*.log
+*.gz
+/visio/~$$full_code.~vsdx
 /.vs/slnx.sqlite-journal

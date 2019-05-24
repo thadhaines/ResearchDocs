@@ -33,31 +33,42 @@
 
 \begin{document}
         \begin{tikzpicture}[auto, node distance=1cm,>=triangle 45]
-        \node [input, name=input, label=$\omega_{PU}(t)$] {};
-        \node [sum, right=of input,label={55:$\Delta\omega_{PU}$}] (sum1) {$\Sigma$};
-        \node [block, right=of sum1] (gain) {$\dfrac{-1}{R}$};
-        \node [block, right=of gain] (state1) {$\dfrac{1}{1+\$T_1}$};
-        \node [block, right=of state1] (state2) {$\dfrac{1+\$T_2}{1+\$T_3}$};
-        \node [block, right=of state2] (mbase) {$M_{Base}$};
-        \node [sum, right= of mbase] (sum2) {$\Sigma$};
-        \node [saturation block, right=of sum2, minimum size=1cm, label=$MW_{cap}$] (mwcap){};
-        \node [output, right=of mwcap, label=$P_M(t)$] (output) {};
+        \node [input, name=input, label=$\omega_{\text{ref}_{PU}}$] {};
+        \node [sum, right=of input] (sum1) {$\Sigma$};
+\coordinate [right=of sum1]  (deltaw) {};
+\node [above=-.8em of deltaw,label={$\Delta\omega_{PU}$}]  (deltaWlabel){};
+        \node [block, right=of deltaw] (gain) {$\dfrac{M_{Base}}{R}$};
+%Add Pref or Pset
+\node [sum, right=of gain] (sumP) {$\Sigma$};
+        \node [block, right=of sumP] (state1) {$\dfrac{1}{1+\$T_1}$};
+\node [block, below=of state1] (Dt) {$M_{Base} Dt$};
+%move limiter to here
+\node [saturation block, right=of state1 , minimum size=1cm, label=$V_{max} \times MW_{cap}$] (mwcap){};
+\node [below=2em of mwcap, label=$V_{min} \times MW_{cap}$](mwcapLOW){};
+        \node [block, right=of mwcap] (state2) {$\dfrac{1+\$T_2}{1+\$T_3}$};
+        \node [sum, right= of state2] (sum2) {$\Sigma$};
+
         
-        \node [input, name=omega, below= of sum1,label={[label distance=.1cm]0:$\omega_{PU}(t-1)$} ] {};
-       	\node [input, name=Pm0, below= of sum2,label={[label distance=.1cm]0:$P_{M}
-       		(t-1)$} ]{};
-       
+        \node [output, right=of sum2, label=$P_M$] (output) {};
+        
+        \node [input, name=omega, above= of sum1,label={[label distance=.1cm]0:$\omega_{PU}$} ] {};
+       	\node [input, name=Pref, above= of sumP,label={[label distance=.1cm]0:$P_{\text{ref}}$} ] {};
+
+
         \draw [draw,->] (input) -- node[pos=0.8] {$+$} (sum1);
         \draw [->] (omega) -- node[pos=0.8] {$-$} (sum1);
-        
+        \draw [->] (Pref) -- node[pos=0.8] {$+$} (sumP);
+
         \draw [->] (sum1) -- (gain) ;
-        \draw [->] (gain) -- (state1) ;
-        \draw [->] (state1) -- (state2) ;
-        \draw [->] (state2) -- (mbase) ;
-        \draw [->] (mbase) -- node[pos=0.8] {$+$} (sum2);
-        \draw [->] (Pm0) -- node[pos=0.8] {$+$} (sum2);
-        \draw [->] (sum2) -- (mwcap);
-        \draw [->] (mwcap) -- (output);
+        \draw [->] (gain) -- (sumP) ;
+		\draw [->] (sumP) -- (state1) ;
+        \draw [->] (state1) -- (mwcap) ;
+        \draw [->] (mwcap) -- (state2) ;
+        \draw [->] (state2) -- node[pos=0.8] {$+$} (sum2);
+        \draw [->] (deltaw) |-  (Dt);
+\draw [->] (Dt) -|  node[pos=0.9] {$-$} (sum2);
+        \draw [->] (sum2) -- (output);
+        %\draw [->] (mwcap) -- (output);
         
         \end{tikzpicture} 
 \end{document}
