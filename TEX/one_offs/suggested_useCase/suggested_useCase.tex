@@ -76,96 +76,165 @@
 % spacing
 \headheight 29 pt
 \headsep 6 pt
-
+\newcommand{\q}{(\textit{\textbf{?}})}
 \begin{document}
-\begin{multicols}{2}
-	
-\paragraph{Step Controller}
+\begin{multicols*}{2}
+\raggedright
+\noindent
+\paragraph{Step Controller / Perturbance}
 \begin{itemize}
 	\item Control Action: Change any settable quantity on any controllable device existing in the power-flow base case.
 	\item Basic Requirements
 	\begin{enumerate}
-		\item Settable via: \% Change, absolute change, relative change
+		\item Value changes by \%, absolute, or relative to original value.
+		\item Time input: start time
 	\end{enumerate}
-	\item Feature Requests
+%	\item Feature Requests \q
+%	\begin{enumerate}
+%		\item Ability to add custom control law 
+%		\item Ability to use arbitrary Inputs 
+%	\end{enumerate}
+	\item Examples
 	\begin{enumerate}
-		\item Ability to add custom control law
-		\item Ability to use arbitrary Inputs
-	\end{enumerate}
-	\item Basic Example 
-	\begin{enumerate}
-		\item Step load up 5\% at t = $t_1$
-		\item Open branch at t = $t_1$
+		\item Step load up 5\% at $t_1$
+		\item Open branch at $t_1$
+		\item Increase $P_{gen}$ by 25 MW at $t_1$
 	\end{enumerate}
 \end{itemize}
 
-\paragraph{Ramp Controller}
+\paragraph{Ramp Controller / Perturbance}
 \begin{itemize}
 	\item Control Action: Change any non-binary settable quantity on any controllable device existing in the power-flow base case.
 	\item Basic Requirements
 	\begin{enumerate}
-		\item Settable via: \% Change, absolute change, relative change
+		\item Value changes by \%, absolute, or relative to original value.
 		\item Time inputs: start time, ramp A time, hold time, ramp B time
-		\item NOTE: Hold time and ramp B time can be zero for single ramp operation.
+		\item NOTE: For single ramp operation, hold time and ramp B time are zero.
 	\end{enumerate}
-	\item Feature Requests
+%	\item Feature Requests \q
+%	\begin{enumerate}
+%		\item Ability to add custom control law
+%		\item Ability to use arbitrary Inputs
+%	\end{enumerate}
+	\item Examples
 	\begin{enumerate}
-		\item Ability to add custom control law
-		\item Ability to use arbitrary Inputs
-	\end{enumerate}
-	\item Basic Example: Ramp Pgen up 5\% at t = $t_1$ over $t_2$ seconds
-	\item Advanced Example: Ramp Pgen up 20 MW at t = $t_1$ over $t_2$ seconds, hold for $t_3$ seconds before ramping down 15\% after $t_4$ seconds.
+	\item Ramp $P_{gen}$ +5\% at $t_1$ over $t_2$ seconds
+	\item Ramp $P_{gen}$ to 60 MW from $t_1$ to $t_2$, hold for $t_3$ seconds, then ramp down 5 MW over $t_4$ seconds.
+	\end{enumerate}	
+	
 \end{itemize}
 
 \vfill\null
 \columnbreak
-
-\paragraph{Definite Time (Digital Relay) Controller}
+%
+\vspace{0pt}
+\paragraph{Definite Time Controller (Digital Relay)}%
 \begin{itemize}
-	\item Control Action: Change the status bit on any controllable device existing in the power-flow base case. (Shunts, Branches, etc\ldots)
+	\item Control Action: Change the status bit on any controllable device existing in the power-flow base case based on any other value in the system.
+	
 	\item Basic Requirements
 	\begin{enumerate}
-		\item Binary or `Analog' settable reference input(s) (bus voltage level, MW output, system frequency \ldots) 
-		\item Threshold inputs: set level (turn on), reset level (turn off)
-		\item Time inputs: set time (time $\pm$ set level before turning on), reset time (time $\mp$ reset level before turning off), reclose time (time required after a reset before a set can be performed)
-		\item NOTE: reclose time can be set to zero.
+		\item Binary or `Analog' settable reference input(s) (bus voltage, MW output, system frequency \ldots) 
+		\item Threshold inputs: \textbf{set level} $L_S$ (turn on), \textbf{reset level} $L_R$ (turn off)
+		\item Time inputs: \textbf{set time} (time $\pm$ $L_S$ before turning on), \textbf{reset time} (time $\mp$ $L_R$ before turning off), \textbf{reclose time} (time required after a reset before a set can be performed)
+		\item NOTE: reclose time can be set to zero, but will only act on next time step.
 	\end{enumerate}
 	\item Feature Requests
 	\begin{enumerate}
 		\item Ability to add custom control law
 		\item Ability to use arbitrary Inputs
+		\item Ability to trigger Steps or Ramps
 	\end{enumerate}
-	\item Basic Example: Using a voltage sensitive base case with an available shunt cap; ramp real power of a load. When but voltage at the cap drops below 0.95 PU for 30 seconds, insert cap.
-	\item Advanced Example: Using a voltage sensitive base case with a wind power plant (WWP) and an available shunt cap on the low side of the WPP transformer; ramp WPP up commensurate hydro down. When WPP high-side voltage drops below 0.95 for 30 seconds \textbf{AND} WPP MW export is positive, insert cap.
+	\item Basic Example: Using a voltage sensitive base case with an available shunt cap; ramp real power of a load. When bus voltage at the cap drops below 0.95 PU for 30 seconds, insert cap.
+	\item Advanced Example: Using a voltage sensitive base case with a wind power plant (WWP) and an available shunt cap on the low side of the WPP transformer; ramp WPP up and commensurate hydro down. When WPP high-side voltage drops below 0.95 for 30 seconds \textbf{AND} WPP MW export is positive, insert cap.
 \end{itemize}
 
 \vfill\null
+\end{multicols*}
 
-\end{multicols}
-\paragraph{Capacitor Group}
+\pagebreak
+\begin{multicols*}{2}
+\raggedright
+\paragraph{Capacitor Group (Cap Bank)}
 \begin{itemize}
-	\item Control Action: changes status bit(s) on a finite set of shunt capacitors existing in the power-flow base case.
+	\item Control Action: Change status bit(s) on a finite set of shunt capacitors existing in the power-flow base case. 
 	\item Basic Requirements
 	\begin{enumerate}
 		\item Group can have a variable amount of capacitors.
-		\item Capacitor status controllable via bus voltage 
-		\item NOTE: Hold time and ramp B time can be zero for single ramp operation.
+		\item Capacitor status controllable via bus voltage.
+		\item Order of Caps switched in can be defined.
 	\end{enumerate}
 	\item Feature Requests
 	\begin{enumerate}
 		\item Ability to add custom control law
 		\item Ability to use arbitrary Inputs
 	\end{enumerate}
-	\item Basic Example: Ramp Pgen up 5\% at t = $t_1$ over $t_2$ seconds
-	\item Advanced Example: Ramp Pgen up 20 MW at t = $t_1$ over $t_2$ seconds, hold for $t_3$ seconds before ramping down 15\% after $t_4$ seconds.
+	\item Examples
+	\begin{enumerate}
+	\item \q
+	\item \q
+	\end{enumerate}	
 \end{itemize}
 
-\pagebreak
-\begin{multicols}{2}
-
+\paragraph{Generator Group (Discrete Power Plant)}
+\begin{itemize}
+	\item Control Action: Change values on a finite set of generators existing in the power-flow base case. 
+	\item Basic Requirements
+	\begin{enumerate}
+		\item Group can have a variable amount of generators.
+	\end{enumerate}
+	\item Feature Requests
+	\begin{enumerate}
+		\item Ability to add custom control law
+		\item Ability to use arbitrary Inputs
+	\end{enumerate}
+	\item Examples
+	\begin{enumerate}
+	\item \q
+	\item \q
+	\end{enumerate}	
+\end{itemize}
 
 \vfill\null
 \columnbreak
 
-\end{multicols}
+\paragraph{Power Plant Agent}
+\begin{itemize}
+	\item Control Action: Change a single generator object in the base case such that it \textbf{acts} like multiple generators.
+	\item Basic Requirements
+	\begin{enumerate}
+		\item Change Pmax, Qmax, H, Pm \ldots
+	\end{enumerate}
+	\item Feature Requests
+	\begin{enumerate}
+		\item Ability to add custom control law
+		\item Ability to use arbitrary Inputs
+	\end{enumerate}
+	\item Examples
+	\begin{enumerate}
+	\item \q
+	\item \q
+	\end{enumerate}	
+\end{itemize}
+	
+\paragraph{Automatic Generator Control}
+\begin{itemize}
+	\item Control Action: Change Pref based on ACE
+	\item Basic Requirements
+	\begin{enumerate}
+		\item  \ldots
+	\end{enumerate}
+	\item Feature Requests
+	\begin{enumerate}
+		\item Ability to add custom control law
+		\item Ability to use arbitrary Inputs
+	\end{enumerate}
+	\item Examples
+	\begin{enumerate}
+	\item \q
+	\item \q
+	\end{enumerate}	
+\end{itemize}
+\vfill\null
+\end{multicols*}
 \end{document}

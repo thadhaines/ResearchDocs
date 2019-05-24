@@ -66,6 +66,7 @@
 	
 %% custom macros
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} % for simple \numberthis command
+
 \newcommand{\equal}{=} % so circuitikz can have an = in the labels
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -83,7 +84,7 @@
 
 \begin{document}
 \begin{multicols}{2}
-
+\raggedright
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
 
@@ -91,7 +92,7 @@
 
 		\item MiniWECC step test results re-validated using different time steps.
 
-		\item AMQP messages can now handle a non-converging system gracefully.
+		\item AMQP messages now handle a non-converging system gracefully.
 		
 	%	\item More \verb|matplotlib| plot functions created.
 
@@ -105,16 +106,14 @@
 		\item Compile Code flowchart to aid in further development.
 
 		\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
-
+		\begin{itemize}
 		\item Add logging to Shunt and Branch Agents
-		
 		\item Add perturbance Agents for Generator/Slack, Shunt, Branch, \ldots
 		\item Define Agent actions for \\ AGC/LFC (i.e. ACE calculations)
-
 		\item Think about Shunt Control / Generic Agent control based on system state(s)
-
-		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+		\end{itemize}
 		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
 
 	\end{enumerate}
 
@@ -133,7 +132,7 @@
 		
 %		\includegraphics[width=\linewidth]{g4aSys}
 	\end{enumerate}
-\paragraph{Goals:}
+\paragraph{'Goals':}
 	\begin{enumerate}
 	\item Speed$\longrightarrow$ Order of Magnitude faster than PSDS (not met --- only $\approx$3x faster)
 	\end{enumerate}
@@ -152,8 +151,9 @@
 		\begin{enumerate}
 		\item Parse models of interest from dyd.
 		\item Create dyd from parsed model.
-		\item Automate Pref step for a one machine infinite bus test in PSDS.
-		\item Generate/Calculate LTD equivalent model parameters from results (this will use MATLAB and \verb|jfind|)
+		\item Automate a Pref step test for a one machine infinite bus in PSDS.
+		\item Read output data
+		\item Generate/Calculate LTD equivalent model parameters from results (this will probably use MATLAB and \verb|jfind|)
 		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
 		\end{enumerate}
 
@@ -179,7 +179,7 @@
 
 \end{multicols}
 \pagebreak
-\paragraph{Updated Tgov1 model:} Previous attempt at model revisted to account for $P_{REF}$.
+\paragraph{Updated Tgov1 model:} Previous attempt at \verb|tgov1| model revisted to account for $P_{\text{ref}}$.
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\linewidth]{tgov1}\vspace{-.5em}
@@ -188,8 +188,8 @@
 	\end{figure}\vspace{-.5em}
 \vspace{-1em}
 
-\paragraph{Time step resolution re-validation:} The \verb|distPacc| function was corrected to eliminate a number of power-flow solutions and the new tgov1 model was used for the 90 second 1,200 miniWECC step test.
-LTD uses no damping, rk45 integration, and 0.5 MW slack tolerance --- it is also run from the command line.
+\paragraph{Time step resolution re-validation:} The \verb|distPacc| function was corrected to eliminate a number of power-flow solutions and the new \verb|tgov1| model was used for the 90 second 1,200 MW miniWECC step test.
+LTD is run from the command line, uses no damping, rk45 integration, and a 0.5 MW slack tolerance.
 The PSDS system has exciters and PSS included.
 
 %%% custom commands for nicer units
@@ -200,28 +200,29 @@ The PSDS system has exciters and PSS included.
 \newcommand{\fbase}{\ensuremath{f_{\text{Base}}}}
 \newcommand{\mbase}[1]{\ensuremath{\text{M}_{\text{Base}_{#1}}}}
 \newcommand{\hsys}{\ensuremath{\text{ H}_{\text{sys}}}}
-Theoretical steady state frequency was calculated as
+
+The theoretical steady state frequency was calculated as
 \begin{align*}
-f_{ss} &= f_{ref}+\Delta f = f_{ref} + \frac{\Delta P}{S_{base}\beta} \\
+f_{ss} &= f_{ref}+\Delta f = f_{ref} + \frac{\Delta P}{S_{base}\beta} \numberthis \\
 f_{ss} &= 1\pu + \frac{-1200\mw}{100\mw \times 15,555\pu} \\
 f_{ss} &\approx .9992285\pu = 59.9537126\hz 
 \end{align*}
-When $R$ is a\pu\ value, $\beta$ for $N$ governor equipped machines, is calculated as
+When $R$ is a\pu\ value, $\beta$ for $N$ governor equipped machines is calculated as
 \begin{align*}
-\beta &= \sum_{i=1}^{N} \dfrac{1}{R_i \frac{\sbase}{\mbase{i}}}
+\beta &= \sum_{i=1}^{N} \dfrac{1}{R_i \frac{\sbase}{\mbase{i}}}\numberthis
 % from glover section 12.2 page 659
 \end{align*}
 
-In a system with $N$ generators, weighted\pu\ PSDS system frequency, $f_{w}$, was calculated as
+Additionally, in a system with $N$ generators, the weighted system frequency, $f_{w}$, is calculated as
 \begin{align*}
-f_{w}\pu &= \sum_{i=1}^{N} \dfrac{f_i}{\fbase} \dfrac{H_{i}\mbase{i}}{\hsys}\\
-\text{where} \hsys &= \sum_{i=1}^{N}H_i\mbase{i}
+f_{w}\pu &= \sum_{i=1}^{N} \dfrac{f_i}{\fbase} \dfrac{H_{i}\mbase{i}}{\hsys} \numberthis\\
+\text{where} \hsys &= \sum_{i=1}^{N}H_i\mbase{i} \numberthis
 \end{align*}
 
 
 \begin{table}[!ht]
 	\centering
-	\footnotesize % this will affect the table font (makse it 10pt)
+	%\footnotesize % this will affect the table font (makse it 10pt)
 	\renewcommand\STprintnum[1]{\numprint{#1}}
  	\nprounddigits{2}
 
@@ -238,7 +239,7 @@ f_{w}\pu &= \sum_{i=1}^{N} \dfrac{f_i}{\fbase} \dfrac{H_{i}\mbase{i}}{\hsys}\\
 		@LTD		&@	0.25 sec	& 63.67   	&	1672 	&   					&  						& 						& @ 0.0017\\ % miniWECC_loadStep04F.mir
 		\bottomrule
 	\end{spreadtab}
-	\caption{Results from MiniWECC load step.}
+	\caption{Results from MiniWECC load step tests.}
 	\label{tab:timestep miniwecc test}
 \end{table} 
 
