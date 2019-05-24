@@ -34,46 +34,46 @@
 }
 
 \begin{document}
-        \begin{tikzpicture}[auto, node distance=1cm,>=triangle 45]
-        % Starting input (wref)
-        \node [input, name=input, label=$\omega_{\text{ref}_{PU}}$] {};
-        % sum 1
-        \node [sum, right=of input] (sum1) {$\Sigma$};
-        % delta w node and label
+	\begin{tikzpicture}[auto, node distance=1cm,>=triangle 45]
+		% Starting input (wref)
+		\node [input, name=input, label=$\omega_{\text{ref}_{PU}}$] {};
+		% sum 1
+		\node [sum, right=of input] (sum1) {$\Sigma$};
+		% delta w node and label
 		\coordinate [right=of sum1]  (deltaw) {};
 		\node [above=-.8em of deltaw,label={$\Delta\omega_{PU}$}]  (deltaWlabel){};
 		% delta w gain blocks
-        \node [block, right=of deltaw] (gain) {$\dfrac{M_{Base}}{R}$};
-        \node [block, below=of gain] (Dt) {$M_{Base} Dt$};
+		\node [block, right=of deltaw] (gain) {$\dfrac{M_{Base}}{R}$};
+		\node [block, below=of gain] (Dt) {$M_{Base} Dt$};
 		% Pref sum
 		\node [sum, right=of gain] (sumP) {$\Sigma$};
 		% Valve state block
-        \node [block, right=of sumP] (state1) {$\dfrac{1}{1+\$T_1}$};
+		\node [block, right=of sumP] (state1) {$\dfrac{1}{1+\$T_1}$};
 		% limiter and labels
 		\node [saturation block, right=of state1 , minimum size=3.5em, label=$V_{max} \times MW_{cap}$] (mwcap){};
 		\node [below=2em of mwcap, label=$V_{min} \times MW_{cap}$](mwcapLOW){};
 		% turbine state
-        \node [block, right=of mwcap] (state2) {$\dfrac{1+\$T_2}{1+\$T_3}$};
-        % damping sum
-        \node [sum, right= of state2] (sum2) {$\Sigma$};
+		\node [block, right=of mwcap] (state2) {$\dfrac{1+\$T_2}{1+\$T_3}$};
+		% damping sum
+		\node [sum, right= of state2] (sum2) {$\Sigma$};
 		% Pm out
-        \node [output, right=of sum2, label=$P_M$] (output) {};
-        % w and pref in
-        \node [input, name=omega, above= of sum1,label={[label distance=.1cm]0:$\omega_{PU}$} ] {};
-       	\node [input, name=Pref, above= of sumP,label={[label distance=.1cm]0:$P_{\text{ref}}$} ] {};
+		\node [output, right=of sum2, label=$P_M$] (output) {};
+		% w and pref in
+		\node [input, name=omega, above= of sum1,label={[label distance=.1cm]0:$\omega_{PU}$} ] {};
+		\node [input, name=Pref, above= of sumP,label={[label distance=.1cm]0:$P_{\text{ref}}$} ] {};
 
 		% connecting lines
-        \draw [draw,->] (input) -- node[pos=0.8] {$+$} (sum1); % straight connecting line
-        \draw [->] (omega) -- node[pos=0.8] {$-$} (sum1);
-        \draw [->] (Pref) -- node[pos=0.8] {$+$} (sumP);
-        \draw [->] (sum1) -- (gain) ;
-        \draw [->] (gain) -- (sumP) ;
+		\draw [draw,->] (input) -- node[pos=0.8] {$+$} (sum1); % straight connecting line
+		\draw [->] (omega) -- node[pos=0.8] {$-$} (sum1);
+		\draw [->] (Pref) -- node[pos=0.8] {$+$} (sumP);
+		\draw [->] (sum1) -- (gain) ;
+		\draw [->] (gain) -- (sumP) ;
 		\draw [->] (sumP) -- (state1) ;
-        \draw [->] (state1) -- (mwcap) ;
-        \draw [->] (mwcap) -- (state2) ;
-        \draw [->] (state2) -- node[pos=0.8] {$+$} (sum2);
-        \draw [->] (deltaw) |-  (Dt); % line goes down and across
+		\draw [->] (state1) -- (mwcap) ;
+		\draw [->] (mwcap) -- (state2) ;
+		\draw [->] (state2) -- node[pos=0.8] {$+$} (sum2);
+		\draw [->] (deltaw) |-  (Dt); % line goes down and across
 		\draw [->] (Dt) -|  node[pos=0.9] {$-$} (sum2); % line goes across then down
-        \draw [->] (sum2) -- (output);
-        \end{tikzpicture} 
+		\draw [->] (sum2) -- (output);
+	\end{tikzpicture} 
 \end{document}

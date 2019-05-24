@@ -128,7 +128,7 @@
 \columnbreak
 %
 \vspace{0pt}
-\paragraph{Definite Time Controller (Digital Relay)}%
+\paragraph{Definite Time Controller (Digital Relay)}
 \begin{itemize}
 	\item Control Action: Change the status bit on any controllable device existing in the power-flow base case based on any other value in the system.
 	
@@ -169,41 +169,45 @@
 		\item Ability to add custom control law
 		\item Ability to use arbitrary Inputs
 	\end{enumerate}
-	\item Examples
+	\item Example
 	\begin{enumerate}
-	\item \q
-	\item \q
-	\end{enumerate}	
-\end{itemize}
-
-\paragraph{Generator Group (Discrete Power Plant)}
-\begin{itemize}
-	\item Control Action: Change values on a finite set of generators existing in the power-flow base case. 
-	\item Basic Requirements
-	\begin{enumerate}
-		\item Group can have a variable amount of generators.
-	\end{enumerate}
-	\item Feature Requests
-	\begin{enumerate}
-		\item Ability to add custom control law
-		\item Ability to use arbitrary Inputs
-	\end{enumerate}
-	\item Examples
-	\begin{enumerate}
-	\item \q
-	\item \q
+	\item Starting with a voltage sensitive base case, ramp real power on a load in a region where two or more shunt caps are available. When reference bus voltage for the cap group drops below 0.95 for 30 seconds, insert one of the available caps. Wait $n_1$ seconds. If voltage still below 0.95 insert additional cap.
 	\end{enumerate}	
 \end{itemize}
 
 \vfill\null
 \columnbreak
 
+\paragraph{Generator Group (Discrete Power Plant)}
+\begin{itemize}
+	\item Control Action: Change status bit(s) and total $P_{gen}$ on a finite set of generators existing in the power-flow base case. 
+	\item Basic Requirements
+	\begin{enumerate}
+		\item Group can have a variable amount of generators.
+		\item Generator status and $P_{gen}$ controllable via $P_{ref}$ value sent from scheduling controller.
+		\item Ability to add custom control law.
+	\end{enumerate}
+	\item Feature Requests
+	\begin{enumerate}
+		\item Ability to use arbitrary Inputs
+	\end{enumerate}
+	\item Examples
+	\begin{enumerate}
+	\item \q
+	\end{enumerate}	
+\end{itemize}
+\vfill\null
+\end{multicols*}
+\pagebreak
+\begin{multicols*}{2}
+\raggedright
+
 \paragraph{Power Plant Agent}
 \begin{itemize}
 	\item Control Action: Change a single generator object in the base case such that it \textbf{acts} like multiple generators.
 	\item Basic Requirements
 	\begin{enumerate}
-		\item Change Pmax, Qmax, H, Pm \ldots
+		\item Change Pmax, Qmax, H, Pm, Pgen as appropriate \ldots
 	\end{enumerate}
 	\item Feature Requests
 	\begin{enumerate}
@@ -212,26 +216,24 @@
 	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item \q
 	\item \q
 	\end{enumerate}	
 \end{itemize}
 	
 \paragraph{Automatic Generator Control}
 \begin{itemize}
-	\item Control Action: Change Pref based on ACE
+	\item Control Action: Change status bit(s) and total $P_{gen}$ on a finite set of generators existing in the power-flow base case.
 	\item Basic Requirements
 	\begin{enumerate}
-		\item  \ldots
+		\item  Generator status and $P_{gen}$ controllable via $P_{ref}$ value sent from scheduling controller.
+		\item Ability to add custom control law
 	\end{enumerate}
 	\item Feature Requests
 	\begin{enumerate}
-		\item Ability to add custom control law
 		\item Ability to use arbitrary Inputs
 	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item \q
 	\item \q
 	\end{enumerate}	
 \end{itemize}
