@@ -172,10 +172,10 @@ The easiest path forward to gain the most possible speed up is message grouping.
 	\label{tab:grouping speedup}
 \end{table}
 
-For this particular case, grouping messages by type can reduce the total number of messages sent by 33-59$\times$ while increasing the average message sending time by 3-10$\times$. A happy medium could be pursued to only group a certain number of messages to allow for maximum message reduction with minimal send time increase. Size of grouped messages from IPY are 23, 34, and 120 (corresponding to load, machine, and bus groupings). In the larger WECC case, a grouping method that limits size of messages will probably be required as the number of objects will be respectively $\approx$480, 124, and 182$\times$ larger. Additionally, more messages will be sent as more agents are added to the system.
+For this particular case, grouping messages by type can reduce the total number of messages sent by 33-59$\times$ while increasing the average message sending time by 3-10$\times$. A happy medium could be pursued to only group a certain number of messages to allow for maximum message reduction with minimal send time increase. Size of grouped messages from IPY are 23, 34, and 120 (corresponding to load, machine, and bus groupings). In the larger WECC case, a grouping method that limits size of messages will likely be required as the number of objects will be respectively $\approx$480, 124, and 182$\times$ larger. Additionally, more messages will be sent as more agents are added to the system.
 \vspace{1em}
 
-However, for the moment, a speed up of 1.45 enables the 2 second time step simulations to be 15$\times$ faster than real time ($\approx$ 1 order of magnitude faster than PSDS $\longrightarrow$ Speed Goal).
+However, the current speed up enables simulations run with a 2 second time step to be $\approx$13-15$\times$ faster than real time ($\approx$ 1 order of magnitude faster than PSDS $\longrightarrow$ Speed Goal).
 
 \begin{comment}
 
