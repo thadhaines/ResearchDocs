@@ -132,7 +132,7 @@ The easiest path forward to gain the most possible speed up is message grouping.
 
 
 \pagebreak
-\paragraph{Grouping Results:} AMQP message grouping was applied to entire types of agent message updates (i.e., all machine updates in one message, bus updates in another, and load updates in a third). Table \ref{tab:grouping speedup} shows the results of tested grouping options. Option B has the largest speed up benefit caused by reducing the number of IPY messages by 59 times while also slightly increasing PY3 Dynamic time and IPY average message time.
+\paragraph{Grouping Results:} AMQP message grouping was applied to entire types of agent message updates (i.e., all machine updates in one message, bus updates in another, and load updates in a third). Table \ref{tab:grouping speedup} shows the results of tested grouping options. Option C has the largest speed up benefit caused by reducing the number of IPY messages by 59 times while also slightly increasing PY3 Dynamic time and IPY average message time.
 
 \begin{table}[!ht]
 
@@ -143,27 +143,26 @@ The easiest path forward to gain the most possible speed up is message grouping.
 	\npdecimalsign{.}
 	\footnotesize
 	\begin{spreadtab}{{tabular}{rrrrrrrc}}
-\toprule @		& @	\shortstack{Option 0\\None}	& @	\shortstack{Option A\\ IPY \& PY3}	& @	\shortstack{Option B\\ IPY }	&	& @	\shortstack{Option A\\ Benefit }	& @	\shortstack{Option B\\ Benefit }	& @	Best	\\	\toprule
+\toprule @	\shortstack{Message Grouping\\ \vspace{.6em}}	& @	\shortstack{Option A\\None}	& @	\shortstack{Option B\\ IPY \& PY3}	& @	\shortstack{Option C\\ IPY }	&	& @	\shortstack{Option B\\ Benefit }	& @	\shortstack{Option C\\ Benefit }	& @	Best	\\	\toprule
 @	Simulation Timings	& @	[sec]	& @	[sec]	& @	[sec]	&	& @	[abs]	& @	[abs]	& @	[Option]	\\	\midrule
-@	     Total Simulation Time	&	28.592126	&	20.96999	&	19.676878	&	&	1.363478285	&	1.453082445	& @	B	\\	
-@	         PY3 Dynamics CPU Time	&	3.267116	&	3.368752	&	3.406628	&	&	0.969829777	&	0.959046893	& @	0	\\	
-@	                 PY3 Send Time	&	0.648147	&	0.065931	&	0.642515	&	&	9.830686627	&	1.008765554	& @	A	\\	
-@	              PY3 Recieve Time	&	24.517481	&	17.386083	&	15.48466	&	&	1.410178532	&	1.583339964	& @	B	\\	
-@	                IPY distPacc Time	&	0.233406	&	0.207108	&	0.255341	&	&	1.126977229	&	0.914095269	& @	A	\\	
-@	            IPY PSLF Get/Set Time	&	1.391693	&	0.964806	&	1.092232	&	&	1.442458898	&	1.274173436	& @	A	\\	
-@	                IPY Msg Make Time	&	0.085266	&	0.029984	&	0.025864	&	&	2.843716649	&	3.296705846	& @	B	\\	
-@	                    IPY Send Time	&	10.390213	&	1.530998	&	1.534767	&	&	6.786562099	&	6.769896017	& @	A or B	\\	
-@	        Uncounted PY3 Time	&	0.159382	&	0.149224	&	0.143075	&	&	1.06807216	&	1.113975188	& @	A or B	\\	
-@	        Uncounted IPY Time	&	1.899927	&	4.236898	&	1.920313	&	&	0.448424059	&	0.989384022	& @	B	\\	
+@	     Total Simulation Time	&	28.592126	&	20.96999	&	19.676878	&	&	1.363478285	&	1.453082445	& @	C	\\	
+@	         PY3 Dynamics CPU Time	&	3.267116	&	3.368752	&	3.406628	&	&	0.969829777	&	0.959046893	& @	A	\\	
+@	                 PY3 Send Time	&	0.648147	&	0.065931	&	0.642515	&	&	9.830686627	&	1.008765554	& @	B	\\	
+@	                IPY distPacc Time	&	0.233406	&	0.207108	&	0.255341	&	&	1.126977229	&	0.914095269	& @	B	\\	
+@	            IPY PSLF Get/Set Time	&	1.391693	&	0.964806	&	1.092232	&	&	1.442458898	&	1.274173436	& @	B	\\	
+@	                IPY Msg Make Time	&	0.085266	&	0.029984	&	0.025864	&	&	2.843716649	&	3.296705846	& @	C	\\	
+@	                    IPY Send Time	&	10.390213	&	1.530998	&	1.534767	&	&	6.786562099	&	6.769896017	& @	B or C	\\	
+@	        Uncounted PY3 Time	&	0.159382	&	0.149224	&	0.143075	&	&	1.06807216	&	1.113975188	& @	B or C	\\	
+@	        Uncounted IPY Time	&	1.899927	&	4.236898	&	1.920313	&	&	0.448424059	&	0.989384022	& @	C	\\	
 @	             PSLF Power-Flow Time	&	10.516975	&	10.41629	&	10.656143	&	&	1.00966611	&	0.986940115	& @	 	\\	\midrule
 @	Simulation Counters	&		&		&		&	&		&		& @		\\	\midrule
-@	                Sent PY3 Messages	&	6157	&	184	&	6157	&	&	33.46195652	&	1	& @	A	\\	
-@	                Sent IPY Messages	&	32037	&	543	&	543	&	&	59	&	59	& @	A or B	\\	
+@	                Sent PY3 Messages	&	6157	&	184	&	6157	&	&	33.46195652	&	1	& @	B	\\	
+@	                Sent IPY Messages	&	32037	&	543	&	543	&	&	59	&	59	& @	B or C	\\	
 @	             Power-Flow Solutions	&	206	&	206	&	206	&	&	1	&	1	& @	 	\\	\midrule
 @	Simulation Summary	&		&		&		&	&		&		& @		\\	\midrule
-@	                Real time Speedup	&	3.14772	&	4.291848	&	4.573896	&	&	1.363478327	&	1.453082231	& @	B	\\	
-@	                Average PY3 Send Time	&	0.000105	&	0.000358	&	0.000104	&	&	0.293296089	&	1.009615385	& @	0 or B	\\	
-@	                Average IPY Send Time	&	0.000324	&	0.00282	&	0.002826	&	&	0.114893617	&	0.114649682	& @	0	\\	
+@	                Real time Speedup	&	3.14772	&	4.291848	&	4.573896	&	&	1.363478327	&	1.453082231	& @	C	\\	
+@	                Average PY3 Send Time	&	0.000105	&	0.000358	&	0.000104	&	&	0.293296089	&	1.009615385	& @	A or C	\\	
+@	                Average IPY Send Time	&	0.000324	&	0.00282	&	0.002826	&	&	0.114893617	&	0.114649682	& @	A	\\	
 @	Average Power-Flow Time	&	0.051053	&	0.050565	&	0.051729	&	&	1.009650944	&	0.986931895	& @	 	\\	
 @	Average Power-Flow / Time Step	&	1.138122	&	1.138122	&	1.138122	&	&	1	&	1	& @	 	\\	
 @	                   Simulated Time	&	90	&	90	&	90	&	&	1	&	1	& @	 	\\	
