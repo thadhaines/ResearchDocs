@@ -88,13 +88,18 @@
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
 
+		\item \textbf{PSLF License Expires June 30}.
+
 		\item Timing added to simulation.
 
-		\item AMQP message grouping speed up work.
+		\item AMQP message grouping speed results.
 
-		\item Batch processing of test cases added.
+		\item Batch processing of test cases functional.
 
-		\item Experiments with GE 4 machine system.
+		\item GE 4 machine 2 area system too sloppy for actual study $\therefore$
+		Kundur 4 machine 2 area system created and adapted for LTD %(lower voltage,  more discrete caps \& branches).
+
+		\item Work on step and ramp perturbances for Loads and Generators.
 		
 	%	\item More \verb|matplotlib| plot functions created.
 
@@ -122,8 +127,11 @@
 
 	\end{enumerate}
 
-%	\paragraph{Current Questions:}
-%	\begin{enumerate}
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+	\item Should the Global Slack = Area slack from Area with most buses?
+	\subitem OR Should global slack error be average Area slack error?
+
 	%\item Does $\Delta \omega=1-\omega$ in \\ $\dot{\omega}=\dfrac{1}{2H_{sys}}\left(\dfrac{P_{acc}}{\omega} - D_{sys}\Delta \omega \right)$ ? Yes it does
 	%	\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? 
 		
@@ -136,10 +144,10 @@
 		
 		
 %		\includegraphics[width=\linewidth]{g4aSys}
-%	\end{enumerate}
+	\end{enumerate}
 \paragraph{'Soft Goals':}
 	\begin{enumerate}
-	\item Simulate 10$\times$ faster than PSDS.\\ Not met --- only $\approx$8x faster.\\Varies with system size \& time step.
+	\item Simulate 10$\times$ faster than PSDS.\\ Not met --- MiniWECC $\approx$8x faster.\\Varies with system size \& time step.
 	\end{enumerate}
 
 %\pagebreak
@@ -149,8 +157,9 @@
 \paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
 	\begin{enumerate}
 		\item Formulate an experiment utilizing a multi-area model that can be validated with PSDS.
-		\item Identify System Slack bus programmatically (currently assumes first slack == global slack if > 1 slack found)
-		\subitem AND/OR calculate system slack error differently $\rightarrow$ An average of slack errors?
+		
+		%\item Identify System Slack bus programmatically (currently assumes first slack == global slack if > 1 slack found)
+		%\subitem AND/OR calculate system slack error differently $\rightarrow$ An average of slack errors?
 
 		\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Something like:
 		\begin{enumerate}
