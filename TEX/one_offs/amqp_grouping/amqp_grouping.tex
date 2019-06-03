@@ -88,6 +88,7 @@
 \item Grouping messages can speed up simulations of the MiniWECC by $\approx$8$\times$ compared to PSDS when using 2 second time steps ($\approx$13$\times$ real time).
 \item Grouping messages increases the average time spent sending and handling a single message while reducing the total number of messages sent.
 \item Optimized message groupings will vary depending on system size. Main speed up comes from reduction of sent IPY messages.
+\item Power system structure (size) and perturbances will affect total simulation time.
 \end{enumerate}
 
 \begin{multicols}{2}
@@ -134,8 +135,9 @@ Simulation Summary
 \item Group AMQP messages: The number of IPY messages could be greatly reduced by grouping agent update messages together.
 \item Variable Time Step: The number of power-flows could be reduced if the time step was automatically changed based on some threshold value of a measurable quantity.
 \item Grouping Dynamics: Instead of solving many small state-space systems each time step, machine governor dynamics could be combined into two larger systems that would only need to be solved once per time step. At least two systems would be required to handle non-linear characteristics. This would require each machine agent to track it's corresponding state location in the larger system(s).
+\item Increase Slack Error Tolerance: This tolerance level could be increased so that fewer power flows would have to be solved. This would decrease the accuracy of the simulation.
 \end{enumerate}
-The easiest path forward to gain the most possible speed up is message grouping.
+The easiest path to gain the most possible speed up without reducing accuracy is message grouping.
 
 \end{multicols}
 
@@ -190,7 +192,7 @@ The easiest path forward to gain the most possible speed up is message grouping.
 \paragraph{Conclusion:}
 For this particular case, PY3 groupings of 5 and IPY groupings of 60 provide the best results. This may vary for different size cases as the main speed up comes from reduction of IPY messages sent.
 
-This speed up enables MiniWECC simulations with a 2 second time steps to be $\approx$13$\times$ faster than real time or $\approx$8$\times$ faster than PSDS.
+This speed up enables the tested MiniWECC simulations with a 2 second time steps to be $\approx$13$\times$ faster than real time or $\approx$8$\times$ faster than PSDS.
 
 
 \end{document}

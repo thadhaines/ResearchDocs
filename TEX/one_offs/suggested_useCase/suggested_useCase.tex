@@ -77,6 +77,19 @@
 \headheight 29 pt
 \headsep 6 pt
 \newcommand{\q}{(\textit{\textbf{?}})}
+
+
+%%% custom commands for nicer units
+\newcommand{\mw}{\ensuremath{\text{ MW}}}
+\newcommand{\hz}{\ensuremath{\text{ Hz}}}
+\newcommand{\pu}{\ensuremath{\text{ Pu}}}
+\newcommand{\sbase}{\ensuremath{\text{S}_{\text{Base}}}}
+\newcommand{\fbase}{\ensuremath{f_{\text{Base}}}}
+\newcommand{\mbase}[1]{\ensuremath{\text{M}_{\text{Base}_{#1}}}}
+\newcommand{\hsys}{\ensuremath{\text{ H}_{\text{sys}}}}
+\newcommand{\pgen}[1]{\ensuremath{\text{P}_{\text{gen}_{#1}}}}
+\newcommand{\pload}{\ensuremath{\text{P}_{\text{load}}}}
+
 \begin{document}
 \begin{multicols*}{2}
 \raggedright
@@ -89,6 +102,11 @@
 		\item Value changes by \%, absolute, or relative to original value.
 		\item Time input: start time
 	\end{enumerate}
+	\item State change Requirements
+	\begin{enumerate}
+		\item Generator inertia must be handled correctly
+		\item Starting Generator Mechanical power should be definable.
+	\end{enumerate}
 %	\item Feature Requests \q
 %	\begin{enumerate}
 %		\item Ability to add custom control law 
@@ -98,7 +116,7 @@
 	\begin{enumerate}
 		\item Step load up 5\% at $t_1$
 		\item Open branch at $t_1$
-		\item Increase $P_{gen}$ by 25 MW at $t_1$
+		\item Increase $P_{M}$ by 25 MW at $t_1$
 	\end{enumerate}
 \end{itemize}
 
@@ -118,8 +136,8 @@
 %	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item Ramp $P_{gen}$ +5\% at $t_1$ over $t_2$ seconds
-	\item Ramp $P_{gen}$ to 60 MW from $t_1$ to $t_2$, hold for $t_3$ seconds, then ramp down 5 MW over $t_4$ seconds.
+	\item Ramp $P_{M}$ +5\% at $t_1$ over $t_2$ seconds
+	\item Ramp $P_{ref}$ to 60 MW from $t_1$ to $t_2$, hold for $t_3$ seconds, then ramp down 5 MW over $t_4$ seconds.
 	\end{enumerate}	
 	
 \end{itemize}
@@ -128,9 +146,11 @@
 \columnbreak
 %
 \vspace{0pt}
-\paragraph{Definite Time Controller (Digital Relay)}
+\paragraph{Definite Time Controller (DTC)}
 \begin{itemize}
-	\item Control Action: Change the status bit on any controllable device existing in the power-flow base case based on any other value in the system.
+\item Will be defined in a \verb|.dtc| file to allow for easier integration into simulation.
+
+	\item Control Action: Change the status bit on any controllable device(s) existing in the power-flow base case based on any other value in the system.
 	
 	\item Basic Requirements
 	\begin{enumerate}
@@ -143,7 +163,7 @@
 	\begin{enumerate}
 		\item Ability to add custom control law
 		\item Ability to use arbitrary Inputs
-		\item Ability to trigger Steps or Ramps
+		\item Ability to trigger Steps or Ramps \q
 	\end{enumerate}
 	\item Basic Example: Using a voltage sensitive base case with an available shunt cap; ramp real power of a load. When bus voltage at the cap drops below 0.95 PU for 30 seconds, insert cap.
 	\item Advanced Example: Using a voltage sensitive base case with a wind power plant (WWP) and an available shunt cap on the low side of the WPP transformer; ramp WPP up and commensurate hydro down. When WPP high-side voltage drops below 0.95 for 30 seconds \textbf{AND} WPP MW export is positive, insert cap.
@@ -157,6 +177,7 @@
 \raggedright
 \paragraph{Capacitor Group (Cap Bank)}
 \begin{itemize}
+	\item $\approx$A DTC with multiple cap references.
 	\item Control Action: Change status bit(s) on a finite set of shunt capacitors existing in the power-flow base case. 
 	\item Basic Requirements
 	\begin{enumerate}
@@ -180,6 +201,7 @@
 
 \paragraph{Generator Group (Discrete Power Plant)}
 \begin{itemize}
+	\item $\approx$ A DTC with multiple generator references.
 	\item Control Action: Change status bit(s) and total $P_{gen}$ on a finite set of generators existing in the power-flow base case. 
 	\item Basic Requirements
 	\begin{enumerate}
@@ -193,7 +215,7 @@
 	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item \q
+	\item Starting with any base case, ramp Pref and some load equally. When all generators in group are operating above 80\%, bring on new generator and give some load (initial mechanical power).
 	\end{enumerate}	
 \end{itemize}
 \vfill\null
@@ -216,15 +238,27 @@
 	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item \q
+	\item Same as Generator Group Case
 	\end{enumerate}	
+	\item May be easier to code in a separate file (the \verb|dtc| file).
+
 \end{itemize}
 	
+\vfill\null
+\columnbreak
+
 \paragraph{Automatic Generator Control}
 \begin{itemize}
+	\item Only one allowed per area
 	\item Control Action: Change status bit(s) and total $P_{gen}$ on a finite set of generators existing in the power-flow base case.
 	\item Basic Requirements
+
 	\begin{enumerate}
+		\item ACE calculated by:
+\begin{align*}
+\text{ACE} &= \sum_{i=1}^{N}\pgen{i} - \sum \pload -10 \beta \Delta\omega
+\end{align*}
+(Or as a sum of station control error SCE)
 		\item  Generator status and $P_{gen}$ controllable via $P_{ref}$ value sent from scheduling controller.
 		\item Ability to add custom control law
 	\end{enumerate}
@@ -234,7 +268,7 @@
 	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item \q
+	\item In a multi-area system where each area has a schedulted tie-lie flow, cause some kind of perturbance and allow AGC to act to eliminate ACE.
 	\end{enumerate}	
 \end{itemize}
 \vfill\null
