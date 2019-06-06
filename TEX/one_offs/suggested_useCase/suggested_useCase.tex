@@ -116,7 +116,7 @@
 	\begin{enumerate}
 		\item Step load up 5\% at $t_1$
 		\item Open branch at $t_1$
-		\item Increase $P_{M}$ by 25 MW at $t_1$
+		\item Increase $P_{ref}$ by 25 MW at $t_1$
 	\end{enumerate}
 \end{itemize}
 
@@ -136,7 +136,7 @@
 %	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item Ramp $P_{M}$ +5\% at $t_1$ over $t_2$ seconds
+	\item Ramp $P_{M}$ +5\% of a non-governed generator at $t_1$ over $t_2$ seconds
 	\item Ramp $P_{ref}$ to 60 MW from $t_1$ to $t_2$, hold for $t_3$ seconds, then ramp down 5 MW over $t_4$ seconds.
 	\end{enumerate}	
 	
@@ -148,7 +148,7 @@
 \vspace{0pt}
 \paragraph{Definite Time Controller (DTC)}
 \begin{itemize}
-\item Will be defined in a \verb|.dtc| file to allow for easier integration into simulation.
+\item Will be defined in an external \verb|.dtc| file to allow for easier integration into simulation.
 
 	\item Control Action: Change the status bit on any controllable device(s) existing in the power-flow base case based on any other value in the system.
 	
@@ -268,7 +268,7 @@
 	\end{enumerate}
 	\item Examples
 	\begin{enumerate}
-	\item In a multi-area system where each area has a schedulted tie-lie flow, cause some kind of perturbance and allow AGC to act to eliminate ACE.
+	\item In a multi-area system where each area has a scheduled tie-lie flow, cause some kind of perturbance and allow AGC to act to eliminate ACE and restore system frequency (load frequency control LFC).
 	\end{enumerate}	
 \end{itemize}
 \vfill\null

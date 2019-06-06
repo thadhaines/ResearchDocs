@@ -38,6 +38,11 @@
 \usepackage{enumitem}	% for [resume] functionality of enumerate
 \usepackage{spreadtab} 	% for using formulas in tables}
 \usepackage{numprint}	% for number format in spread tab
+% for row colors in tables....
+\usepackage{color, colortbl}
+\definecolor{G1}{gray}{0.9}
+\definecolor{G2}{rgb}{1,0.88,1}%{gray}{0.6}
+\definecolor{G3}{rgb}{0.88,1,1}
 
 % For table formatting
 \usepackage{booktabs}
@@ -93,7 +98,7 @@
 
 \begin{multicols}{2}
 \raggedright
-\paragraph{Initial Timings:} Non-grouped results of a 90 second MiniWECC step test with a 0.5 second time step are shown in Listing \ref{init}. Solving the power-flow, sending IPY messages, and running PY3 dynmaics are the top three time usage operations in the simulation. 
+\paragraph{Initial Timings:} Non-grouped results of a \underline{90 second MiniWECC 1,200 MW step test} with a \underline{0.5 second time step} are shown in Listing \ref{init}. Solving the power-flow, sending IPY messages, and running PY3 dynmaics are the top three time usage operations in the simulation. 
 \begin{lstlisting}[caption=Initial timings and counters., label=init]
 Simulation Timings
       Total Simulation Time:    34.024235
@@ -152,38 +157,38 @@ The easiest path to gain the most possible speed up without reducing accuracy is
 	\npdecimalsign{.}
 	\footnotesize
 	\begin{spreadtab}{{tabular}{rrrrrrrc}}
-\toprule @	\shortstack{Message Grouping\\ \vspace{.6em}}	& @	\shortstack{Option A\\None}	& @	\shortstack{Option B\\ IPY \& PY3}	& @	\shortstack{Option C\\ IPY }	&	& @	\shortstack{Option B\\ Benefit }	& @	\shortstack{Option C\\ Benefit }	& @	Best	\\	\toprule
-@	Simulation Timings	& @	[sec]	& @	[sec]	& @	[sec]	&	& @	[abs]	& @	[abs]	& @	[Option]	\\	\midrule
-@	Total Simulation Time	&	33.028977	&	22.378316	&	22.69096	&	&	1.475936661	&	1.455600689	& @	B	\\	
-@	PY3 IVP CPU Time	&	0.065656	&	0.075721	&	0.070843	&	&	0.867077825	&	0.926781757	& @	A	\\	
-@	PY3 Dynamics CPU Time	&	3.77524	&	3.972738	&	3.914325	&	&	0.950286679	&	0.964467692	& @	A	\\	
-@	PY3 Message Send Time	&	0.683906	&	0.209337	&	0.695254	&	&	3.267009654	&	0.983677908	& @	B	\\	
-@	PY3 Agent Find Time	&	0.062156	&	0.038054	&	0.041346	&	&	1.633363116	&	1.503313501	& @	B	\\	
-@	IPY Agent Find Time	&	0.037163	&	0.028061	&	0.038574	&	&	1.324364777	&	0.963420957	& @	B	\\	
-@	IPY distPacc Time	&	0.275238	&	0.255409	&	0.267662	&	&	1.077636262	&	1.028304354	& @	B	\\	
-@	IPY PSLF Get/Set Time	&	1.64608	&	1.308762	&	1.321899	&	&	1.257738229	&	1.245238857	& @	B	\\	
-@	IPY Message Make Time	&	0.134232	&	0.103607	&	0.119385	&	&	1.295588136	&	1.124362357	& @	B	\\	
-@	IPY Message Send Time	&	12.225662	&	1.871941	&	1.832787	&	&	6.531008189	&	6.670530727	& @	C	\\	
-@	Uncounted PY3 Time	&	0.170455	&	0.176866	&	0.176457	&	&	0.963752219	&	0.965986048	& @	A	\\	
-@	Uncounted IPY Time	&	2.873997	&	3.059607	&	3.055616	&	&	0.939335346	&	0.94056223	& @	A	\\	
-@	PSLF Power-Flow Time	&	11.178513	&	11.34433	&	11.236732	&	&		&		& @		\\	\midrule
-@	Simulation Counters	&		&		&		&	&		&		& @		\\	\midrule
-@	Sent PY3 Messages	&	6157	&	1270	&	6157	&	&	4.848031496	&	1	& @	B	\\	
-@	Sent IPY Messages	&	32037	&	543	&	543	&	&	59	&	59	& @	B or C	\\	
-@	PY3 Dynamic Solutions	&	7602	&	7602	&	7602	&	&		&		& @		\\	
-@	Power-Flow Solutions	&	206	&	206	&	206	&	&		&		& @		\\	\midrule
-@	Simulation Summary	&		&		&		&	&		&		& @	 	\\	\midrule
-@	Real time Speedup	&	2.72488	&	4.02175	&	3.966337	&	&	1.475936555	&	1.455600614	& @	B	\\	
-@	Average PY3 messsage send	&	0.000111	&	0.000165	&	0.000113	&	&	0.672727273	&	0.982300885	& @	A	\\	
-@	PY3 Message Group Size	&	1	&	5	&	1	&	&	0.2	&	1	& @	 	\\	
-@	Average IPY msg send	&	0.000382	&	0.003447	&	0.003375	&	&	0.110821004	&	0.113185185	& @	A	\\	
-@	IPY Message Group Size	&	1	&	60	&	60	&	&	0.016666667	&	0.016666667	& @		\\	
-@	Average Dynamic Soln. Time	&	0.000497	&	0.000523	&	0.000515	&	&		&		& @		\\	
-@	Average Power-Flow Time	&	0.054265	&	0.05507	&	0.054547	&	&		&		& @		\\	
-@	Average P-F / Time Step	&	1.138122	&	1.138122	&	1.138122	&	&		&		& @		\\	
-@	Mirror Creation Time	&	0.275749	&	0.257751	&	0.284851	&	&		&		& @		\\	
-@	Simulated Time	&	90	&	90	&	90	&	&		&		& @		\\	
-@	Simulation Time Step	&	0.5	&	0.5	&	0.5	&	&		&		& @		\\	\bottomrule
+\toprule @		\shortstack{Message Grouping\\ \vspace{.6em}}	& @	\shortstack{Option A\\None}	& @	\shortstack{Option B\\ IPY \& PY3}	& @	\shortstack{Option C\\ IPY }	&	& @	\shortstack{Option B\\ Benefit }	& @	\shortstack{Option C\\ Benefit }	& @	Best	\\	\toprule
+@		Simulation Timings	& @	[sec]	& @	[sec]	& @	[sec]	&	& @	[abs]	& @	[abs]	& @	[Option]	\\	\midrule
+@		Total Simulation Time	&	33.028977	&	22.378316	&	22.69096	&	&	1.475936661	&	1.455600689	& @	B	\\	
+@		PY3 IPV CPU Time	&	0.065656	&	0.075721	&	0.070843	&	&	0.867077825	&	0.926781757	& @	A	\\	
+@	\rowcolor{G3}	PY3 Dynamics CPU Time	&	3.77524	&	3.972738	&	3.914325	&	&	0.950286679	&	0.964467692	& @	A	\\	
+@	\rowcolor{G1}	PY3 Message Send Time	&	0.683906	&	0.209337	&	0.695254	&	&	3.267009654	&	0.983677908	& @	B	\\	
+@		PY3 Agent Find Time	&	0.062156	&	0.038054	&	0.041346	&	&	1.633363116	&	1.503313501	& @	B	\\	
+@		IPY Agent Find Time	&	0.037163	&	0.028061	&	0.038574	&	&	1.324364777	&	0.963420957	& @	B	\\	
+@		IPY distPacc Time	&	0.275238	&	0.255409	&	0.267662	&	&	1.077636262	&	1.028304354	& @	B	\\	
+@		IPY PSLF Get/Set Time	&	1.64608	&	1.308762	&	1.321899	&	&	1.257738229	&	1.245238857	& @	B	\\	
+@		IPY Message Make Time	&	0.134232	&	0.103607	&	0.119385	&	&	1.295588136	&	1.124362357	& @	B	\\	
+@	\rowcolor{G1}	IPY Message Send Time	&	12.225662	&	1.871941	&	1.832787	&	&	6.531008189	&	6.670530727	& @	C	\\	
+@		Uncounted PY3 Time	&	0.170455	&	0.176866	&	0.176457	&	&	0.963752219	&	0.965986048	& @	A	\\	
+@		Uncounted IPY Time	&	2.873997	&	3.059607	&	3.055616	&	&	0.939335346	&	0.94056223	& @	A	\\	
+@	\rowcolor{G2}	PSLF Power-Flow Time	&	11.178513	&	11.34433	&	11.236732	&	&		&		& @		\\	\midrule
+@		Simulation Counters	&		&		&		&	&		&		& @		\\	\midrule
+@	\rowcolor{G1}	Sent PY3 Messages	&	6157	&	1270	&	6157	&	&	4.848031496	&	1	& @	B	\\	
+@	\rowcolor{G1}	Sent IPY Messages	&	32037	&	543	&	543	&	&	59	&	59	& @	B or C	\\	
+@	\rowcolor{G3}	PY3 Dynamic Solutions	&	7602	&	7602	&	7602	&	&		&		& @		\\	
+@	\rowcolor{G2}	Power-Flow Solutions	&	206	&	206	&	206	&	&		&		& @		\\	\midrule
+@		Simulation Summary	&		&		&		&	&		&		& @	 	\\	\midrule
+@		Real time Speedup	&	2.72488	&	4.02175	&	3.966337	&	&	1.475936555	&	1.455600614	& @	B	\\	
+@	\rowcolor{G1}	Average PY3 messsage send	&	0.000111	&	0.000165	&	0.000113	&	&	0.672727273	&	0.982300885	& @	A	\\	
+@	\rowcolor{G1}	PY3 Message Group Size	&	1	&	5	&	1	&	&	0.2	&	1	& @	 	\\	
+@	\rowcolor{G1}	Average IPY msg send	&	0.000382	&	0.003447	&	0.003375	&	&	0.110821004	&	0.113185185	& @	A	\\	
+@	\rowcolor{G1}	IPY Message Group Size	&	1	&	60	&	60	&	&	0.016666667	&	0.016666667	& @		\\	
+@	\rowcolor{G3}	Average Dynamic Soln. Time	&	0.000497	&	0.000523	&	0.000515	&	&		&		& @		\\	
+@	\rowcolor{G2}	Average Power-Flow Time	&	0.054265	&	0.05507	&	0.054547	&	&		&		& @		\\	
+@	\rowcolor{G2}	Average P-F / Time Step	&	1.138122	&	1.138122	&	1.138122	&	&		&		& @		\\	
+@		Mirror Creation Time	&	0.275749	&	0.257751	&	0.284851	&	&		&		& @		\\	
+@		Simulated Time	&	90	&	90	&	90	&	&		&		& @		\\	
+@		Simulation Time Step	&	0.5	&	0.5	&	0.5	&	&		&		& @		\\	\bottomrule
 	\end{spreadtab}
 	\caption{Timings and group message benefits of a 90 second MiniWECC load step test.}
 	\label{tab:grouping speedup}
