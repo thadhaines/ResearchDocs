@@ -22,35 +22,17 @@
       #1
     }
   },
-  do path full/.style={%
-      path picture={%
-        \pgfpointdiff{\pgfpointanchor{\ppbb}{south west}}%
-          {\pgfpointanchor{\ppbb}{north east}}%
-        \pgfgetlastxy\x\y%
-        \tikzset{x=\x/1,y=\y/2}%
-        #1
-      }
-    },
   sin wave/.style={do path picture={    
     \draw [line cap=round] (-3/4,0)
       sin (-3/8,1/2) cos (0,0) sin (3/8,-1/2) cos (3/4,0);
   }},
 	gen/.style={circle, draw=black, thick, minimum width = 2em,sin wave
 	},
-  cap lines/.style={do path full={    
-    \draw [black, opacity=1, ultra thick] (-1,0) -- (1,0);
-    \draw [black, opacity=1, ultra thick] (-1,-1) -- (1,-1);
-  }},
+	cSZ/.style={/tikz/circuitikz/bipoles/length=.6cm}
 }
 
 
-\tikzset{
-	cappy/.style = {rectangle, draw=black, 
-		minimum width=.5cm, minimum height=.1cm, cap lines
-		},% end of path picture
-	}
-
-
+\newcommand{\ctkSZ}{/tikz/circuitikz/bipoles/length=.6cm,}
 \begin{document}
 	
 	\begin{tikzpicture} [american voltages,scale=.8, 
@@ -64,14 +46,6 @@
 		\coordinate[right = .5cm of G1](bus1) {};
 		\foreach \a/\b in {1/5, 5/6, 6/7, 7/8, 8/9, 9/10, 10/11, 11/3}
 		\coordinate[right = of bus\a](bus\b) {};
-		%\coordinate[right = of bus1](bus5) {};
-		%\coordinate[right = of bus5](bus6) {};
-		%\coordinate[right = of bus6](bus7) {};
-		%\coordinate[right = of bus7](bus8) {};
-		%\coordinate[right = of bus8](bus9) {};
-		%\coordinate[right = of bus9](bus10) {};
-		%\coordinate[right = of bus10](bus11) {};
-		%\coordinate[right = of bus11](bus3) {};
 		\node[gen, right =.5 cm of bus3](G3) {};
 		
 		% Second row
@@ -87,9 +61,19 @@
 		\coordinate (load2) at ($ (.5,-2 ) + (bus9)$) {};
 		
 		% Cap coordinates
-		\coordinate (cap2) at ($ (-.5,-1.5 ) + (bus9)$) {};
-		\draw ($ (0,-.6) + (bus9)$) -| (cap2) [/tikz/circuitikz/bipoles/length=.6cm, C] to ($(cap2)+(0,-.25)$) node[/tikz/circuitikz/bipoles/length=.7cm,ground] {}; 
-		\node[cappy] at ($ (.5,-1.5 ) + (bus7)$) (cap1) {};
+		\coordinate (cap1) at ($ (+.5,-1.6 ) + (bus7)$) {};
+		\coordinate (cap2) at ($ (-.5,-1.6 ) + (bus9)$) {};
+		\coordinate (cap3) at ($ (1.2,-1.6 ) + (bus7)$) {};
+		\coordinate (cap4) at ($ (-1.2,-1.6 ) + (bus9)$) {};
+
+% caps are scaled, math calcs used for positioning, pretty complicated - could be made simplier by using more defined styles
+		\draw ($ (0,-.6) + (bus9)$) -| (cap2) [/tikz/circuitikz/bipoles/length=.6cm, C] to ($(cap2)+(0,-.2)$) node[/tikz/circuitikz/bipoles/length=.7cm,ground] {}; 
+
+		\draw ($ (0,-.6) + (bus7)$) -| (cap1) [/tikz/circuitikz/bipoles/length=.6cm, C] to ($(cap1)+(0,-.2)$) node[/tikz/circuitikz/bipoles/length=.7cm,ground] {}; 
+
+		\draw ($ (0,-.6) + (bus7)$) -- ($ (0,-.6) + (bus7)+(1.2,0)$)  [cSZ, nos] to (cap3) [/tikz/circuitikz/bipoles/length=.6cm, C] to ($(cap3)+(0,-.2)$) node[/tikz/circuitikz/bipoles/length=.7cm,ground] {}; 
+
+		\draw ($ (0,-.6) + (bus9)$) -- ($ (0,-.6) + (bus9)+(-1.2,0)$)  [cSZ, nos] to  (cap4) [/tikz/circuitikz/bipoles/length=.6cm, C] to ($(cap4)+(0,-.2)$) node[/tikz/circuitikz/bipoles/length=.7cm,ground] {}; 
 		
 		% Vertical draw buses
 		\foreach \busNum in {1,5,6,7,8,9,10,11,3}
