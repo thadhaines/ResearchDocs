@@ -1,0 +1,180 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble
+\input{../../thad_preamble.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Kundur Four Machine for LTD\\ Step and Ramp Comparisons}
+\lhead{Research \\ }
+
+\begin{document}
+\paragraph{System Information}
+\newcommand{\figW}{1}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{kundur4LTD.pdf}\vspace{-.5em}
+			\caption{Slightly Modified Kundur System.}
+			\label{system}		 
+	\end{figure}%\vspace{-0em}
+
+\begin{Verbatim}
+genrou   1 "1" 22.00 "1 " : #9 mva=900.00   ... "h" 6   
+genrou   2 "2" 22.00 "1 " : #9 mva=900.00   ... "h" 3.5 
+genrou   3 "3" 22.00 "1 " : #9 mva=900.00   ... "h" 4  
+genrou   4 "4" 22.00 "1 " : #9 mva=900.00   ... "h" 3  
+
+sexs     1 "1" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+sexs     2 "2" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+sexs     3 "3" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+sexs     4 "4" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+
+tgov1 1 "1" 22.00 "1 " : #1 mwcap=900.0000 0.050000 0.5 1.000000 0.0   1.0000  15.0000 0.0
+tgov1 2 "2" 22.00 "1 " : #1 mwcap=400.0000 0.040000 0.5 1.000000 0.0   3.0000  10.0000 0.0
+tgov1 3 "3" 22.00 "1 " : #1 mwcap=800.0000 0.050000 0.4 1.000000 0.0   3.0000  10.0000 0.0
+
+....
+At t = 0:
+Load on bus 7 = 500 P, 100 Q
+Load on bus 9 = 900 P, 100 Q
+All Gens ~350 Pgen, 88 Qgen
+\end{Verbatim}
+
+\paragraph{General Speed up:} LTD 2 second time step $\approx$10x faster than PSDS; 1 second time step $\approx$5x faster than PSDS.
+
+
+\pagebreak
+\newcommand{\caseName}{kundurStep}
+\paragraph{Step Test:} Load on Bus 9 +30\% (270 MW step) at t=2
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName F}\vspace{-.5em}
+			\caption{System frequency response.}
+			\label{\caseName F}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName AveF}\vspace{-.5em}
+			\caption{Average frequency.}
+			\label{\caseName AveF}		 
+	\end{figure}%\vspace{-0em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName RelF}\vspace{-.5em}
+			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
+			\label{\caseName RelF}		 
+	\end{figure}%\vspace{-.5em}
+%
+\pagebreak
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pe}\vspace{-.5em}
+			\caption{Electrical Power Output}
+			\label{\caseName Pe}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pm}\vspace{-.5em}
+			\caption{Generator Mechanical Power Output}
+			\label{\caseName Pm}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[height=.3\textheight]{\caseName Gen2Pm}\vspace{-.5em}
+			\caption{Dynamic state information of Generator 2.}
+			\label{\caseName V}		 
+	\end{figure}%\vspace{-0em}
+
+\pagebreak
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Q}\vspace{-.5em}
+			\caption{Reactive Power Output}
+			\label{\caseName Q}		 
+	\end{figure}%\vspace{-.5em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName V}\vspace{-.5em}
+			\caption{System Bus Voltages}
+			\label{\caseName V}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Angle}\vspace{-.5em}
+			\caption{Generator Angles}
+			\label{\caseName Angle}		 
+	\end{figure}%\vspace{-0em}
+
+
+\pagebreak
+\renewcommand{\caseName}{kundurRamp1}
+\renewcommand{\figW}{1}
+\paragraph{Ramp Test:} Load on Bus 9 +30\% (270 MW) from t=2 to 42.
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName F}\vspace{-.5em}
+			\caption{System frequency response.}
+			\label{\caseName F}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName AveF}\vspace{-.5em}
+			\caption{Average frequency.}
+			\label{\caseName AveF}		 
+	\end{figure}%\vspace{-0em}
+
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName RelF}\vspace{-.5em}
+			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
+			\label{\caseName RelF}		 
+	\end{figure}%\vspace{-.5em}
+
+\pagebreak
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pe}\vspace{-.5em}
+			\caption{Electrical Power Output.}
+			\label{\caseName Pe}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pm}\vspace{-.5em}
+			\caption{Generator Mechanical Power Output}
+			\label{\caseName Pm}		 
+	\end{figure}%\vspace{-0em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[height=.3\textheight]{\caseName Gen2Pm}\vspace{-.5em}
+			\caption{Dynamic state information of Generator 2.}
+			\label{\caseName V}		 
+	\end{figure}%\vspace{-0em}
+\pagebreak
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Q}\vspace{-.5em}
+			\caption{Reactive Power Output}
+			\label{\caseName Q}		 
+	\end{figure}%\vspace{-.5em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName V}\vspace{-.5em}
+			\caption{System Bus Voltages}
+			\label{\caseName V}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Angle}\vspace{-.5em}
+			\caption{Generator Angles}
+			\label{\caseName Angle}		 
+	\end{figure}%\vspace{-0em}
+
+\end{document}
