@@ -26,23 +26,25 @@ genrou   2 "2" 22.00 "1 " : #9 mva=900.00   ... "h" 3.5
 genrou   3 "3" 22.00 "1 " : #9 mva=900.00   ... "h" 4  
 genrou   4 "4" 22.00 "1 " : #9 mva=900.00   ... "h" 3  
 
-sexs     1 "1" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
-sexs     2 "2" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
-sexs     3 "3" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
-sexs     4 "4" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+                                           R    T1    T2    T3
+tgov1 1 "1" 22.00 "1 " : #1 mwcap=900.0000 0.05 0.50  1.00  15.00
+tgov1 2 "2" 22.00 "1 " : #1 mwcap=400.0000 0.04 0.50  3.00  10.00
+tgov1 3 "3" 22.00 "1 " : #1 mwcap=800.0000 0.05 0.40  3.00  10.00
 
-tgov1 1 "1" 22.00 "1 " : #1 mwcap=900.0000 0.050000 0.5 1.000000 0.0   1.0000  15.0000 0.0
-tgov1 2 "2" 22.00 "1 " : #1 mwcap=400.0000 0.040000 0.5 1.000000 0.0   3.0000  10.0000 0.0
-tgov1 3 "3" 22.00 "1 " : #1 mwcap=800.0000 0.050000 0.4 1.000000 0.0   3.0000  10.0000 0.0
+(exciter the same for all gens)
+sexs     1 "1" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
 
 ....
 At t = 0:
 Load on bus 7 = 500 P, 100 Q
 Load on bus 9 = 900 P, 100 Q
-All Gens ~350 Pgen, 88 Qgen
+All Gens approx 350 Pgen, 88 Qgen
+approx 200 MW Interchange from Area 1 to Area 2 (left to right)
 \end{Verbatim}
 
-\paragraph{General Speed up:} LTD 2 second time step $\approx$10x faster than PSDS; 1 second time step $\approx$5x faster than PSDS.
+\paragraph{General Speed up:} \ \\
+LTD 2 second time step $\approx$10x faster than PSDS.\\
+LTD 1 second time step $\approx$5x faster than PSDS.
 
 
 \pagebreak
