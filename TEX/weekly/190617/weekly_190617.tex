@@ -65,8 +65,8 @@
 	\paragraph{Current Questions:}
 	\begin{enumerate}
 
-	\item Are the units on System Damping are MW*s/Hz? Common settings?
-	\item Should D be defined as negative or should $\Delta\omega = \omega-1$ when scaling D?
+	\item Is System Damping, $D$, in MW*s/Hz? \\ Any common settings?
+	\item Should $D$ be defined as negative or should $\Delta\omega = \omega-1$ when scaling D?
 	
 	%	\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? 
 		
@@ -130,14 +130,24 @@
 	\label{system}		 
 \end{figure}%\vspace{-0em}
 
-\paragraph{Additional Features:} While the behavior of PSDS to a 5\% load ramp on Bus 9 over 40 seconds can be matched fairly closely using LTD\footnote{LTD is using a 1 second time step while PSDS is using a 4.167 ms time step.}, system inertia can be scaled\footnote{Hsys scaled by 75\%.}, and effective droop can optionally be taken into account\footnote{Generator 5 is un-governed.}. The system frequency response and the effects of these additional simulation features are shown in Figure \ref{featureComp}. 
-
+\paragraph{Additional Features:} While the behavior of PSDS can be matched fairly closely using LTD\footnote{LTD is using a 1 second time step while PSDS is using a 4.167 ms time step.}, simulation parameters allow system inertia to be scaled\footnote{Hsys scaled by 75\%.}, and effective droop to be taken into account\footnote{Generator 5 is un-governed.}. The default LTD system frequency response and the effects of these additional simulation features are shown in Figures \ref{fig:sfig1} and \ref{fig:sfig2}. 
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\figW\linewidth]{HReffCompRamp}\vspace{-.5em}
+	\begin{subfigure}{.48\linewidth}
+		\centering
+		\includegraphics[width=\figW\linewidth]{HReffCompStep}\vspace{-.5em}
+		\caption{37.5 MW Load Step.}
+		\label{fig:sfig1}
+	\end{subfigure}\hspace{1em}%
+	\begin{subfigure}{.48\linewidth}
+		\centering
+		\includegraphics[width=\figW\linewidth]{HReffCompRamp}\vspace{-.5em}
+		\caption{75 MW Load Ramp over 40 Seconds.}
+		\label{fig:sfig2}
+	\end{subfigure}
 	\caption{Comparison of LTD system frequency to PSDS weighted frequency.}
-	\label{featureComp}		 
+	\label{fig:featureComp}		 
 \end{figure}%\vspace{-0em}
 
 Note that the plotted theoretical steady state value was calculated using the ideal R values. If effective R values are used for the calculation, the calculated result matches the LTD Reff simulation result.
