@@ -19,37 +19,39 @@
 			\caption{Slightly Modified Kundur System.}
 			\label{system}		 
 	\end{figure}%\vspace{-0em}
-
+% uses sameGens5.dyd
 \begin{Verbatim}
-genrou   1 "1" 22.00 "1 " : #9 mva=900.00   ... "h" 6   
-genrou   2 "2" 22.00 "1 " : #9 mva=900.00   ... "h" 3.5 
-genrou   3 "3" 22.00 "1 " : #9 mva=900.00   ... "h" 4  
-genrou   4 "4" 22.00 "1 " : #9 mva=900.00   ... "h" 3  
 
-                                           R    T1    T2    T3
-tgov1 1 "1" 22.00 "1 " : #1 mwcap=900.0000 0.05 0.50  1.00  15.00
-tgov1 2 "2" 22.00 "1 " : #1 mwcap=400.0000 0.04 0.50  3.00  10.00
-tgov1 3 "3" 22.00 "1 " : #1 mwcap=800.0000 0.05 0.40  3.00  10.00
+#   generators
+genrou   1 "1" 22.00 "1 " : #9 mva=600.00   ... "h" 6   "d" 0.0000 ... "ra" 0.0000 ...
+genrou   2 "2" 22.00 "1 " : #9 mva=800.00   ... "h" 4   "d" 0.0000 ... "ra" 0.0000 ...
+genrou   3 "3" 22.00 "1 " : #9 mva=1100.00  ... "h" 3   "d" 0.0000 ... "ra" 0.0000 ...
+genrou   4 "4" 22.00 "1 " : #9 mva=900.00   ... "h" 4   "d" 0.0000 ... "ra" 0.0000 ...
 
-(exciter the same for all gens)
+#   exciters
 sexs     1 "1" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+sexs     2 "2" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+sexs     3 "3" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+sexs     4 "4" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+
+#   governors                            R      T1           T2      T3
+tgov1 1 "1" 22.00 "1 " : #1 mwcap=450.00 0.040  0.4 1.00 0.0 3.0000  10.0000 0.0
+tgov1 2 "2" 22.00 "1 " : #1 mwcap=500.00 0.050  0.4 1.00 0.0 3.0000  10.0000 0.0
+tgov1 3 "3" 22.00 "1 " : #1 mwcap=700.00 0.030  0.4 1.00 0.0 3.0000  10.0000 0.0
 
 ....
 At t = 0:
-Load on bus 7 = 500 P, 100 Q
-Load on bus 9 = 900 P, 100 Q
-All Gens approx 350 Pgen, 88 Qgen
-approx 200 MW Interchange from Area 1 to Area 2 (left to right)
+Load on bus 7 = 400 P, 100 Q
+Load on bus 9 = 500 P, 100 Q
+Slack 240 Pegn 31 Qgen
+All other Gens approx 220 Pgen, 26 Qgen
+approx 60 MW Interchange from Area 1 to Area 2 (left to right)
 \end{Verbatim}
-
-\paragraph{General Speed up:} \ \\
-LTD 2 second time step $\approx$10x faster than PSDS.\\
-LTD 1 second time step $\approx$5x faster than PSDS.
 
 
 \pagebreak
 \newcommand{\caseName}{kundurStep}
-\paragraph{Step Test:} Load on Bus 9 +30\% (270 MW step) at t=2
+\paragraph{Step Test:} Load on Bus 9 -30\% at t=2
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\figW\linewidth]{\caseName F}\vspace{-.5em}
@@ -83,12 +85,6 @@ LTD 1 second time step $\approx$5x faster than PSDS.
 			\caption{Generator Mechanical Power Output}
 			\label{\caseName Pm}		 
 	\end{figure}%\vspace{-0em}
-	\begin{figure}[h!]
-			\centering
-			\includegraphics[height=.3\textheight]{\caseName Gen2Pm}\vspace{-.5em}
-			\caption{Dynamic state information of Generator 2.}
-			\label{\caseName V}		 
-	\end{figure}%\vspace{-0em}
 
 \pagebreak
 	\begin{figure}[h!]
@@ -113,9 +109,9 @@ LTD 1 second time step $\approx$5x faster than PSDS.
 
 
 \pagebreak
-\renewcommand{\caseName}{kundurRamp1}
+\renewcommand{\caseName}{kundurRamp}
 \renewcommand{\figW}{1}
-\paragraph{Ramp Test:} Load on Bus 9 +30\% (270 MW) from t=2 to 42.
+\paragraph{Ramp Test:} Load on Bus 9 -30\% from t=2 to 42.
 	\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\figW\linewidth]{\caseName F}\vspace{-.5em}
@@ -151,12 +147,7 @@ LTD 1 second time step $\approx$5x faster than PSDS.
 			\label{\caseName Pm}		 
 	\end{figure}%\vspace{-0em}
 
-	\begin{figure}[h!]
-			\centering
-			\includegraphics[height=.3\textheight]{\caseName Gen2Pm}\vspace{-.5em}
-			\caption{Dynamic state information of Generator 2.}
-			\label{\caseName V}		 
-	\end{figure}%\vspace{-0em}
+
 \pagebreak
 
 	\begin{figure}[h!]

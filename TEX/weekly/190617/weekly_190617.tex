@@ -19,20 +19,22 @@
 
 		\item \textbf{PSLF License Expires June 30}.
 
-		\item Differences in Steady State behavior due to R being on the wrong base.
+		\item Differences in steady state behavior due to R being on a different base.
 
 		\item PSDS doesn't account for `effective droop' in system where not all machines are governed:
-		\[R_{eff_i}=R_i \dfrac{\Sigma \mbase{GOV} }{\Sigma \mbase\ }  \]
+		\[R_{eff_i} \triangleq R_i \dfrac{\Sigma \mbase{GOV} }{\Sigma \mbase\ }  \]
 		This can be accounted for in LTD via a simulation parameter.
-
+		
+		\item Kundur 4 Machine system step and ramp validated.
+		
 		\item Alternate input of System H tested.
 		
 		\item Six Machine System created to test additional features. (see reverse)
 		
-		\item Step and ramp perturbances for Loads, Generators, branches, and shunts refined.
-		\item Logging added to Branch and Shunt Agents.
+		\item Step and ramp perturbances for loads, generators, branches, and shunts refined.
+		\item Logging added to branch and shunt agents.
 		
-		\item System Slack identified programatically.
+		\item System slack identified programatically.
 	%	\item More \verb|matplotlib| plot functions created.
 
 		\item GitHub updated:\\
@@ -47,8 +49,8 @@
 		\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
 		\begin{itemize}
 		
-		\item Add Timer, Power Plant, and BA agents
-		\item Work to Define Definite Time Controller, Power Plant, and BA user Input
+		\item Add Timer, Power Plant, and Balancing Authority Agents
+		\item Work to Define Definite Time Controller, Power Plant, and Balancing Authority user input
 		
 		\item Define Agent actions for \\ AGC/LFC (i.e. ACE / UCE / SCE calculations)
 		\item Further Refine perturbance Agents for Generator/Slack Agents
@@ -63,7 +65,8 @@
 	\paragraph{Current Questions:}
 	\begin{enumerate}
 
-	\item Units on System Damping are MW*s/Hz? Should D be defined as Negative or $\Delta\omega = \omega-1$ when scaling D?
+	\item Are the units on System Damping are MW*s/Hz? Common settings?
+	\item Should D be defined as negative or should $\Delta\omega = \omega-1$ when scaling D?
 	
 	%	\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? 
 		
@@ -78,24 +81,24 @@
 
 \paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
 	\begin{enumerate}
-		\item Formulate an experiment utilizing a multi-area model that can be validated with PSDS.
-		
 
 		\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Something like:
 		\begin{enumerate}
 		\item Parse models of interest from dyd.
 		\item Create dyd from parsed model.
-		\item Automate a Pref step test for a one machine infinite bus in PSDS.
-		\item Read output data
+		\item Automate a 'scaled' Pref step test for a one machine infinite bus in PSDS.
+		\item Read and analyze output data
 		\item Generate/Calculate LTD equivalent model parameters from results (this will probably use MATLAB and \verb|jfind|)
 		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
 		\end{enumerate}
 
 		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
 
-		\item Create an agent for every object: \\ SVD, Transformer, \ldots
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
 		
-		\item Investigate line current data and ULTC action in PSLF.
+		\item Investigate line current data and ULTC action in PSDS.
+		
+		\item Account for different types of loads (exponential load model)
 	\end{enumerate}
 
 \paragraph{Matt Requests:}
@@ -115,10 +118,9 @@
 \vfill\null
 
 \end{multicols}
-%\pagebreak
 
 \pagebreak
-\paragraph{Six Machine} The two area six machine model shown in Figure \ref{system} has enough generators to experiment with power plant agents, balancing authorities and AGC control, multiple generators per bus, and numerous available shunts that can be used to control bus voltage.
+\paragraph{Six Machine:} The two area six machine model shown in Figure \ref{system} has enough generators to experiment with power plant agents, balancing authorities using AGC control, multiple generators per bus, and automated shunts to control bus voltage.
 
 \newcommand{\figW}{1}
 \begin{figure}[h!]
@@ -128,11 +130,8 @@
 	\label{system}		 
 \end{figure}%\vspace{-0em}
 
+\paragraph{Additional Features:} While the behavior of PSDS to a 5\% load ramp on Bus 9 over 40 seconds can be matched fairly closely using LTD\footnote{LTD is using a 1 second time step while PSDS is using a 4.167 ms time step.}, system inertia can be scaled\footnote{Hsys scaled by 75\%.}, and effective droop can optionally be taken into account\footnote{Generator 5 is un-governed.}. The system frequency response and the effects of these additional simulation features are shown in Figure \ref{featureComp}. 
 
-\paragraph{Additional Features} The behavior of PSDS to a 5\% load ramp on Bus 9 over 40 seconds can be matched fairly closely using LTD\footnote{LTD is using a 1 second time step while PSDS is using a 4.167 ms time step.}. Additionally, system inertia can be scaled\footnote{Hsys scaled by 75\%.} and effective droop can be taken into account\footnote{Generator 5 is un-governed.}. The effects of these optional simulation parameters on system frequency are shown in Figure \ref{featureComp}. 
-\\
-
-Note that the plotted theoretical steady state value was calculated using the ideal R values. If effective R values are used for the calculation, the calculated result matches the LTD Reff simulation result.
 
 \begin{figure}[h!]
 	\centering
@@ -141,6 +140,7 @@ Note that the plotted theoretical steady state value was calculated using the id
 	\label{featureComp}		 
 \end{figure}%\vspace{-0em}
 
+Note that the plotted theoretical steady state value was calculated using the ideal R values. If effective R values are used for the calculation, the calculated result matches the LTD Reff simulation result.
 
 
 \end{document}
