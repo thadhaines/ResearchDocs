@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble
+\input{../../thad_preamble.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Six Machine\\ Step and Ramp Comparisons}
+\lhead{Research \\ }
+
+\begin{document}
+\paragraph{System Information}
+\newcommand{\figW}{1}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{../../models/sixMachine/sixMachine.pdf}\vspace{-.5em}
+			\caption{Six Machine System.}
+			\label{system}		 
+	\end{figure}%\vspace{-0em}
+% uses sixMachine2.dyd
+\begin{Verbatim}
+
+#   generators
+genrou   1 "1" 22.00 "1 " : #9 mva=1000.00  ... "h" 5   "d" 0.0000 ... "ra" 0.0000 
+genrou   2 "2" 22.00 "1 " : #9 mva=900.00   ... "h" 3   "d" 0.0000 ... "ra" 0.0000 
+genrou   2 "2" 22.00 "2 " : #9 mva=900.00   ... "h" 3   "d" 0.0000 ... "ra" 0.0000  
+genrou   3 "3" 22.00 "1 " : #9 mva=800.00   ... "h" 4   "d" 0.0000 ... "ra" 0.0000
+genrou   4 "4" 22.00 "1 " : #9 mva=800.00   ... "h" 4   "d" 0.0000 ... "ra" 0.0000  
+genrou   5 "5" 22.00 "1 " : #9 mva=900.00   ... "h" 4.5 "d" 0.0000 ... "ra" 0.0000  
+
+#   exciters (same on all machines)
+sexs     1 "1" 22.00 "1 " : #9 1.0 5.0 1000.0 0.05 -5.0 5.0 0.1 0.0 -5.0 5.0 0.0
+
+#   governors
+tgov1 1 "1" 22.00 "1 " : #1 mwcap=1000.0 0.050 0.2 1.00 0.0  -1.0  15.0 0.0
+tgov1 2 "2" 22.00 "1 " : #1 mwcap=800.00 0.200 0.4 1.00 0.0   3.0  10.0 0.0
+tgov1 2 "2" 22.00 "2 " : #1 mwcap=800.00 0.200 0.4 1.00 0.0   3.0  10.0 0.0
+tgov1 3 "3" 22.00 "1 " : #1 mwcap=400.00 0.050 0.4 1.00 0.0   3.0  10.0 0.0
+tgov1 4 "4" 22.00 "1 " : #1 mwcap=400.00 0.050 0.4 1.00 0.0   3.0  10.0 0.0
+
+....
+At t = 0:
+Load on bus 8 = 600 P, 100 Q
+Load on bus 9 = 750 P, 100 Q
+
+Generator 1  1 Pgen: 261.3 Qgen: 79.0
+Generator 2  1 Pgen: 220.0 Qgen: 75.0
+Generator 2  2 Pgen: 220.0 Qgen: 75.0
+Generator 3  1 Pgen: 210.0 Qgen: 64.3
+Generator 4  1 Pgen: 210.0 Qgen: 64.3
+Generator 5  1 Pgen: 230.0 Qgen: 69.8
+
+approx 100 MW Interchange from Area 1 to Area 2 (left to right)
+\end{Verbatim}
+
+
+\pagebreak
+\newcommand{\caseName}{SixMachineStep2}
+\paragraph{Step Test:} Load on Bus 9 +10\% at t=2
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName AveF}\vspace{-.5em}
+			\caption{Average system frequency response.}
+			\label{\caseName F}		 
+	\end{figure}%\vspace{-0em}
+
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName RelF}\vspace{-.5em}
+			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
+			\label{\caseName RelF}		 
+	\end{figure}%\vspace{-.5em}
+
+%% place for voltageM, Voltage angle
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.48\linewidth}
+		\centering
+		\includegraphics[width=\figW\linewidth]{\caseName V}\vspace{-.5em}
+		%\caption{75 MW Load Step.}
+		\label{fig:sfig1}
+	\end{subfigure}\hspace{1em}%
+	\begin{subfigure}{.48\linewidth}
+		\centering
+		\includegraphics[width=\figW\linewidth]{\caseName Angle}\vspace{-.5em}
+		%\caption{75 MW Load Ramp over 40 Seconds.}
+		\label{fig:sfig2}
+	\end{subfigure}
+	\caption{System bus voltages and angles.}
+	\label{fig:\caseName V}		 
+\end{figure}%\vspace{-0em}
+
+%
+\pagebreak
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pe}\vspace{-.5em}
+			\caption{Generator Electrical Power Output}
+			\label{\caseName Pe}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pm}\vspace{-.5em}
+			\caption{Generator Mechanical Power Output (un-governed machines have no PSDS data)}
+			\label{\caseName Pm}		 
+	\end{figure}%\vspace{-0em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Q}\vspace{-.5em}
+			\caption{Reactive Power Output}
+			\label{\caseName Q}		 
+	\end{figure}%\vspace{-.5em}
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineRamp1}
+\paragraph{Ramp Test:} Load on Bus 9 +10\% from t=2 to t=42.
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName AveF}\vspace{-.5em}
+			\caption{Average system frequency response.}
+			\label{\caseName F}		 
+	\end{figure}%\vspace{-0em}
+
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName RelF}\vspace{-.5em}
+			\caption{Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$.}
+			\label{\caseName RelF}		 
+	\end{figure}%\vspace{-.5em}
+
+%% place for voltageM, Voltage angle
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.48\linewidth}
+		\centering
+		\includegraphics[width=\figW\linewidth]{\caseName V}\vspace{-.5em}
+		%\caption{75 MW Load Step.}
+		\label{fig:sfig1}
+	\end{subfigure}\hspace{1em}%
+	\begin{subfigure}{.48\linewidth}
+		\centering
+		\includegraphics[width=\figW\linewidth]{\caseName Angle}\vspace{-.5em}
+		%\caption{75 MW Load Ramp over 40 Seconds.}
+		\label{fig:sfig2}
+	\end{subfigure}
+	\caption{System bus voltages and angles.}
+	\label{fig:\caseName V}		 
+\end{figure}%\vspace{-0em}
+
+%
+\pagebreak
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pe}\vspace{-.5em}
+			\caption{Generator Electrical Power Output}
+			\label{\caseName Pe}		 
+	\end{figure}%\vspace{-0em}
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Pm}\vspace{-.5em}
+			\caption{Generator Mechanical Power Output (un-governed machines have no PSDS data)}
+			\label{\caseName Pm}		 
+	\end{figure}%\vspace{-0em}
+
+	\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\figW\linewidth]{\caseName Q}\vspace{-.5em}
+			\caption{Reactive Power Output}
+			\label{\caseName Q}		 
+	\end{figure}%\vspace{-.5em}
+
+
+\end{document}
