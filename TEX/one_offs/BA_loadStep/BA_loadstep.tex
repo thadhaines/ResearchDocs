@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{BA Step Results \\ }
+\lhead{Research \\ }
+
+\begin{document}
+\paragraph{System:} \ \\
+\includegraphics[width=\linewidth]{../../models/sixMachine/sixMachine}
+\paragraph{Event and BA Description:} The simplest explanation is the code used to define the event, power plants, and BA.
+\begin{Verbatim}
+# Perturbances
+mirror.sysPerturbances = [
+    'load 9 : step P 5 75 rel', # Step Load P +75 MW relative at t=5
+    ]
+
+# Power Plants
+# defined as a dictionary of lists {'name' : ['gen id : participation factor', ...], ...}
+mirror.sysPowerPlants ={'pp1': ["gen 2 1: 0.75 : rampA", "gen 2 2 : 0.25: rampA"],
+                        'pp2': ["gen 3 : 0.75: rampA", "gen 4 : 0.25: rampA"],
+                        }
+
+# Testing of Balancing Authority input
+mirror.sysBA = {
+    'BA1':{
+        'Area':1,
+        'B':" 1.0 : p", # MW/0.1 Hz
+        'ActionTime': 5.00, # sends update signals as requred every x seconds
+        'Type':'TLB', # Tie-Line Bias
+        'Filtering': 'PI : 0.1 0.0001', # where 0.1 = Kp, and 0.0001 = a = Ki/Kp
+        'CtrlGens': ['plant pp1 : .60 ',
+                    'gen 1 : .40 : rampA']
+        },
+    'BA2':{
+        'Area':2,
+        'B':" 1.0 : p", # MW/0.1 Hz
+        'ActionTime': 5.00,
+        'Type':'TLB', # Tie-Line Bias
+        'Filtering': 'PI : 0.1 0.0001',
+        'CtrlGens': ['plant pp2 : 1.0 ']
+        },
+    }
+\end{Verbatim}
+
+\pagebreak
+
+\paragraph{Results:} The filtered ACE (which is distributed to controlled generators Pref according to participation factor) is much smaller than the calculated ACE. This allows for governor action to take place with minimal interference. The 20 minute simulation took 76 seconds ($\approx$60\% of total time spent solving Power Flows).
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{area1}\vspace{-1em}
+		%\caption{Generator Electrical Power Output}
+		%\label{ Pe}		 
+\end{figure}\vspace{-1.5em}
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{area2}\vspace{-1em}
+		%\caption{Generator Mechanical Power Output (un-governed machines have no PSDS data)}
+		%\label{ Pm}		 
+\end{figure}\vspace{-1.5em}
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{ace}\vspace{-1em}
+		%\caption{Reactive Power Output}
+		%\label{ Q}		 
+\end{figure}\vspace{-1.5em}
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{freq}\vspace{-1em}
+		%\caption{Reactive Power Output}
+		%\label{ Q}		 
+\end{figure}\vspace{-1.5em}
+\end{document}
