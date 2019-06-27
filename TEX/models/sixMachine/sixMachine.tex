@@ -48,6 +48,13 @@
 		\foreach \a/\b/\c in {1/6/\csize, 6/7/\csize, 7/8/\csize, 8/9/\csize*2, 9/10/\csize, 10/11/\csize, 11/3/\csize}
 		\coordinate[right = \c cm of bus\a](bus\b) {};
 		\node[gen, right =.5 cm of bus3](G3) {};
+
+		% Area Split Line
+		\coordinate (areaSplitTop) at at ( $(bus8)!0.5!(bus9)+(0,2)$ ){};
+		\coordinate (areaSplitBtm) at at ( $(bus8)!0.5!(bus9)+(0,-4.5)$ ){};
+		\draw [dashed] (areaSplitTop) -- (areaSplitBtm);
+		\draw ($(areaSplitTop) +(.75,-.2)$) node {\scriptsize{Area 2}}; 
+		\draw ($(areaSplitTop) +(-.75,-.2)$) node {\scriptsize{Area 1}}; 
 		
 		% Second row
 		\coordinate (bus2) at ( $(bus6)!0.5!(bus7)+(0,-2.5)$ ){};
