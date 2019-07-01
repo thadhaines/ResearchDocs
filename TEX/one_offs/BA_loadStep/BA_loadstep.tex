@@ -9,7 +9,7 @@
 %% Header
 \rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
 \chead{Balancing Authority Step Response \& \\ ACE Filtering Results }
-\lhead{Research \\ }
+\lhead{Research \\ June 28th, 2019}
 
 \begin{document}
 \paragraph{Test System:} \ \\
@@ -58,7 +58,7 @@ mirror.sysBA = {
 \begin{align*}
 \text{ACE}_{\text{tie line}} &= P_{gen} - P_{load} - P_{\text{sched interchange}}\\
 \text{ACE}_{\text{frequency bias}} &= 10B(f_{\text{actual}}-f_{\text{sched}})f_{base}\\
-\text{ACE} &= \text{ACE}_{\text{tieline}} -\text{ACE}_{\text{frequency bias}}
+\text{ACE} &= \text{ACE}_{\text{tie line}} -\text{ACE}_{\text{frequency bias}}
 \end{align*}
 
 \paragraph{Initial Step ACE Results:} Initial tests where calculated ACE was distributed as steps resulted with an undesirable and unrealistic system response.
@@ -89,7 +89,7 @@ mirror.sysBA = {
 		\label{stepTest}		 
 \end{figure}\vspace{-1.5em}
 \pagebreak
-\paragraph{Ramp PI ACE Results:} Changing the ACE distribution to ramps and using a PI controller to filter ACE with a proportional gain of 0.1 and integral gain of 10E-6 produces the responses shown in Figure \ref{PI 0 Results}. The filtered ACE is distributed to controlled machines according to their participation factor. Note that the 20 minute simulation uses a 1 second time step.
+\paragraph{Ramp PI ACE Results:} Changing the ACE distribution to ramps and using a PI controller to filter ACE with a proportional gain of 0.1 and integral gain of 10E-6 produces the responses shown in Figure \ref{PI 0 Results}. The filtered, or \emph{smoothed}, ACE (SACE) is distributed to controlled machines according to their participation factor. The 20 minute simulation uses a 1 second time step.
 \renewcommand{\testNum}{0}
 \begin{figure}[h!]
 		\centering
