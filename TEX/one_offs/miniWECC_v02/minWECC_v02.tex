@@ -8,7 +8,7 @@
 
 %% Header
 \rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
-\chead{MiniWECC Step and Trip Results \\  }
+\chead{MiniWECC \\Step and Trip Results  }
 \lhead{Research \\ July 1st, 2019}
 
 \begin{document}
@@ -36,7 +36,7 @@
 Improvement from previous results. Load model in dyd changed from \verb|alwscc| with Q as a constant impedance and P as a constant current to \verb|wlwscc| where both P and Q are constant Power.\\
 \pagebreak
 
-$P_e$, $P_m$, and $Q$ all match well, but a number of system voltages don't match at t=0. Additionally, PSDS angles seemingly missing (around t= 8, 25, 45, 70) are actually shifted up near 5 and 6 degrees.
+$P_e$, $P_m$, and $Q$ all match well (reactive power example on last page), however, a number of system voltages don't match at t=0. Additionally, PSDS angles missing (around t= 8, 25, 45, 70) are shifted up near 5 and 6 degrees. Could be an issue with the selected reference bus angle.
 
 	\begin{figure}[h!]
 			\centering
@@ -59,7 +59,7 @@ $P_e$, $P_m$, and $Q$ all match well, but a number of system voltages don't matc
 \pagebreak
 
 
-\paragraph{Generator Trip:} Simulation results with time step = 1.0 second. Generator producing 212 MW tripped at t=2 (smallest generator in MiniWECC). PSDS must have exciters and PSS models to remain stable. Calculated theoretical SS does not match simulated results.
+\paragraph{Generator Trip:} Simulation results with time step = 1.0 second. Generator producing 212.5 MW tripped at t=2 (smallest generator in MiniWECC). PSDS must have exciters and PSS models to remain stable. Calculated theoretical SS requires knowing MW tripped and $\Delta P_{losses}$.
 
 \newcommand{\caseName}{miniWECCgenTrip0}
 	\begin{figure}[h!]
@@ -292,5 +292,14 @@ Power Flow Solution returns: -1
 *** Error Caught, Simulation Stopping...
 *** PSLF power flow solution did not converge.
 \end{Verbatim}
+\pagebreak
+\begin{landscape}
+	\begin{figure}[h!]
+				\centering
+				\includegraphics[width=\linewidth]{manyQ}  \vspace{-2em}
+				\caption{Detail Recative Power Comparison. Not all Generators shown.} 
+				\label{manyQ}
+	\end{figure}\vspace{-2em}
+\end{landscape}
 
 \end{document}

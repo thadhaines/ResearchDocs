@@ -1,0 +1,149 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Talking Points \\ Week of July 1st, 2019}
+\lhead{Research \\ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+
+		\item \textbf{PSLF License Renewed}.
+
+		\item Balancing Authority ACE filtering expanded.
+		\item Six Machine Trip Testing.
+		\item MiniWECC Step and Trip Testing.
+		
+
+	%	\item More \verb|matplotlib| plot functions created.
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/|
+		
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+
+		\item Continue to Update Code flowchart to aid in further development.
+		\item Bring wind into simulation.
+		\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		
+		\item Continue to Refine BA ACE actions.
+
+		\end{itemize}
+		%\item Keep Goals and Requests in mind.
+		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+
+	\end{enumerate}
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+	
+	\item Best way to trip generators on/off in PSDS?
+	\item Could improper tripping cause non-convergence?
+	
+	\item Could exciters be responsible for initial voltage differences in MiniWECC tests?
+
+	\item What is the end goal of this research?
+	\subitem Long-term simulation of governor and AGC interaction to wind ramps while controlling voltage stability via switched shunts.
+	
+	 Simulation uses large time steps, ignores inter-machine oscillations, utilizes a time sequence of power flows for system bus states, a single aggregate swing equation for frequency, and reduces governor models to 2nd order. (?)
+	
+	%	\item Overview of planned PSLF scenarios? $\rightarrow$ Similar to Heredia paper but on Wecc/MiniWecc Scale? 
+		
+	%	\item Is there more available/relevant event data that may help us to verify simulations of specific instances (wind ramps or other behavior) that novel research will focus on? %(Heredia paper data helpful for some wind ramp data context)
+
+	%	\item  Any progress / continued interest in miniWecc Area definitions?
+
+
+\vfill\null
+\columnbreak
+
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+
+		\item Account for different types of loads (exponential load model)
+		
+		\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Something like:
+		\begin{enumerate}
+		\item Parse models of interest from dyd.
+		\item Create dyd from parsed model.
+		\item Automate a 'scaled' Pref step test for a one machine infinite bus in PSDS.
+		\item Read and analyze output data
+		\item Generate/Calculate LTD equivalent model parameters from results (this will probably use MATLAB and \verb|jfind|)
+		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
+		\end{enumerate}
+
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
+		
+		\item Investigate line current data and ULTC action in PSDS.
+		
+	\end{enumerate}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+
+	\end{enumerate}
+\includegraphics[width=\linewidth]{../../models/sixMachine/sixMachine}
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\vfill\null
+
+\end{multicols}
+
+\pagebreak
+\paragraph{ACE Conventions:} Positive ACE denotes over generation. $B$ (the frequency bias) is negative.
+\begin{align*}
+\text{ACE}_{\text{tie line}} &= P_{gen} - P_{load} - P_{\text{sched interchange}}\\
+\text{ACE}_{\text{frequency bias}} &= 10B(f_{\text{actual}}-f_{\text{sched}})f_{base}\\
+\text{ACE} &= \text{ACE}_{\text{tie line}} -\text{ACE}_{\text{frequency bias}}
+\end{align*}
+\paragraph{Final ACE Results:} Event is a 75 MW load step in Area 2 of Six Machine System.\\
+
+\begin{minipage}{\linewidth}
+		\includegraphics[width=.5\linewidth]{SixMachineStepBA4BA1}
+		\includegraphics[width=.5\linewidth]{SixMachineStepBA4BA2}
+\end{minipage}
+\begin{minipage}{\linewidth}
+		\includegraphics[width=.5\linewidth]{SixMachineStepBA4ACE}
+		\includegraphics[width=.5\linewidth]{SixMachineStepBA4Freq}
+\end{minipage}
+
+\paragraph{MiniWECC Gen Trip:} Tripping Gen 27 (212.5 MW) at t=2. \\
+Theoretical SS calculation requires tripped generator MW and change in system losses.
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{../../one_offs/miniWECC_v02/miniWECCgenTrip0Freq}\vspace{-1em}
+		%\caption{Generator Electrical Power Output}
+		%\label{ Pe}		 
+\end{figure}
+
+Tripping other generators (colstrip) causes Python run PSLF load flow solution to diverge. \\
+The PSDS simulation does not crash during similar events.\\
+The PSLF load flow does not diverge if the same generator is set to St=0 from PSLF.\\
+Voltage magnitudes and angles from LTD do not match PSDS.
+\end{document}
