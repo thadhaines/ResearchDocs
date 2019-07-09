@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Talking Points \\ Week of July 8th, 2019}
+\lhead{Research \\ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+		\item One week left on contract.
+		\item Improved miniWECC validation graphs.
+		\item 3 Area miniWECC created. Initial BA tests are similar to six machine results.
+		\item Stepping Pm of a governed generator tested. (governor states must be set)
+		
+
+	%	\item More \verb|matplotlib| plot functions created.
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/|
+		
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\item Work on miniWECC case development.
+
+		\item Continue to Update Code flowchart to aid in further development.
+
+		\item Continue to Refine BA ACE actions.
+
+		\item Bring wind into simulation? \\ (ramp ungoverned generators) ?
+
+		\item Find best way to trip gens in PSLF from python.
+
+		
+		%\item Keep Goals and Requests in mind.
+		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+
+	\end{enumerate}
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+	\item Should the exponential load model be a priority?\\
+(RJ miniWECC had Q as constant impedance, P as constant current)
+
+	
+	\item What is the end goal of this research?
+	\subitem Develop a simulation framework to facilitate the analysis of long-term power system dynamics	with a focus on governor and AGC interaction to various perturbances.
+	
+	 Simulation uses large time steps, ignores inter-machine oscillations, utilizes a time sequence of power flows for system bus states, a single aggregate swing equation for frequency, and uses reduced governor models.
+	
+
+\vfill\null
+\columnbreak
+
+\paragraph{Future Tasks: (possibly by me)} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+
+		\item Use generic governor for non-modeled governors (WECC)
+
+		\item Account for different types of loads? (exponential load model) % read from dyd
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Investigate line current data.
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Possibly:
+		\begin{enumerate}
+		\item Parse models of interest from dyd.
+		\item Create dyd from parsed model.
+		\item Automate a 'scaled' Pref step test for a one machine infinite bus in PSDS.
+		\item Read and analyze output data
+		\item Generate/Calculate LTD equivalent model parameters from results (this will probably use MATLAB and \verb|jfind|)
+		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
+		\end{enumerate}
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+
+	\end{enumerate}
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\vfill\null
+
+\end{multicols}
+\pagebreak
+	\paragraph{Deviation Plots:} To make large numbers of comparisons easier to comprehend], deviation plots were created to show the difference between LTD and PSDS data.\\
+	
+	One way to think of these plots is $\text{LTD}_{data}+\text{Deviation}_{data} = \text{PSDS}_{data}$. \\(Assuming all time step issues are handled appropriately.)\\
+	
+	Alternatively, the deviation data could be thought of as data that is filtered out due to the larger time steps and assumptions made by LTD.\\
+	
+	\newcommand{\caseName}{miniWECCgenTrip027}
+	\includegraphics[width=\linewidth]{\caseName dev1} 
+	
+	\includegraphics[width=.5\linewidth]{\caseName Pe2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pm2} 
+	
+	\includegraphics[width=.5\linewidth]{\caseName Q2} %
+	\includegraphics[width=.5\linewidth]{\caseName V2} 
+	
+	Angle deviation not included as PSDS angles wrap oddly and would result in a misleading deviation.
+
+\end{document}
