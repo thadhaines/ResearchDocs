@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Fixed long-term MiniWECC BA test results \\ Ensure controlled machine has a governor }
+\lhead{Research \\ July 17th, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+
+\newcommand{\caseName}{ }
+\begin{document}
+\renewcommand{\caseName}{miniWECC3A0}
+\paragraph{miniWECC3A0} -1000 MW generator step in Area 3. TLB type 0.
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+	
+\pagebreak
+
+\renewcommand{\caseName}{miniWECC3A1}
+\paragraph{miniWECC3A1} -1000 MW generator step in Area 3. TLB type 2.
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+
+\pagebreak
+
+\renewcommand{\caseName}{miniWECC3A4}
+\paragraph{miniWECC3A4} +400 MW generator ramp in area 1 over 20 minutes. TLB type 0.
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+	
+\pagebreak
+
+
+\renewcommand{\caseName}{miniWECC3A2}
+\paragraph{miniWECC3A2} +400 MW generator ramp in area 1 over 20 minutes. TLB type 2.
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+	
+\pagebreak
+
+\renewcommand{\caseName}{miniWECC3A5}
+\paragraph{miniWECC3A5} +400 MW generator ramp in area 2 over 20 minutes. TLB type 0.
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+	
+\pagebreak
+
+\renewcommand{\caseName}{miniWECC3A3}
+\paragraph{miniWECC3A3} +400 MW generator ramp in area 2 over 20 minutes. TLB type 2.
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+\end{document}
