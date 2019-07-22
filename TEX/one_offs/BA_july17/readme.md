@@ -1,0 +1,1 @@
+All generators that receive AGC are goverened.

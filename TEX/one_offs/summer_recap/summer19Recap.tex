@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Summer Recap \\ }
+\lhead{Research \\ End of July, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+\begin{document}
+\paragraph{Summer Progress of Note:}
+\begin{enumerate}
+	\item Shunt, Branch, Timer, Power Plant, Balancing Authority, and Filter agents added to code.
+	\item Step and ramp perturbances for loads, generators, branches, and shunts refined and tested.
+	
+	\item Six Machine System created to test new and upcoming simulation features.	
+	\item 3 Area miniWECC created for BA testing (Loading and shunts reduced by 5\%).
+	\item Multiple Generators per bus tested as working.
+	
+	\item tgov1 model reworked to account for \verb|Pref|.
+	\item User input of Total System Inertia, H, added to simulation.
+	\item System slack bus identified programmatically. % note: talk about slack vs swing terminology
+	
+	\item Batch processing of test cases functional (handles divergent cases).
+	\item Timing and counters added to simulation for efficiency information.
+	\item AMQP message process expanded to handle most non-converging systems gracefully.
+	\item Python data storage package changed to \verb|shelve| (instead of \verb|pickle|).
+
+	\item `Final' \verb|MATLAB| validation (PSDS vs LTD) plots created.
+	\item Initial BA control tests executed and \verb|matplotlib| plots created.	
+	
+	\item \LaTeX\ thesis template created and approved.%	\verb|https://github.com/thadhaines/|
+	
+\end{enumerate}
+
+
+\paragraph{Things left to do:}%
+\begin{enumerate}[label=\Alph*]
+	\item Expand on BA ACE distribution schemes for more robust AGC. Initial things to experiment with may be dead bands and integral or derivative values used in ACE distribution decisions.
+	
+	\item Formulate and implement a \emph{default generic governor} to use for un-modeled governors in full WECC case (base off machine inertia?). While dynamic response will be wrong (frequency nadir), steady state characteristics should match. This work would be used to test and show software scalability and adaptability.
+	
+	\item Update Visio Code Flow Chart, GitHub readme.md, and PYPI package.
+	
+	\item Write a master thesis and possibly a paper for publication.
+\end{enumerate}
+
+\paragraph{Things left to \emph{possibly} do:}%
+\begin{enumerate}[label=\alph*]
+	\item Add random noise to loads or create a suitable reason for ignoring.
+	
+	\item Add exponential load models to loads.
+	
+	\item Find out why tripping a generator will cause the power flow to diverge. (Experiment with power-flow solution options)
+	
+	\item Add Definite Time Controller and Shunt Group Agents (see \verb|suggested_useCase.pdf|).
+\end{enumerate}
+
+% Rest of recap should be pictures and breif explanations
+
+\pagebreak
+
+% Goal of research
+\paragraph{Abstract Abstract} \ \\
+Develop a simulation framework to facilitate the analysis of long-term power system dynamics with a focus on governor and AGC interaction to various system perturbances. The simulation will use a time sequence of power flows for system bus states, large time steps (ignoring inter-machine oscillations),  a single aggregate swing equation for frequency, and reduced order governor models.
+% This is a departure, or simplification, from the (transient) detailed model simulation of every machine, governor, exciter, and pss with very (4.67 ms) time steps.
+
+% updated tgov1 model
+\paragraph{tgov1 Model} \ (see \verb|tgov1.pdf|)\\
+\verb|tgov1| model Pref input added and tested as working, though damping is un-tested.
+
+% six machine one line
+\paragraph{Six Machine System} \ (see \verb|sixMachine.pdf|)\\
+A two area, six machine system was created to test BA action, multiple generators per bus, and (possibly) definite time control of shunts in response to voltage conditions.
+
+%3 area mini WECC oneline
+\paragraph{3 Area  miniWECC} \ (see \verb|miniWECC_split03.png|)\\
+Split into North, East, and South. Loading reduced by 5\% to improve stability (make less oscillatory). Shunts reduced by 5\% to keep voltage profile similar (simple solution). Generator numbers in figure changed to reflect bus numbers instead of PSLF table index number.
+
+% final validation plots (with PSS?)
+\paragraph{Validation Plots} \ (see \verb|final_validation_01.pdf|)\\
+\verb|MATLAB| plot functions created to easier compare simulation approaches. Some plots aren't very useful. Percent difference of angles (small values near zero) is misleading / easily confusing. Reactive power has similar `bad plot' issues, though deeper investigation for cause not performed.\\
+
+Case used to make \verb|final_validation_01| had PSS commented out in PSDS dyd. Plots should probably be remade with PSS enabled before actual final validation. % BA Ramps w/o AGC should be compared
+
+% BA ACE calculation equations (from july 1st weekly)
+\paragraph{ACE Conventions} \ \\
+Positive ACE [MW] denotes over generation. $B$ (the frequency bias) is negative.
+\begin{align*}
+\text{ACE}_{\text{tie line}} &= P_{gen} - P_{load} - P_{\text{sched interchange}}\\
+\text{ACE}_{\text{frequency bias}} &= 10B(f_{\text{actual}}-f_{\text{sched}})f_{base}\\
+\text{ACE} &= \text{ACE}_{\text{tie line}} -\text{ACE}_{\text{frequency bias}}
+\end{align*}
+
+% initial BA control results
+\paragraph{Initial BA results} \ (see \verb|BA_july17.pdf|)\\
+Tie-Line Bias (TLB) BA response was tested with steps and ramps in generation or load. ACE is \emph{smoothed} through a simple PI controller to become SACE.\footnote{Low pass filtering and integral control were also tested, but PI control was found to work best.}
+Three different types of conditional ACE dispatch were tested. TLB Type 0, 1, and 2 are related to the number of ACE constituents sent based on a condition.\footnote{Type 0: (no conditions) ACE always dispatched. Type 1: Tie-line ACE sent only if same sign as frequency deviation. Type 2:  ACE distributed only if same sign as frequency deviation.}\\
+
+Initial results show desired response\footnote{Responds within 30 seconds, brings ACE to zero within 10 minutes after event (FERC or NERC)} to steps, but not to ramps. % Ramps w/o AGC should be compared
+Additionally, TLB Type 2 improves step response as areas don't `fight' each other during the `rebound' period. More research and experimenting is required to design an acceptable controller for ramp type perturbances. % slow (small) and long (consistent) 
+ % Random noise could be added to better represent actual power systems.\footnote{Noise could be ignored under the assumption that input to ACE calculations are filtered to remove system noise.}
+
+
+\end{document}
