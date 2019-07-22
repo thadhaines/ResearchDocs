@@ -1,0 +1,38 @@
+% Equations used in project
+% Started 07/22/219
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Equations \\}
+\lhead{Research \\ }
+
+\begin{document}
+	Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$
+	
+	$\Delta \omega=1-\omega$ in $\dot{\omega}=\dfrac{1}{2H_{sys}}\left(\dfrac{P_{acc}}{\omega} - D_{sys}\Delta \omega \right)$
+	
+	\paragraph{ACE Conventions:} Positive ACE denotes over generation. $B$ (the frequency bias) is negative.
+	\begin{align*}
+	\text{ACE}_{\text{tie line}} &= P_{gen} - P_{load} - P_{\text{sched interchange}}\\
+	\text{ACE}_{\text{frequency bias}} &= 10B(f_{\text{actual}}-f_{\text{sched}})f_{base}\\
+	\text{ACE} &= \text{ACE}_{\text{tie line}} -\text{ACE}_{\text{frequency bias}}
+	\end{align*}
+	
+	One way to think of deviation plots is $\text{LTD}_{data}+\text{Deviation}_{data} = \text{PSDS}_{data}$. \\(Assuming all time step issues are handled appropriately.)\\
+	
+	The system has only 1 frequency and it is altered by the aggregate PU swing equation
+	\[ \dot{f}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{f_{sys}(t)} - D_{sys}\Delta f{sys}(t)  \right)  \]
+	
+	\[ P_{e,i}(t) = P_{e,i}(t-1)-\Delta P_{acc,sys}(t)\dfrac{H_{i}}{H_{sys}} \]
+	
+	\[ \dot{\omega}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{\omega_{sys}(t)} - D_{sys}\Delta\omega_{sys}(t)  \right)\] 
+	
+\end{document}
