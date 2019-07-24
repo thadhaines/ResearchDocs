@@ -17,7 +17,8 @@
 \begin{document}
 	Relative Hz difference of PSDS - LTD $\left( \text{i.e. }  \left|f_{PSDS}(t)- f_{LTD}(t)\right| \times 60 \text{Hz} \right)$
 	
-	$\Delta \omega=1-\omega$ in $\dot{\omega}=\dfrac{1}{2H_{sys}}\left(\dfrac{P_{acc}}{\omega} - D_{sys}\Delta \omega \right)$
+	$\Delta \omega=1-\omega$
+		\[ \dot{\omega}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{\omega_{sys}(t)} - D_{sys}\Delta\omega_{sys}(t)  \right)\] 
 	
 	\paragraph{ACE Conventions:} Positive ACE denotes over generation. $B$ (the frequency bias) is negative.
 	\begin{align*}
@@ -27,12 +28,39 @@
 	\end{align*}
 	
 	One way to think of deviation plots is $\text{LTD}_{data}+\text{Deviation}_{data} = \text{PSDS}_{data}$. \\(Assuming all time step issues are handled appropriately.)\\
+
+%Percent difference
+\[\%_{diff} = \dfrac{\abs{x-y}}{\frac{x+y}{2}}*100\% \]
 	
-	The system has only 1 frequency and it is altered by the aggregate PU swing equation
-	\[ \dot{f}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{f_{sys}(t)} - D_{sys}\Delta f{sys}(t)  \right)  \]
-	
+	Distribution of accelerating power based on inertia:
 	\[ P_{e,i}(t) = P_{e,i}(t-1)-\Delta P_{acc,sys}(t)\dfrac{H_{i}}{H_{sys}} \]
 	
-	\[ \dot{\omega}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{\omega_{sys}(t)} - D_{sys}\Delta\omega_{sys}(t)  \right)\] 
+
+	%%% custom commands for nicer units % in thad_cmds.tex....
+	%\newcommand{\mw}{\ensuremath{\text{ MW}}}
+	%\newcommand{\hz}{\ensuremath{\text{ Hz}}}
+	%\newcommand{\pu}{\ensuremath{\text{ Pu}}}
+	%\newcommand{\sbase}{\ensuremath{\text{S}_{\text{Base}}}}
+	%\newcommand{\fbase}{\ensuremath{f_{\text{Base}}}}
+	%\newcommand{\mbase}[1]{\ensuremath{\text{M}_{\text{Base}_{#1}}}}
+	%\newcommand{\hsys}{\ensuremath{\text{ H}_{\text{sys}}}}
 	
+	The theoretical steady state frequency was calculated as
+	\begin{align*}
+	f_{ss} &= f_{ref}+\Delta f = f_{ref} + \frac{\Delta P}{S_{base}\beta} \numberthis 
+	\end{align*}
+	When $R$ is a\pu\ value, $\beta$ for $N$ governor equipped machines is calculated as
+	\begin{align*}
+	\beta &= \sum_{i=1}^{N} \dfrac{1}{R_i \frac{\sbase}{\mbase{i}}}\numberthis
+	% from glover section 12.2 page 659
+	\end{align*}
+	
+	Additionally, in a system with $N$ generators, the weighted system frequency, $f_{w}$, is calculated as
+	\begin{align*}
+	f_{w}\pu &= \sum_{i=1}^{N} \dfrac{f_i}{\fbase} \dfrac{H_{i}\mbase{i}}{\hsys} \numberthis\\
+	\text{where} \hsys &= \sum_{i=1}^{N}H_i\mbase{i} \numberthis
+	\end{align*}
+
+
+
 \end{document}
