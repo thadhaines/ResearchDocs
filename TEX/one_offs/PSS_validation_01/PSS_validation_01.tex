@@ -1,0 +1,94 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{`Final' Validation with PSS \\ }
+\lhead{Research \\ September 12th, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+\newcommand{\caseName}{ }
+\begin{document}
+
+\renewcommand{\caseName}{miniWECCLTDPSSstep}
+\paragraph{MiniWECC 3 Area Load Step} Three loads are stepped up 400 MW at t=2 (1,200 MW total load change).\\
+
+	%\includegraphics[width=\linewidth]{\caseName dev1} 
+	\includegraphics[width=.5\linewidth]{\caseName F3} %
+	\includegraphics[width=.5\linewidth]{\caseName RelF} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Pm2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pm3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Pe2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pe3} 
+	
+	\pagebreak
+
+	\includegraphics[width=.5\linewidth]{\caseName Q2} %
+	\includegraphics[width=.5\linewidth]{\caseName Q3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName V2} %
+	\includegraphics[width=.5\linewidth]{\caseName V3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Angle2} %
+	\includegraphics[width=.5\linewidth]{\caseName Angle3} 
+
+\pagebreak
+\renewcommand{\caseName}{miniWECCLTDPSSramp}
+\paragraph{MiniWECC 3 Area Load Ramp} Three loads are ramped up 400 MW over 40 seconds (1,200 MW total load change).\\
+
+	%\includegraphics[width=\linewidth]{\caseName dev1} 
+	\includegraphics[width=.5\linewidth]{\caseName F3} %
+	\includegraphics[width=.5\linewidth]{\caseName RelF} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Pm2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pm3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Pe2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pe3} 
+	
+	\pagebreak
+
+	\includegraphics[width=.5\linewidth]{\caseName Q2} %
+	\includegraphics[width=.5\linewidth]{\caseName Q3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName V2} %
+	\includegraphics[width=.5\linewidth]{\caseName V3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Angle2} %
+	\includegraphics[width=.5\linewidth]{\caseName Angle3} 
+	
+\pagebreak
+\renewcommand{\caseName}{miniWECCgenTrip027PSS}
+\paragraph{MiniWECC 3 Area  Generator Trip} A generator providing 201.9 MW is tripped at t=2.\\
+
+	%\includegraphics[width=\linewidth]{\caseName dev1} 
+	\includegraphics[width=.5\linewidth]{\caseName F3} %
+	\includegraphics[width=.5\linewidth]{\caseName RelF} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Pm2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pm3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Pe2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pe3} 
+	
+\pagebreak
+
+	\includegraphics[width=.5\linewidth]{\caseName Q2} %
+	\includegraphics[width=.5\linewidth]{\caseName Q3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName V2} %
+	\includegraphics[width=.5\linewidth]{\caseName V3} \\
+
+	\includegraphics[width=.5\linewidth]{\caseName Angle2} %
+	\includegraphics[width=.5\linewidth]{\caseName Angle3} 
+\end{document}
