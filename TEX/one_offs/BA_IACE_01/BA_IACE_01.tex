@@ -1,0 +1,33 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Long-term MiniWECC BA test results \\ IACE included in control algorithm }
+\lhead{Research \\ September 20th, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+
+\newcommand{\caseName}{ }
+\begin{document}
+\renewcommand{\caseName}{miniWECC3A2IACE}
+\paragraph{miniWECC3A2IACE} 20 Minute +400 MW generator ramp in Area 1. \\
+TLB type 2, IACE included. Residual North ACE believed to be unaccounted changes in losses.
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+	
+\pagebreak
+
+\end{document}

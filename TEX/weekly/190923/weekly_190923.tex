@@ -1,0 +1,168 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Talking Points \\ Week of September 23rd, 2019}
+\lhead{Research \\ }
+
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+\newcommand{\caseName}{ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+		\item Program form and Committee form filed in Grad Office 
+		\item Graduate seminar presentation scheduled for Oct 22nd
+		\item PSDS WECC / MiniWECC PSS work
+		\begin{itemize}
+			\item 100GW\_ALS\_SHAWN.sav runs flatlines. SVDs act, $f$ inc by \approx 4.2 mHz, Pg inc by 0.003x
+%SVDs turn on and off at t=25 and 50 respectively. 
+%System speed increases by 0.0007 pu (4.2 mHz). 
+%Pg may increase from initial value by 0.003 times.
+			\item Dynamic simulation errors in 16HS3a and 18HSP2a probably related to \verb|dcc| table entries of \verb|nan| and \verb|-nan(ind)|
+			\item PSS takes $\approx$45 seconds of flatlines to settle - can't seem to avoid.
+			\item PSS has most effect on Reactive Power Output and Bus Voltages.
+		\end{itemize}
+		\item BA control can now include windowed IACE. Ramp results on reverse.
+		\item Area agents log area losses.
+
+	%	\item More \verb|matplotlib| plot functions created.
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/|
+		
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\item Continue to Refine BA ACE actions.
+
+		\item Work on miniWECC and WECC integration.
+
+		\item Update Code flowchart% to aid in further development.
+		
+		\item Outline thesis \& presentation
+
+		
+		%\item Keep Goals and Requests in mind.
+		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+
+	\end{enumerate}
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+	\item How to best deal with PSDS PSS issues (system is not in steady state at simulation start). Does it really matter?
+		
+	\item Realistic AGC results?
+	\item Typical deadbands of AGC?
+	\item Recommended deadbands of  governors? Intentional: 36 mHz max (NERC), \\Inherent: less than 5 mHz
+
+\vfill\null
+\columnbreak
+
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+
+		\item Use generic governor for non-modeled governors (WECC) - estimate tgov1 time constants from machine H (and MW cap?).		
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Bring wind into simulation \\ (ramp ungoverned generators?)
+
+		\item Find best/correct way to trip gens in PSLF from python.
+
+		\item Investigate line current data.
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Account for different types of loads. (exponential load model) % read from dyd
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
+
+		\item Get away from reliance on GE
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+
+	\end{enumerate}
+
+
+
+\vfill\null
+
+\end{multicols}
+\pagebreak
+\renewcommand{\caseName}{miniWECC3A2IACE}
+\paragraph{miniWECC3A2IACE} 20 Minute +400 MW generator ramp in Area 1. \\
+TLB type 2 (ACE sent only if same sign as $\Delta\omega$), windowed IACE included ($\approx$ moving average). 
+
+	\includegraphics[width=\linewidth]{\caseName North}
+	\includegraphics[width=\linewidth]{\caseName East} 
+	\includegraphics[width=\linewidth]{\caseName South} 
+	\includegraphics[width=\linewidth]{\caseName ACE} 
+	\includegraphics[width=.8\linewidth]{\caseName Freq} 
+	
+
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\begin{comment}
+
+\item Formulate feasible plan of action for casting all WECC governors to LTD governors (tgov1). Possibly:
+		\begin{enumerate}
+		\item Parse models of interest from dyd.
+		\item Create dyd from parsed model.
+		\item Automate a 'scaled' Pref step test for a one machine infinite bus in PSDS.
+		\item Read and analyze output data
+		\item Generate/Calculate LTD equivalent model parameters from results (this will probably use MATLAB and \verb|jfind|)
+		\item Export custom dyd for LTD simulation. (PSDS would still use original the dyd, though \emph{could} use modified dyd)
+		\end{enumerate}
+
+\pagebreak
+	\paragraph{Deviation Plots:} To make large numbers of comparisons easier to comprehend], deviation plots were created to show the difference between LTD and PSDS data.\\
+	
+	One way to think of these plots is $\text{LTD}_{data}+\text{Deviation}_{data} = \text{PSDS}_{data}$. \\(Assuming all time step issues are handled appropriately.)\\
+	
+	Alternatively, the deviation data could be thought of as data that is filtered out due to the larger time steps and assumptions made by LTD.\\
+	
+	\newcommand{\caseName}{miniWECCgenTrip027}
+	\includegraphics[width=\linewidth]{\caseName dev1} 
+	
+	\includegraphics[width=.5\linewidth]{\caseName Pe2} %
+	\includegraphics[width=.5\linewidth]{\caseName Pm2} 
+	
+	\includegraphics[width=.5\linewidth]{\caseName Q2} %
+	\includegraphics[width=.5\linewidth]{\caseName V2} 
+	
+	Angle deviation not included as PSDS angles wrap oddly and would result in a misleading deviation.
+
+\end{comment}
+
+\end{document}
