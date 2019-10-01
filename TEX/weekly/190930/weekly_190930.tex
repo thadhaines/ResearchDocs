@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Talking Points \\ Week of September 29th, 2019}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+		\item Results from turbine type code.
+		\item Re-test of WECC dyd runs..., flatlines seemed to work in 2018 case from gui...
+		\item Generic generator created
+		\item Generic governor work started
+		\item Update of Tgov1 to account for area gov deadband.
+
+	%	\item More \verb|matplotlib| plot functions created.
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/|
+		
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\item Generic Governor Coding
+		\item Don't forget to Refine BA ACE actions.
+		\item Update Code flowchart% to aid in further development.
+		\item Thesis Outline and Introduction 
+		
+		%\item Keep Goals and Requests in mind.
+		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+
+	\end{enumerate}
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+	\item Realistic AGC results?
+	\item Typical deadbands of AGC? 
+	\item Number (type) of generic governors to create? Steam, Hydro, Gas ...
+	
+\vfill\null
+\columnbreak
+
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Bring wind into simulation \\ (ramp ungoverned generators?)
+
+		\item Find best/correct way to trip gens in PSLF from python.
+
+		\item Investigate line current data.
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Account for different types of loads. (exponential load model) % read from dyd
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
+
+		\item Get away from reliance on GE
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+
+	\end{enumerate}
+
+
+
+\vfill\null
+
+\end{multicols}
+\pagebreak
+
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\begin{comment}
+
+\end{comment}
+
+\end{document}
