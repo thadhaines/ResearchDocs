@@ -1,0 +1,26 @@
+
+\documentclass[]{standalone}
+
+\usepackage{booktabs} 	% enhanced table qualities
+\usepackage[per-mode=fraction]{siunitx} % for si units and num
+
+\usepackage{array} 		% for >{} column characterisctis
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+\begin{document}
+
+\begin{tabular}{C{2cm} S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]}
+			\multicolumn{4}{c}{\large Generic Governor Model Parameters} \\ \toprule
+		Parameter 		& 	\multicolumn{1}{c}{Steam} 	& \multicolumn{1}{c}{Hydro} 	& \multicolumn{1}{c}{Gas}\\
+			\cmidrule(lr){1-1} \cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4} 
+			Ts	&	0.04	&	0.40	&0.50\\
+			Tc	&	0.20	&	45.00	&10.00\\
+			T3	&	0.00	&	5.00	&4.00\\
+			T4	&	1.50	&	-1.00	&0.00\\
+			T5	&	5.00	&	0.50	&1.00\\
+\end{tabular}
+
+\end{document}
