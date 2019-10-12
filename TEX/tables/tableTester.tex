@@ -1,5 +1,7 @@
 % Easy template for testing table builds to verify their appearance.
 \documentclass[]{report} 
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
 \usepackage{pdflscape}
 \usepackage{booktabs} 	% enhanced table qualities
 
@@ -15,5 +17,6 @@
 \input{simParams/simParamsTable} % Uses landscape
 \pagebreak
 \input{genGov/genGovTest}
-
+\pagebreak
+\input{BAdict/BAdict}
 \end{document}
