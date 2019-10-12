@@ -1,0 +1,19 @@
+% Testing of external table build for \input later
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} C{2cm} S[table-format=2.2] S[table-format=2.2] S[table-format=2.2] @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+		\text{Parameter}	&	\text{Steam}	&	\text{Hydro}	&	\text{Gas}	\\		
+		\midrule		
+			Ts	&	0.04	&	0.40	&0.50\\
+			Tc	&	0.20	&	45.00	&10.00\\
+			T3	&	0.00	&	5.00	&4.00\\
+			T4	&	1.50	&	-1.00	&0.00\\
+			T5	&	5.00	&	0.50	&1.00\\
+		\bottomrule
+	\end{tabular}
+	\caption{Generic governor model parameters.}
+	\label{tab:genGovParams}
+\end{table}

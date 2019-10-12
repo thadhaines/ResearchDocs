@@ -1,0 +1,31 @@
+% File for simParams
+% NOTE: the body of this table was made in EXCEL, though has been updated in this file further than in excel due to latex formating etc.
+\begin{landscape}
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} llllp{5in} @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+		Key	&	Type	&	Units	&	Example	&	Description	\\		
+		\midrule		
+		timeStep	&	float	&	Seconds	&	1	&	Simulated time between power-flow solutions	\\
+		endTime	&	float	&	Seconds	&	1800	&	Number of seconds simulation is to run for.	\\
+		slackTol	&	float	&	MW	&	0.5	&	MW Value that slack error must be below for returned solution to be accepted.	\\
+		PY3msgGroup	&	integer	&	-	&	3	&	Number of messages to combine into one AMQP message for PY3 to IPY communication.	\\
+		IPYmsgGroup	&	integer	&	-	&	60	&	Number of messages to combine into one AMQP message for IPY to PY3 communication.	\\
+		Hinput	&	float	&	MW sec	&	0	&	Value to use for total system inertia. Units are MW*sec. If set to 0.0, system inertia will be calculated from the given .sav information.	\\
+		Dsys	&	float	&	PU	&	0	&	Value of system damping used in swing equation and governor models. While this option is available, it is untested and typically set to 0.0.	\\
+		fBase	&	float	&	Hz	&	60	&	Value of base system frequency.	\\
+		freqEffects	&	boolean	&	-	&	True	&	If True, the $\omega$ used in the swing equation will be the current system frequency. If this is set to False then $\omega$ will be set equal to 1 for the swing equation calculation	\\
+		integrationMethod	&	string	&	-	&	'rk45'	&	This option defines how the swing equation is integrated to find current frequency. Valid options are 'rk45', 'ab', and 'euler'. The default is the 'euler' method which is a simple forward Euler integration. The 'ab' option uses a two step Adams-Bashforth method and the 'rk45' options uses the scipy \verb|solve_ivp| function that utilizes an explicit Runge-Kutta 4(5) method.	\\
+		fileDirectory	&	string	&	-	&	"\textbackslash\textbackslash delme\textbackslash\textbackslash"	&	This is a relative path location from the folder where PSLTDSim is exectued in which the output files are saved to.	\\
+		fileName	&	string	&	-	&	"SimTest"	&	This is that name used to save files.	\\
+		exportFinalMirror	&	int	&	-	&	1	&	If this value is 1 a final system mirror will be exported. If this value is 0 no final mirror will be exported.	\\
+		exportMat	&	int	&	-	&	1	&	If this value is 1 a MATLAB .mat file will be exported. If this value is 0 no MATLAB .mat file will be exported.	\\
+		\bottomrule
+	\end{tabular}
+	\caption{Simulation parameters dictionary input information.}
+	\label{tab:simParamsDict}
+\end{table}
+\end{landscape}
