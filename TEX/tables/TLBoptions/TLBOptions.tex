@@ -1,0 +1,18 @@
+% Testing of external table build for \input later
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} l l @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+		TLB Type	&		ACE Calculation			\\
+		\midrule		
+		0	&	$	ACE_{FB}+ACE_{TL}		$	\\
+		1	&	$	ACE_{FB}+(sgn(\Delta\omega)==sgn(ACE_{TL}))*ACE_{TL}		$	\\
+		2	&	$	(ACE_{FB}+ACE_{TL})*(sgn(\Delta\omega)==sgn(ACE_{FB}+ACE_{TL}))		$	\\
+		3	&	$	ACE_{FB}*(sgn(\Delta\omega)==sgn(ACE_{FB})) + ACE_{TL}*(sgn(\Delta\omega)==sgn(ACE_{TL})) 		$	\\
+		\bottomrule
+	\end{tabular}
+	\caption{Tie-Line Bias AGC type ACE calculations.}
+	\label{tab: TLBOptions}
+\end{table}
