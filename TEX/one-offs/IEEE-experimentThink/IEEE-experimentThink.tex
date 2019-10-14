@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Collection of BA Descriptions and Options \\  }
+\lhead{Research \\ October 14th, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+
+% Easy template for testing table builds to verify their appearance.
+%\documentclass[]{report} 
+%\usepackage{geometry}
+%\geometry{letterpaper, margin=1in}
+\usepackage{pdflscape}
+\usepackage{booktabs} 	% enhanced table qualities
+
+\usepackage[per-mode=fraction]{siunitx} % for si units and num
+
+\usepackage{array} 		% for >{} column characterisctis
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%\pagestyle{empty}
+
+\begin{document}
+
+
+%\pagebreak
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=\linewidth]{../../models/AGC-TLB/AGC-TLB}
+	\caption{Block diagram of ACE calculation and manipulation.}
+	\label{fig: AGC-TLB}
+\end{figure}\vspace{-1em} % will remove 1 white space after image - typically good
+
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=.8\linewidth]{../../models/filterAgents/filterAgent}
+	\caption{Block diagram available filters.}
+	\label{fig: filterAgents}
+\end{figure}\vspace{-1em} % will remove 1 white space after image - typically good
+
+
+\input{../../tables/TLBoptions/TLBoptions}
+
+If IACE is to be added using the weight option:
+\[ACE = ACE*(1-IACEweight)+ IACE*IACEweight*IACEscale\]
+Else:
+\[ACE = ACE+IACE*IACEscale\]
+
+
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=.5\linewidth]{dbAction}
+	\caption{Governor deadband options.}
+	\label{fig: dbAction}
+\end{figure}\vspace{-1em} % will remove 1 white space after image - typically good
+
+
+\pagebreak
+\input{../../tables/BAdict/BAdict} % landscape
+
+\end{document}

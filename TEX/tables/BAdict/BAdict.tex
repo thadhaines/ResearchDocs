@@ -11,17 +11,18 @@
 		\midrule		
 		B	&	String	&	MW/0.1Hz	&	"1.0 : permax"	&	Describes the frequency bias scaling factor B used in the ACE calculation. Various Options exist.	\\
 		AGCActionTime	&	Float	&	Seconds	&	5	&	Time between AGC dispatch messages.	\\
-		AGCType	&	String	&	-	&	"TLB : 2"	&	Dictates which AGC routine to use and type specific options.	\\
+		AGCType	&	String	&	-	&	"TLB : 2"	&	Sets AGC routine to use and type specific options.	\\
 		UseAreaDroop	&	Boolean	&	-	&	False	&	If True, all governed generators under BA control will use the area droop.	\\
 		AreaDroop	&	Float	&	Hz/MW	&	0.05	&	Droop value to use if 'UseAreaDroop' is True.	\\
 		IncludeIACE	&	Boolean	&	-	&	True	&	If True, include IACE in ACE calculation	\\
-		IACEconditional	&	Boolean	&	-	&	False	&	Adds IACE to ACE if signs of deltaw, ACE and IACe all match.	\\
+		IACEconditional	&	Boolean	&	-	&	False	&	Adds IACE to ACE if signs of $\Delta\omega$, ACE and IACE match.	\\
 		IACEwindow	&	Integer	&	Seconds	&	60	&	Defines the length of moving integration window to use in IACE. If set to 0, integration takes place for all time.	\\
 		IACEscale	&	Float	&	-	&	0.0167	&	Value used to scale IACE.	\\
+		IACEuseWeight	&	Boolean	&	-	&	True	&	Option to use weighting of IACE during summation.	\\
 		IACEweight	&	Float	&	-	&	0.5	&	Weighting of IACE to ACE used during summation.	\\
-		IACEdeadband	&	Float	&	Hz	&	0.036	&	Absolute value of system frequency where IACE will not be calculated below.	\\
+		IACEdeadband	&	Float	&	Hz	&	0.036	&	Absolute value of system frequency where IACE will not be included below.	\\
 		ACEFiltering	&	String	&	-	&	'PI : 0.03 0.001'	&	String used to dictate which filter agent is created and specific parameters.	\\
-		AGCDeadband	&	Float	&	MW	&	1.5	&	Value of ACE to ignore sending in AGC dispatch. Not implemented as of this writing.	\\
+		AGCDeadband	&	Float	&	MW	&	1.5	&	Value of ACE to ignore sending in AGC dispatch. \\%Not implemented as of this writing.	\\
 		GovDeadbandType	&	String	&	-	&	step'	&	Type of deadband to be applied to area governors.	\\
 		GovDeadband	&	Float	&	Hz	&	0.036	&	Absolute value of system frequency that governors will not respond below.	\\
 		GovAlpha	&	Float	&	Hz	&	0.016	&	Specific to 'NLDroop' type of deadband. Specifies lower bound of non-linear droop.	\\

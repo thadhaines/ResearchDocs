@@ -60,6 +60,11 @@
 	f_{w}\pu &= \sum_{i=1}^{N} \dfrac{f_i}{\fbase} \dfrac{H_{i}\mbase{i}}{\hsys} \numberthis\\
 	\text{where} \hsys &= \sum_{i=1}^{N}H_i\mbase{i} \numberthis
 	\end{align*}
+	
+	If IACE is to be added using the weight option:
+	\[ACE = ACE*(1-IACEweight)+ IACE*IACEweight*IACEscale\]
+	Else:
+	\[ACE = ACE+IACE*IACEscale\]
 
 
 
