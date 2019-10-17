@@ -85,7 +85,7 @@
 		% Conditional Summing
 		\node [block, right=of ACEfb,] (condSum) {\shortstack{Conditional \\and \\Weighted\\ Summing}};
 		%  ACE node and label
-		\coordinate [right=of condSum]  (ACE) {};
+		\coordinate [right=1.5cm of condSum]  (ACE) {};
 		\coordinate [above=-.1em of ACE,label={$ACE$}]  (ACElabel){};
 		
 		% Filtering
@@ -95,13 +95,13 @@
 		\coordinate [above=-.1em of SACE,label={$SACE$}]  (SACElabel){};
 		
 		% IACE
-		\node [block, below=2 cm of ACElabel] (IACE) {$\int_{t-x}^{t}$};
-		\coordinate [left=.9 cm of IACE,label={$IACE$}]  (IACElabel){};
+		\node [block, below=2 cm of ACElabel] (IACE) {$\text{IACEscale}\int_{t-x}^{t}$};
+		\coordinate [left=1 cm of IACE,label={$IACE$}]  (IACElabel){};
 		
 		% output gain
-		\node [block, right= of SACElabel] (ACE2dist) {$-1$};
+		\node [block, right= of SACElabel] (ACE2dist) {$\text{ACEgain}$};
 		% Pm out
-		\node [output, right=of ACE2dist, label=$\shortstack{ACE\\to\\Distribute}$] (output) {};
+		\node [output, right=of ACE2dist, label=$\shortstack{-ACE\\to\\Distribute}$] (output) {};
 		
 		% connecting lines
 		\draw [draw,->] (inputwref) -- node[pos=0.8] {$+$} (sum1); 
@@ -112,7 +112,7 @@
 		\draw [->] (fbias) -- (condSum);
 		\draw [->] (sum2) -| ($(condSum.south west)!.25!(condSum.south)$); % using calc to find point halfway between corner and middle		
 		\draw [->] (IACE) -| ($(condSum.south east)!.25!(condSum.south)$);
-		\draw [->] ($(condSum)!.5!(filter)$) -- (IACE);
+		\draw [->] ($(condSum)!.5!(filter)$) -| (IACE);
 		%\draw [->] (ACElabel) -- (IACE);
 		\draw [->] (condSum) -- (filter);
 		\draw [->] (filter) -- (ACE2dist);
