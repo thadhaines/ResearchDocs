@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Talking Points \\ Week of October 21th, 2019}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+\itemsep0em 
+		\item Noise Agent Created
+
+		\item Deadband Experimental Results
+
+	%	\item More \verb|matplotlib| plot functions created.
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/|
+		
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\itemsep0em 
+		\item Paper for IEEE PES
+		%\item Generic Governor testing
+		\item Continue to refine BA ACE actions.
+		%\item Update Code flowchart% to aid in further development.
+		\item Thesis work 
+		%\item Keep Goals and Requests in mind.
+		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+
+	\end{enumerate}
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+\itemsep0em 
+	\item Realistic AGC results and/or tuning?
+	\item Typical deadbands of AGC? 
+	\item IEEE Paper outline or title?\\Long-Term Effect of Governor Deadband on Valve Travel
+	\end{enumerate}
+	
+\paragraph{Deadband Explained} \ \\
+\includegraphics[width=\linewidth]{tgov1DB}\\
+\includegraphics[width=\linewidth]{dbAction2}
+
+\paragraph{MiniWECC AGC Settings}
+
+\begin{itemize}
+\itemsep0em 
+\item 15 second ACG Action Time
+\item PI filtered ACE
+\item 15 Second Windowed IACE included
+\item Step Deadband at 36 mHz
+\item N-L Droop from 16-36 mHz
+\end{itemize}
+\vfill\null
+\columnbreak
+\paragraph{MiniWECC Noise Results} \ \\
+System Loading (0.05\% Noise Added):\\
+\includegraphics[width=\linewidth]{miniWECCnoiseStepDBPload}
+Step DB:\\
+\includegraphics[width=\linewidth]{miniWECCnoiseStepDBFreq}
+\includegraphics[width=\linewidth]{miniWECCnoiseStepDBValveTravel01}
+Non-linear Droop DB:\\
+\includegraphics[width=\linewidth]{miniWECCnoiseNLDBFreq}
+\includegraphics[width=\linewidth]{miniWECCnoiseNLDBValveTravel01}
+\includegraphics[width=.9\linewidth]{miniWECCnoiseRes01}
+
+\vfill\null
+\end{multicols}
+%\pagebreak
+\paragraph{AGC Block Diagram} \ \\
+
+\includegraphics[width=\linewidth]{AGC-TLB}\\
+Optional Filters:\\
+\begin{center}
+\includegraphics[width=.8\linewidth]{filterAgent}
+\end{center}
+
+\paragraph{Controller Results (no noise)} miniWECC 1500 MW generation loss at t=2\ \\
+No Deadband:\\
+\includegraphics[width=\linewidth]{noDB}
+{Step Deadband:\\
+\includegraphics[width=\linewidth]{stepDB}
+Non-Linear Droop:\\
+\includegraphics[width=\linewidth]{NLdroopDB}
+\begin{comment}
+% Common 2nd col removed 
+
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Bring wind into simulation \\ (ramp ungoverned generators?)
+
+		\item Find best/correct way to trip gens in PSLF from python.
+
+		\item Investigate line current data.
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Account for different types of loads. (exponential load model) % read from dyd
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
+
+		\item Get away from reliance on GE
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+
+	\end{enumerate}
+
+
+\pagebreak
+\end{comment}
+
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\begin{comment}
+
+\end{comment}
+
+\end{document}
