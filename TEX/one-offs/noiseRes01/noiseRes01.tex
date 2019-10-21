@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{MiniWECC Noise Results\\ System Frequency and Valve travel Comparisons }
+\lhead{Research \\ October 21st, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+
+\newcommand{\caseName}{ }
+\begin{document}
+\renewcommand{\caseName}{miniWECCnoise}
+\paragraph{\caseName} 20 Minutes of 0.05\% noise.\\
+Comparison of system frequency - Pload the same for all cases.
+
+	\includegraphics[width=\linewidth]{\caseName NoDBPload}
+	
+	\includegraphics[width=\linewidth]{\caseName NoDBFreq} 
+	\includegraphics[width=\linewidth]{\caseName NLDBFreq} 
+	\includegraphics[width=\linewidth]{\caseName StepDBFreq} 
+	
+\pagebreak
+\paragraph{\caseName} 20 Minutes of 0.05\% noise.\\
+Comparison of valve travel.
+\begin{center}
+	\includegraphics[height=.3\textheight]{\caseName NoDBValveTravel01} \\
+	\includegraphics[height=.3\textheight]{\caseName NLDBValveTravel01} \\
+	\includegraphics[height=.3\textheight]{\caseName StepDBValveTravel01} 
+\end{center}
+	
+\pagebreak
+
+\end{document}

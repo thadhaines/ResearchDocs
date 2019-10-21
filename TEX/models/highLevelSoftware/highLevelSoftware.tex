@@ -62,7 +62,7 @@
 		\node [block] (user) {\shortstack{\textbf{User} \\ Inputs simulation specifications \\ Analyze results}};
 		
 		% python
-		\node [block, right=of user,] (python) {\shortstack{\textbf{Python} \\ Initializes simulation environment \\ Handles PSLF communication \\ Performs dynamic calculations\\ Logs data}};
+		\node [block, right=of user,] (python) {\shortstack{\textbf{PSLTDSim} \\ {\scriptsize Python and IronPython}\\ Creates simulation environment \\ Performs dynamics\\ PSLF communication\\ Logs data\\ Generates Plots}};
 		
 		% pslf
 		\node [block, right=of python,] (pslf) {\shortstack{\textbf{PSLF} \\ Solves power flow}};
