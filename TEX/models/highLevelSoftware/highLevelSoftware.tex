@@ -59,17 +59,25 @@
 		
 		
 		% user
-		\node [block] (user) {\shortstack{\textbf{User} \\ Inputs simulation specifications \\ Analyze results}};
+		\node [block, label=\textbf{User}] (user) {\shortstack{\\ Inputs simulation specifications}};
+		\node [block, below= of user] (userout) {\shortstack{Analyze results}};
 		
-		% python
-		\node [block, right=of user,] (python) {\shortstack{\textbf{PSLTDSim} \\ {\scriptsize Python and IronPython}\\ Creates simulation environment \\ Performs dynamics\\ PSLF communication\\ Logs data\\ Generates Plots}};
+		% python init
+		\node [block, right=of user,label=\textbf{PSLTDSim} ] (python) {\shortstack{{\scriptsize Python and IronPython}\\ Creates simulation environment}};
+		% python loop
+				\node [block, below=of python,] (pythonloop) {\shortstack{Performs dynamics\\ PSLF communication\\ Logs data\\ Increments simulation time}};
+		% python output
+				\node [block, below=of pythonloop,] (pythonoutput) {\shortstack{Generates plots}};
 		
 		% pslf
-		\node [block, right=of python,] (pslf) {\shortstack{\textbf{PSLF} \\ Solves power flow}};
+		\node [block, right=2cm of pythonloop, label=\textbf{PSLF} ] (pslf) {\shortstack{Solves power flow}};
 		
 
-		\draw [<->] (user) -- (python);
-		\draw [<->] (python) -- (pslf);
+		\draw [->] (user) -- (python);
+		\draw [->] (python) -- (pythonloop);
+		\draw [<->] (pythonloop) -- (pslf);
+		\draw [->] (pythonloop) -- (pythonoutput);
+		\draw [->] (pythonoutput) -| (userout);
 
 	\end{tikzpicture} 
 \end{document}
