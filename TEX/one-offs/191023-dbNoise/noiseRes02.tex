@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{MiniWECC Noise Results\\ System Frequency and Valve Travel Comparisons }
+\lhead{Research \\ October 23rd, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+
+\newcommand{\caseName}{ }
+\begin{document}
+\begin{minipage}{.5\linewidth}
+Timestep = 0.5 seconds\\
+MiniWECC 30 Minutes of 0.03\% noise. \\
+
+AGC Settings:
+\begin{itemize}
+\item B = 1\% initial area load
+\item Action Time: 15 seconds
+\item ACE Gain: 1.75
+\item Filtering: PI kp=0.025 a=0.0001
+\item IACE Included, 15 second window average
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\linewidth}
+\includegraphics[width=\linewidth]{dbAction3}
+\end{minipage}%
+
+
+\includegraphics[width=\linewidth]{mw05NoDBAGCPload}\\
+
+\input{noiseRes02Table}
+\pagebreak
+
+\renewcommand{\caseName}{mw05NoDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName AGCFreq}\\
+	\includegraphics[width=.8\linewidth]{\caseName AGCValveTravel01} \\
+\end{center}
+\paragraph{\caseName\ With No AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCFreq} \\
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCValveTravel01} 
+\end{center}
+\pagebreak
+
+\renewcommand{\caseName}{mw05StepDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName AGCFreq}\\
+	\includegraphics[width=.8\linewidth]{\caseName AGCValveTravel01} \\
+\end{center}
+\paragraph{\caseName\ With No AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCFreq} \\
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCValveTravel01} 
+\end{center}
+\pagebreak
+
+\renewcommand{\caseName}{mw05NoStepDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName AGCFreq}\\
+	\includegraphics[width=.8\linewidth]{\caseName AGCValveTravel01} \\
+\end{center}
+\paragraph{\caseName\ With No AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCFreq} \\
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCValveTravel01} 
+\end{center}
+\pagebreak
+
+\renewcommand{\caseName}{mw05NLdroopDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName AGCFreq}\\
+	\includegraphics[width=.8\linewidth]{\caseName AGCValveTravel01} \\
+\end{center}
+\paragraph{\caseName\ With No AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCFreq} \\
+	\includegraphics[width=.8\linewidth]{\caseName NoAGCValveTravel01} 
+\end{center}
+\pagebreak
+%\begin{landscape}
+
+
+
+%\end{landscape}
+\end{document}
