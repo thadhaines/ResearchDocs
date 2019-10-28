@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{IEEE MiniWECC Noise Results\\ System Frequency and Valve travel Comparisons }
+\lhead{Research \\ October 28th, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+
+\newcommand{\caseName}{changeme}
+\begin{document}
+\begin{minipage}{.5\linewidth}
+Timestep = 1.0 seconds, Area Droop = 0.05\\
+MiniWECC 30 Minutes of 0.03\% noise. \\
+
+AGC Settings:
+\begin{itemize}
+\item B = 1\% initial area load
+\item Action Time: 15 seconds
+\item ACE Gain: 1.75
+\item Filtering: PI kp=0.025 a=0.0001
+\item IACE Included, 15 second window average
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\linewidth}
+\includegraphics[width=\linewidth]{dbAction3}
+\end{minipage}%
+
+
+\includegraphics[width=\linewidth]{miniWECCnoiseNoDBPload}\\
+
+\input{paperSimFullTable}
+\pagebreak
+
+\renewcommand{\caseName}{miniWECCnoiseNoDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName Freq}\\
+	\includegraphics[width=.8\linewidth]{\caseName ValveTravel01} \\
+\end{center}
+
+\renewcommand{\caseName}{miniWECCnoiseStepDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName Freq}\\
+	\includegraphics[width=.8\linewidth]{\caseName ValveTravel01} \\
+\end{center}
+\pagebreak
+
+\renewcommand{\caseName}{miniWECCnoiseNoStepDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName Freq}\\
+	\includegraphics[width=.8\linewidth]{\caseName ValveTravel01} \\
+\end{center}
+\renewcommand{\caseName}{miniWECCnoiseNLdroopDB}
+\paragraph{\caseName\ With AGC} 
+\begin{center}
+	\includegraphics[width=.8\linewidth]{\caseName Freq}\\
+	\includegraphics[width=.8\linewidth]{\caseName ValveTravel01} \\
+\end{center}
+%\begin{landscape}
+
+
+
+%\end{landscape}
+\end{document}
