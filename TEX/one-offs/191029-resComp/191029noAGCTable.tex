@@ -1,0 +1,25 @@
+% Testing of external table build for \input later
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} C{2cm} S[table-format=2.2] S[table-format=2.2] S[table-format=2.2] S[table-format=2.2]  @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+
+	&	\multicolumn{4}{c}{Valve Travel [PU]}							\\	
+\text{Generator}	&	\text{No DB}	&	\text{Step}	&	\text{No-Step}	&	\text{N-L Droop}	\\	\midrule
+17	&	0.16	&	7.48	&	0.14	&	0.23	\\	
+23	&	0.16	&	7.48	&	0.14	&	0.23	\\	
+30	&	0.16	&	7.48	&	0.14	&	0.23	\\	
+32	&	0.16	&	7.54	&	0.14	&	0.23	\\	
+107	&	0.16	&	7.54	&	0.14	&	0.23	\\	
+41	&	0.15	&	6.44	&	0.14	&	0.22	\\	
+45	&	0.15	&	6.44	&	0.14	&	0.22	\\	
+53	&	0.16	&	7.54	&	0.14	&	0.23	\\	
+59	&	0.15	&	6.44	&	0.14	&	0.22	\\	\bottomrule
+Total:	&	1.41	&	64.38	&	1.26	&	2.04	\\	
+
+	\end{tabular}
+	\caption{MiniWECC noise results.}
+	\label{tab:miniWECCnoiseRes01}
+\end{table}

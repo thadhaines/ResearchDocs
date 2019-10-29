@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{IEEE MiniWECC Noise Results\\ System Frequency Comparisons }
+\lhead{Research \\ October 29th, 2019 }
+
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+
+\newcommand{\caseName}{changeme}
+\begin{document}
+\begin{multicols}{2}
+\includegraphics[width=\linewidth]{miniWECCnoiseNoDBPload}
+\includegraphics[width=\linewidth]{gen32ValveComp}
+\includegraphics[width=\linewidth]{miniWECCnoiseNLdroopDBFreq}
+
+\vfill
+\columnbreak
+
+
+\end{multicols}
+
+\input{191029noAGCTable}
+%\end{landscape}
+\end{document}
