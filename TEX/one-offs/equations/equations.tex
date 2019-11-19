@@ -66,6 +66,15 @@
 	Else:
 	\[ACE = ACE+IACE*IACEscale\]
 
+ Branch Power Flow calculated as \\ % according to glover
+\begin{align}
+P &= \dfrac{V_R V_S}{X} \sin(\delta_S - \delta_R)\\
+Q &= \dfrac{V_R}{X} \left(V_S\cos(\delta_S - \delta_R)-V_R\right)\\
+S &= P + jQ\\
+Amps &= \dfrac{\abs{S}}{V_S\sqrt{3}}\\
+\text{where} &V_S,V_R \text{ are magnitudes.}
+\end{align}
+
 
 
 \end{document}

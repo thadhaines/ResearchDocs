@@ -1,0 +1,35 @@
+% Testing of external table build for \input later
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} C{2cm} 
+	S[table-format=4.2,round-mode=places, round-precision=2,] 
+	S[table-format=6.2,round-mode=places, round-precision=2] 
+	S[table-format=3.2,round-mode=places, round-precision=2]
+ 	S[table-format=3.2,round-mode=places, round-precision=2] @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+Model Name & 	 \text{Occurrences} & 	 \text{MW Cap} & 		\text{\% Of Models}	&	\text{\% Of Capacity}	\\ \midrule
+ggov1 & 	1315.000 & 	77961.961 & 	46.060 & 	39.858 \\
+ieeeg1 & 	300.000 & 	54452.110 & 	10.508 & 	27.838 \\
+hyg3 & 	320.000 & 	18947.767 & 	11.208 & 	9.687 \\
+hygov4 & 	167.000 & 	7614.401 & 	5.849 & 	3.893 \\
+ieeeg3 & 	137.000 & 	7403.492 & 	4.799 & 	3.785 \\
+hygovr & 	25.000 & 	6249.371 & 	0.876 & 	3.195 \\
+ggov3 & 	30.000 & 	5358.317 & 	1.051 & 	2.739 \\
+hygov & 	230.000 & 	5315.827 & 	8.056 & 	2.718 \\
+pidgov & 	61.000 & 	3809.765 & 	2.137 & 	1.948 \\
+wndtge & 	33.000 & 	3783.470 & 	1.156 & 	1.934 \\
+gpwscc & 	62.000 & 	2398.050 & 	2.172 & 	1.226 \\
+tgov1 & 	25.000 & 	1485.556 & 	0.876 & 	0.759 \\
+g2wscc & 	21.000 & 	458.280 & 	0.736 & 	0.234 \\
+gast & 	37.000 & 	330.680 & 	1.296 & 	0.169 \\
+ccbt1 & 	3.000 & 	32.530 & 	0.105 & 	0.017 \\
+wndtrb & 	1.000 & 	0.000 & 	0.035 & 	0.000 \\
+lcfb1 & 	88.000 & 	0.000 & 	3.082 & 	0.000 \\ \midrule
+TOTAL & 	2855.000 & 	195601.576 & 	100.000 & 	100.000 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Prime movers parsing results.}
+	\label{tab: dydParse Prime Movers }
+\end{table}

@@ -1,0 +1,41 @@
+% Testing of external table build for \input later
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} C{2cm} 
+	S[table-format=4.2,round-mode=places, round-precision=2,] 
+	S[table-format=6.2,round-mode=places, round-precision=2] 
+	S[table-format=3.2,round-mode=places, round-precision=2]
+ 	S[table-format=3.2,round-mode=places, round-precision=2] @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+Model Name & 	 \text{Occurrences} & 	 \text{MW Cap} & 		\text{\% Of Models}	&	\text{\% Of Capacity}	\\ \midrule
+regc\_a & 	286.000 & 	18461.697 & 	19.536 & 	40.287 \\
+wt4g & 	131.000 & 	8995.084 & 	8.948 & 	19.629 \\
+wt3g & 	112.000 & 	7633.716 & 	7.650 & 	16.658 \\
+wt3e & 	106.000 & 	4882.038 & 	7.240 & 	10.654 \\
+wt2g & 	21.000 & 	1841.236 & 	1.434 & 	4.018 \\
+wt2t & 	19.000 & 	1224.900 & 	1.298 & 	2.673 \\
+wt1g & 	21.000 & 	1188.370 & 	1.434 & 	2.593 \\
+wt1t & 	21.000 & 	885.990 & 	1.434 & 	1.933 \\
+wt3t & 	106.000 & 	712.280 & 	7.240 & 	1.554 \\
+wtgt\_a & 	35.000 & 	0.000 & 	2.391 & 	0.000 \\
+wtgq\_a & 	29.000 & 	0.000 & 	1.981 & 	0.000 \\
+wtgp\_a & 	29.000 & 	0.000 & 	1.981 & 	0.000 \\
+wtga\_a & 	28.000 & 	0.000 & 	1.913 & 	0.000 \\
+wt4t & 	72.000 & 	0.000 & 	4.918 & 	0.000 \\
+%wt4e & 	128.000 & 	0.000 & 	8.743 & 	0.000 \\
+wt3p & 	67.000 & 	0.000 & 	4.577 & 	0.000 \\
+wt2p & 	16.000 & 	0.000 & 	1.093 & 	0.000 \\
+wt2e & 	19.000 & 	0.000 & 	1.298 & 	0.000 \\
+wt1p & 	16.000 & 	0.000 & 	1.093 & 	0.000 \\
+repc\_a & 	143.000 & 	0.000 & 	9.768 & 	0.000 \\
+reec\_a & 	44.000 & 	0.000 & 	3.005 & 	0.000 \\
+exwtg1 & 	5.000 & 	0.000 & 	0.342 & 	0.000 \\
+ewtgfc & 	10.000 & 	0.000 & 	0.683 & 	0.000 \\ \midrule
+TOTAL & 	1464.000 & 	45825.311 & 	100.000 & 	100.000 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Wind turbine parsing results.}
+	\label{tab: dydParse wind turbines }
+\end{table}

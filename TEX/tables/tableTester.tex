@@ -3,12 +3,13 @@
 \usepackage{geometry}
 \geometry{letterpaper, margin=1in}
 \usepackage{pdflscape}
-
 %\documentclass[]{standalone} 
 
 \usepackage{booktabs} 	% enhanced table qualities
 
+
 \usepackage[per-mode=fraction]{siunitx} % for si units and num
+\sisetup{group-separator = {,}, group-minimum-digits = 3}
 
 \usepackage{array} 		% for >{} column characterisctis
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -19,11 +20,15 @@
 \begin{document}
 %\input{simParams/simParamsTable} % Uses landscape
 %\pagebreak
-\input{genGov/genGovTest}
+%\input{genGov/genGovTest}
 %\pagebreak
 %\input{BAdict/BAdict}
 %\pagebreak
 %\input{TLBoptions/TLBoptions}
 %\pagebreak
-\input{miniWECCnoiseRes01/miniWECCnoiseRes01}
+%\input{miniWECCnoiseRes01/miniWECCnoiseRes01}
+\paragraph{dyd: 18HSP2a1.dyd} \ \\
+\input{dydParse/Machines}
+\input{dydParse/PrimeMovers}
+\input{dydParse/WindTurbines}
 \end{document}

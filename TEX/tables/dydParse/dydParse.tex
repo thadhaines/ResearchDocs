@@ -1,0 +1,36 @@
+% Testing of external table build for \input later
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} C{2cm} 
+	S[table-format=4.2,round-mode=places, round-precision=2,] 
+	S[table-format=6.2,round-mode=places, round-precision=2] 
+	S[table-format=3.2,round-mode=places, round-precision=2]
+ 	S[table-format=3.2,round-mode=places, round-precision=2] @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+		\text{Model Name}	&	\text{Occurances}	&	\text{MW Cap}	&	\text{\% Of Models}	&	\text{\% Of Capacity}	\\
+		\midrule		
+ ccbt1 & 3 & 32.53 & 0.10507880910683014 & 0.016630745338866406 \\
+ g2wscc & 21 & 458.28 & 0.7355516637478109 & 0.23429259065157385 \\
+ gast & 37 & 330.68 & 1.2959719789842383 & 0.16905794247329678 \\
+ ggov1 & 1315 & 77961.96099999991 & 46.05954465849387 & 39.85753210911875 \\
+ ggov3 & 30 & 5358.316999999999 & 1.0507880910683012 & 2.7394037956322967 \\
+ gpwscc & 62 & 2398.05 & 2.171628721541156 & 1.225987053792456 \\
+ hyg3 & 320 & 18947.767197000016 & 11.208406304728546 & 9.686919489499964 \\
+ hygov & 230 & 5315.827100000004 & 8.056042031523642 & 2.717681117907925 \\
+ hygov4 & 167 & 7614.400798000004 & 5.84938704028021 & 3.8928115763787035 \\
+ hygovr & 25 & 6249.370599999999 & 0.8756567425569177 & 3.1949490002089993 \\
+ ieeeg1 & 300 & 54452.10960599999 & 10.507880910683012 & 27.83827752909398 \\
+ ieeeg3 & 137 & 7403.4917989999985 & 4.798598949211909 & 3.7849857586091273 \\
+ lcfb1 & 88 & 0.0 & 3.0823117338003505 & 0.0 \\
+ pidgov & 61 & 3809.7650000000012 & 2.136602451838879 & 1.9477169233300462 \\
+ tgov1 & 25 & 1485.5559999999998 & 0.8756567425569177 & 0.7594805878458354 \\
+ wndtge & 33 & 3783.4699999999993 & 1.1558669001751314 & 1.9342737801180718 \\
+ wndtrb & 1 & 0.0 & 0.03502626970227671 & 0.0 \\
+ TOTAL & 2855 & 195601.57610000012 & 99.99999999999999 & 99.9999999999999 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Prime movers parsing results.}
+	\label{tab: dydParse Prime Movers }
+\end{table}

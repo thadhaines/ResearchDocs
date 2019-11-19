@@ -21,10 +21,24 @@
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
 \itemsep0em 
-		\item Branch Power Flow data added
+		\item Branch Power Flow data added. \\
+Plots on reverse.
+\begin{align}
+P &= \dfrac{V_R V_S}{X} \sin(\delta_S - \delta_R)\\
+Q &= \dfrac{V_R}{X} \left(V_S\cos(\delta_S - \delta_R)-V_R\right)\\
+S &= P + jQ\\
+Amps &= \dfrac{\abs{S}}{V_S\sqrt{3}}\\
+\text{where} &V_S,V_R \text{ are magnitudes.}
+\end{align}
 
-		\item Generic Machine and Governors added and tested
-
+		\item Generic Machine and Governors added and tested.
+		\item PSDS issues with voltage stability found when using: 
+\verb|hygov4|, 
+\verb|hyg3|, 
+\verb|hygov|, 
+\verb|ggov1|
+		\item dyd Parser updated to include MW capacity and percentages.
+		\item Initial generic miniWECC testing
 	%	\item More \verb|matplotlib| plot functions created.
 
 		\item GitHub updated:\\
@@ -34,6 +48,7 @@
 \paragraph{Current Tasks:}
 	\begin{enumerate}
 		\itemsep0em 
+		\item Continue working with generics on miniWECC
 		\item Test WECC case...
 		\item `Interesting' Case generation
 		\item Continue to refine BA ACE actions.
@@ -49,8 +64,9 @@
 	\begin{enumerate}
 \itemsep0em 
 	\item Progress on case data?
-	\item Calculations for VAR flow?
-	\item AMPS / sqrt(3) for Line to phase values?
+	\item Calculation for VAR flow?
+	\item AMPS / sqrt(3) for Line to phase values- seems correct?
+	\item `Security' issues associated with WECC data...
 	\end{enumerate}
 	
 \vfill\null
@@ -67,8 +83,6 @@
 		\item Bring wind into simulation \\ (ramp ungoverned generators?)
 
 		\item Find best/correct way to trip gens in PSLF from python.
-
-		\item Investigate line current data.
 		
 	\end{enumerate}
 \paragraph{Future Work: (not by me)}
@@ -85,7 +99,7 @@
 
 		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
 
-		\item Get away from reliance on GE
+		\item Move away from reliance on GE
 		
 \end{itemize}
 
@@ -97,6 +111,33 @@
 
 \vfill\null
 \end{multicols}
+
+\pagebreak
+
+\newcommand{\caseName}{SixMachineRamp1}
+\begin{landscape}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr3}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr3}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp3}
+
+\end{landscape}
+\pagebreak
+
+\textbf{Parsing Results from 2018 WECC case:}
+
+
+\input{../../tables/dydParse/Machines}
+\input{../../tables/dydParse/PrimeMovers}
+\input{../../tables/dydParse/WindTurbines}
 
 %\paragraph{'Soft Goals':}
 %	\begin{enumerate}

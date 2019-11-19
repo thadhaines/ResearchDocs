@@ -1,0 +1,25 @@
+% Testing of external table build for \input later
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{} C{2cm} 
+	S[table-format=4.2,round-mode=places, round-precision=2,] 
+	S[table-format=6.2,round-mode=places, round-precision=2] 
+	S[table-format=3.2,round-mode=places, round-precision=2]
+ 	S[table-format=3.2,round-mode=places, round-precision=2] @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+Model Name & 	 \text{Occurrences} & 	 \text{MV Rating} & 		\text{\% Of Models}	&	\text{\% Of Capacity}	\\ \midrule
+genrou & 	1823.000 & 	203122.050 & 	43.046 & 	54.651 \\
+gentpj & 	1681.000 & 	117049.602 & 	39.693 & 	31.493 \\
+gentpf & 	587.000 & 	34533.841 & 	13.861 & 	9.292 \\
+gencc & 	48.000 & 	9790.800 & 	1.133 & 	2.634 \\
+gewtg & 	52.000 & 	5528.296 & 	1.228 & 	1.487 \\
+genwri & 	7.000 & 	839.210 & 	0.165 & 	0.226 \\
+motor1 & 	37.000 & 	805.460 & 	0.874 & 	0.217 \\\midrule
+TOTAL & 	4235.000 & 	371669.259 & 	100.000 & 	100.000 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Machine parsing results.}
+	\label{tab: dydParse Machines }
+\end{table}
