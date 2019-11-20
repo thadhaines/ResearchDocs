@@ -21,16 +21,14 @@
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
 \itemsep0em 
-		\item Branch Power Flow data added. \\
-Plots on reverse.
+		\item Branch Power Flow calculations added. \\
+\includegraphics[width=\linewidth]{../../models/2bus/2bus}
 \begin{align}
 P &= \dfrac{V_R V_S}{X} \sin(\delta_S - \delta_R)\\
 Q &= \dfrac{V_R}{X} \left(V_S\cos(\delta_S - \delta_R)-V_R\right)\\
-S &= P + jQ\\
-Amps &= \dfrac{\abs{S}}{V_S\sqrt{3}}\\
-\text{where} &V_S,V_R \text{ are magnitudes.}
+I &= \dfrac{\abs{P + jQ}}{V_R\sqrt{3}}
 \end{align}
-
+(Plots on reverse)
 		\item Generic Machine and Governors added and tested.
 		\item PSDS issues with voltage stability found when using: 
 \verb|hygov4|, 
@@ -60,6 +58,9 @@ Amps &= \dfrac{\abs{S}}{V_S\sqrt{3}}\\
 
 	\end{enumerate}
 
+\vfill\null
+\columnbreak
+
 	\paragraph{Current Questions:}
 	\begin{enumerate}
 \itemsep0em 
@@ -69,8 +70,7 @@ Amps &= \dfrac{\abs{S}}{V_S\sqrt{3}}\\
 	\item `Security' issues associated with WECC data...
 	\end{enumerate}
 	
-\vfill\null
-\columnbreak
+
 
 
 % Common 2nd col removed 
