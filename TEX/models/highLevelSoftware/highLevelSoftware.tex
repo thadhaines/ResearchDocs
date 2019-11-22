@@ -5,6 +5,9 @@
 \usepackage{comment}
 \usepackage{calc}
 
+% Decision
+\tikzstyle{decision} = [diamond, aspect=1.8, minimum width=2cm, minimum height=1cm, text centered, text width=2cm, draw=black]
+
 % definition of basic block
 \tikzset{
     block/.style = {draw, rectangle,
@@ -55,29 +58,47 @@
 }
 
 \begin{document}
-	\begin{tikzpicture}[auto, node distance=1cm,>=triangle 45]
+	\begin{tikzpicture}[auto, node distance=.5cm,>=triangle 45]
 		
 		
 		% user
 		\node [block, label=\textbf{User}] (user) {\shortstack{\\ Inputs simulation specifications}};
-		\node [block, below= of user] (userout) {\shortstack{Analyze results}};
+		
 		
 		% python init
-		\node [block, right=of user,label=\textbf{PSLTDSim} ] (python) {\shortstack{{\scriptsize Python and IronPython}\\ Creates simulation environment}};
+		\node [block, right=of user,label=\textbf{PSLTDSim} ] (python) {\shortstack{{\scriptsize Python and IronPython}\\ Initializes simulation environment}};
 		% python loop
-				\node [block, below=of python,] (pythonloop) {\shortstack{Performs dynamics\\ PSLF communication\\ Logs data\\ Increments simulation time}};
+		\node [block, below=of python,] (pythonloop1) {\shortstack{Perform dynamic calculations}};
+		
+		\node [block, below=of pythonloop1,] (pythonloop2) {\shortstack{Handle PSLF communication}};
+		
+		\node [block, below=of pythonloop2,] (pythonloop3) {\shortstack{Log data\\ Increment simulation time}};
+		
+		% sim over decision
+		\node (simOver) [decision, below =of pythonloop3,text width=3cm] {Simulation Over?};
+		
 		% python output
-				\node [block, below=of pythonloop,] (pythonoutput) {\shortstack{Generates plots}};
+		\node [block, below=of simOver,] (pythonoutput) {\shortstack{Output data \\ Generate plots}};
 		
 		% pslf
-		\node [block, right=2cm of pythonloop, label=\textbf{PSLF} ] (pslf) {\shortstack{Solves power flow}};
+		\node [block, right=2cm of pythonloop2, label=\textbf{PSLF} ] (pslf) {\shortstack{Solve power flow}};
 		
+		% analyze
+	%	\coordinate (2ndUser) at ($ , $)
+		\node [block] (userout) at (pythonoutput -| user) {\shortstack{Analyze results}};
 
 		\draw [->] (user) -- (python);
-		\draw [->] (python) -- (pythonloop);
-		\draw [<->] (pythonloop) -- (pslf);
-		\draw [->] (pythonloop) -- (pythonoutput);
-		\draw [->] (pythonoutput) -| (userout);
+		\draw [->] (python) -- (pythonloop1);
+		\draw [->] (pythonloop1) -- (pythonloop2);
+		\draw [->] (pythonloop2) -- (pythonloop3);
+		\draw [<->] (pythonloop2) -- (pslf);
+		\draw [->] (pythonloop3) -- (simOver);
+		\draw [->] (pythonoutput) -- (userout);
+		
+		% pf convergence bad
+		\draw [->] (simOver) --  node[anchor=east] {Yes} (pythonoutput);
+		\draw (simOver.west) -- node[anchor=north] {No} ($(simOver.west) + (-1,0)$);
+		\draw [->] ($(simOver.west) + (-1,0)$) |- (pythonloop1.west);
 
 	\end{tikzpicture} 
 \end{document}
