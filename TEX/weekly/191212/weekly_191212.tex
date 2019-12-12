@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Semester Recap \\ Week of December 9th, 2019}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+\itemsep0em 
+		\item Noise agent added.
+		\item Branch Power Flow calculations added. \\
+\includegraphics[width=.75\linewidth]{../../models/2bus/2bus}
+\begin{align}
+P &= \dfrac{V_R V_S}{X} \sin(\delta_S - \delta_R)\\
+Q &= \dfrac{V_R}{X} \left(V_S\cos(\delta_S - \delta_R)-V_R\right)\\
+I &= \dfrac{\abs{P + jQ}}{V_R\sqrt{3}}
+\end{align}
+(Plots on reverse)
+		\item Generic Machine and Governors added and tested.
+		\item dyd Parser updated to include MW capacity and percentages.
+		\item WECC simulation works - takes 6 minutes for 30 second sim time. Generic governors used, islanded objects ignored, tap changers, SVD, and phase shifters enabled, PSLF exponential load changes handled.
+	%	\item More \verb|matplotlib| plot functions created.
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/|
+		
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\itemsep0em 
+		\item Solidify test cases for validation
+		\item `Interesting' Case generation
+\subitem Large gov Deadband, fast AGC
+\subitem Normal Deadband, adequate AGC (as per FERC requirements)
+\subitem Various numbers of BA's 
+		\item Continue to refine BA ACE actions.
+\subitem Differentiate between reported ACE and distributed ACE
+\subitem Enable FERC requirement checks
+		\item Update Code flowchart% to aid in further development.
+		\item Thesis work 
+		%\item Keep Goals and Requests in mind.
+		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+
+	\end{enumerate}
+
+\vfill\null
+\columnbreak
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+\itemsep0em 
+	\item Progress on case data?
+	\item VAR calculation - Real power and AMPS match, Reactive power off (see reverse)
+	\end{enumerate}
+	
+
+
+
+% Common 2nd col removed 
+
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Bring wind into simulation \\ (ramp ungoverned generators?)
+
+
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Find best/correct way to trip gens in PSLF from python.
+\item Account for different types of loads better. (exponential load model) % read from dyd
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
+
+		\item Move away from reliance on GE
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+
+\vfill\null
+\end{multicols}
+
+\pagebreak
+
+\newcommand{\caseName}{SixMachineRamp1}
+\begin{landscape}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr3}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr3}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp3}
+
+\end{landscape}
+\pagebreak
+
+\textbf{Parsing Results from 2018 WECC case:}
+Note: Dyd contains model information for objects no longer present in .sav - therefore, below values are only a 'ballpark' estimate of what actual model contains.
+
+\input{../../tables/dydParse/Machines}
+\input{../../tables/dydParse/PrimeMovers}
+\input{../../tables/dydParse/WindTurbines}
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\end{document}
