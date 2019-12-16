@@ -62,13 +62,13 @@
 		
 		
 		% user
-		\node [block, label=\textbf{User}] (user) {\shortstack{\\ Inputs simulation specifications}};
+		\node [block, label=\textbf{User}] (user) {\shortstack{\\ Input simulation specifications}};
 		
 		
 		% python init
-		\node [block, right=of user,label=\textbf{PSLTDSim} ] (python) {\shortstack{{\scriptsize Python and IronPython}\\ Initializes simulation environment}};
+		\node [block, right=of user,label=\textbf{PSLTDSim} ] (python) {\shortstack{{\scriptsize Python and IronPython}\\ Initialize simulation environment}};
 		% python loop
-		\node [block, below=of python,] (pythonloop1) {\shortstack{Perform dynamic calculations}};
+		\node [block, below=of python,] (pythonloop1) {\shortstack{Perform dynamic calculations\\Execute perturbances}};
 		
 		\node [block, below=of pythonloop1,] (pythonloop2) {\shortstack{Handle PSLF communication}};
 		
