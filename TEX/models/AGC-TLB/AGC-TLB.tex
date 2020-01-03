@@ -86,7 +86,7 @@
 		\node [block, right=of ACEfb,] (condSum) {\shortstack{Conditional \\and \\Weighted\\ Summing}};
 		%  ACE node and label
 		\coordinate [right=1.5cm of condSum]  (ACE) {};
-		\coordinate [above=-.1em of ACE,label={$ACE$}]  (ACElabel){};
+		\coordinate [above=-.1em of ACE,]  (ACElabel){};
 		
 		% Filtering
 		\node [block, right=of ACE,] (filter) {\shortstack{Optional \\ Filter}};
@@ -112,8 +112,10 @@
 		\draw [->] (fbias) -- (condSum);
 		\draw [->] (sum2) -| ($(condSum.south west)!.25!(condSum.south)$); % using calc to find point halfway between corner and middle		
 		\draw [->] (IACE) -| ($(condSum.south east)!.25!(condSum.south)$);
-		\draw [->] ($(condSum)!.5!(filter)$) -| (IACE);
-		%\draw [->] (ACElabel) -- (IACE);
+		\draw [->] ($(condSum.south east)!.5!(condSum.east)$) -| (IACE);
+		%\draw [->] (ACElabel) -- (IACE); [xshift=3pt] 
+		\draw [->] ( $(condSum.north east)!.5!(condSum.east)$) -- node[pos=0.5]  {$RACE$}  
+		([xshift=1.5 cm]$(condSum.north east)!.5!(condSum.east)$);
 		\draw [->] (condSum) -- (filter);
 		\draw [->] (filter) -- (ACE2dist);
 		\draw [->] (ACE2dist) -- (output);
