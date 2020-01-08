@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Research Update \\ Week of January 6th, 2020}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Thesis Schedule:}
+	\begin{enumerate}
+\itemsep0em 
+		\item Draft thesis to Donnelly and Southergill Week of\textbf{ Feb 10}.
+		\item Revised thesis to Committee week of \\ \textbf{Mar 9} (pre-spring break).
+		\item Thesis Defense week of \textbf{April 13}.
+		\item Final thesis and docs to Southergill week of \textbf{April 20}.
+\item Other tasks:
+\subitem Register for graduation
+\subitem Complete other graduation forms
+\subitem Book room for defense
+\subitem Get EIT references
+\end{enumerate}
+
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+\itemsep0em 
+\item New Branch Flow Power Calculations: \\
+\begin{align}
+	I &= \dfrac{ V_S e^{j\delta_S}-V_R e^{j\delta_R}}{ (R+jX)\sqrt{3}}\\
+	P &= V_S \sqrt{3} \abs{I} \cos(\delta_S -\angle{I}) \\
+	Q &= V_S \sqrt{3} \abs{I} \sin(\delta_S -\angle{I}) 
+\end{align}
+		\item Old Branch Power Flow calculations: \\
+\begin{align}
+P &= \dfrac{V_R V_S}{X} \sin(\delta_S - \delta_R)\\
+Q &= \dfrac{V_R}{X} \left(V_S\cos(\delta_S - \delta_R)-V_R\right)\\
+I &= \dfrac{\abs{P + jQ}}{V_R\sqrt{3}}
+\end{align}
+
+		\item Branch Flow calculation correction
+		
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/|
+
+
+\vfill\null
+\columnbreak
+	
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\itemsep0em 
+		\item work on feed forward governor design
+		\item work on feed forward gov scenario
+\item Create daily load cycle agent to read EIA data (hourly forecast and demand values)
+		\item Solidify test cases for engineering problem
+		\item Update Code flowchart and finalize code% to aid in further development.
+		\item Thesis work 
+\end{enumerate}
+\paragraph{Proposed MiniWECC test cases:} \ \\
+duration: 4-6 hours
+\begin{itemize}
+	\itemsep0em 
+\item system noise 
+\item wind generation ramps 
+\item daily load cycle (during peak/valley transition)
+\end{itemize}
+
+Control varaitions:\\
+Normal gov deadband and large gov deadband \\
+Fast (seconds) and slow (minutes) AGC
+\\ Three cases: 
+\begin{itemize}
+	\itemsep0em 
+\item normal gov, Slow AGC
+\item normal gov, Fast AGC
+\item large gov, Fast AGC
+\end{itemize}
+
+Experimental Measures:
+\begin{itemize}
+\itemsep 0em
+\item Valve movement
+\item NERC mandate adherence
+\end{itemize}
+
+		%\item Keep Goals and Requests in mind.
+		
+		%\subitem A FlowtabrDAO exists that can find flow between busses. A way to initialize bus connections between areas has yet to be devised.
+
+
+
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+\itemsep0em 
+	\item Progress on case data?
+	\item VAR calculation - Real power and AMPS match, Reactive power off (see reverse)
+	\end{enumerate}
+	
+
+
+
+\begin{comment}
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Bring wind into simulation \\ (ramp ungoverned generators?)
+
+
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Find best/correct way to trip gens in PSLF from python.
+\item Account for different types of loads better. (exponential load model) % read from dyd
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, Transformer, \ldots
+
+		\item Move away from reliance on GE
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+\end{comment}
+
+\vfill\null
+\end{multicols}
+
+\begin{comment}
+\pagebreak
+
+\newcommand{\caseName}{SixMachineRamp1}
+\begin{landscape}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Pbr3}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Qbr3}
+
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp1}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp2}%
+\includegraphics[width=.33\linewidth,height=.33\textheight]{figures/\caseName Amp3}
+
+\end{landscape}
+\end{comment}
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\end{document}
