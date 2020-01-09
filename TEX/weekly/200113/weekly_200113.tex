@@ -8,7 +8,7 @@
 
 %% Header
 \rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
-\chead{Research Update \\ Week of January 6th, 2020}
+\chead{Research Update \\ Week of January 13th, 2020}
 \lhead{Research \\ }
 
 %\usepackage{graphicx}
@@ -21,7 +21,7 @@
 	\paragraph{Thesis Schedule:}
 	\begin{enumerate}
 \itemsep0em 
-		\item Draft thesis to Donnelly and Southergill Week of\textbf{ Feb 10}.
+		\item First Draft thesis to Donnelly and Southergill Week of\textbf{ Feb 10}.
 		\item Revised thesis to Committee week of \\ \textbf{Mar 9} (pre-spring break).
 		\item Thesis Defense week of \textbf{April 13}.
 		\item Final thesis and docs to Southergill week of \textbf{April 20}.
@@ -34,24 +34,22 @@
 	\paragraph{Recent Progress:}
 	\begin{enumerate}
 \itemsep0em 
-
-\item Register for graduation
+\item Work started on Delay Agent
+\item Registered for graduation
 \item Branch Flow calculation correction
-\subitem New calculations: \\
+\subitem New calculations:
 \begin{align}
-	I &= \dfrac{ V_S e^{j\delta_S}-V_R e^{j\delta_R}}{ (R+jX)\sqrt{3}}\\
-	P &= V_S \sqrt{3} \abs{I} \cos(\delta_S -\angle{I}) \\
-	Q &= V_S \sqrt{3} \abs{I} \sin(\delta_S -\angle{I}) 
+	I &= \dfrac{ V_S e^{j\delta_S}-V_R e^{j\delta_R}}{\sqrt{3} (R+jX)}\\
+	P &=  \sqrt{3} V_S  \abs{I} \cos(\delta_S -\angle{I}) \\
+	Q &= \sqrt{3} V_S  \abs{I} \sin(\delta_S -\angle{I}) 
 \end{align}
-\subitem Old calculations: \\
+\subitem Old calculations: 
 \begin{align}
 P &= \dfrac{V_R V_S}{X} \sin(\delta_S - \delta_R)\\
 Q &= \dfrac{V_R}{X} \left(V_S\cos(\delta_S - \delta_R)-V_R\right)\\
 I &= \dfrac{\abs{P + jQ}}{V_R\sqrt{3}}
 \end{align}
 
-		
-		
 		\item GitHub updated:\\
 		\verb|https://github.com/thadhaines/|
 
@@ -63,8 +61,7 @@ I &= \dfrac{\abs{P + jQ}}{V_R\sqrt{3}}
 \paragraph{Current Tasks:}
 	\begin{enumerate}
 		\itemsep0em 
-		\item work on feed forward governor design
-		\item work on feed forward gov scenario
+		\item Work on gov delay scenario?
 \item Create daily load cycle agent to read EIA data (hourly forecast and demand values)
 		\item Solidify test cases for engineering problem
 		\item Update Code flowchart and finalize code% to aid in further development.
