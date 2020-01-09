@@ -57,6 +57,13 @@
 		\node [output, right=of PI] (output2) {};
 		\draw [->] (input2) -- (PI) ;
 		\draw [->] (PI) -- (output2) ;
+		
+		% Delay and lowPass
+		\node [input, name=input3, right =1cm of output2] {};
+		\node [block, right=of input3] (delay) {$\dfrac{e^{-\$D_1}}{1+\$T_1}$};
+		\node [output, right=of delay] (output3) {};
+		\draw [->] (input3) -- (delay) ;
+		\draw [->] (delay) -- (output3) ;
 	
 	\end{tikzpicture} 
 \end{document}
