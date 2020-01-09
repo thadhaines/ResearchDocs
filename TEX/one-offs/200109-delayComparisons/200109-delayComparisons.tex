@@ -1,0 +1,75 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Initial Six Machine Delay Scenario \\ 01-09-20}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\paragraph{Scenario: } 
+Two area, six machine system loss of generation event. \\
+% six machine system
+\includegraphics[width=\linewidth]{../../models/sixMachine/sixMachine}
+
+Governed machines are: G1, G2 `1', G3, G4.\\
+Governor time constants identical for all machines and have no deadband.\\
+AGC signals are sent every 5 seconds.\\
+
+At t = 2, G2 `2', steps down its Pm output by 20\%.\\
+
+All system settings are the same in both cases, with the exception of added governor delays on G3.\\
+% tgov delay
+
+\includegraphics[width=\linewidth]{../../models/tgov1/tgov1DBdelay}
+\\
+
+Input $\Delta \omega_{PU}$ is delayed by 40 seconds and any changes to $P_{REF}$ are delayed by 10 seconds.
+
+\paragraph{Summary Results:} The delayed governor generates a second frequency perturbance 40 seconds after the first frequency drop caused by the loss of generation.
+The delay also introduces minor oscillations in frequency that are eventually damped out.
+Additionally, the delay case has a larger frequency nadir and takes longer to cross zero than the no delay case.
+
+Valve travel is increased by roughly 50\% due to the delayed governor action.
+\pagebreak
+
+\newcommand{\caseName}{SixMachineDelayStep1}
+\paragraph{Base Case - No Delay Results:} \ \\
+
+\includegraphics[width=\linewidth]{figures/\caseName Freq}
+
+\includegraphics[width=\linewidth]{figures/\caseName RACE}
+
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel1}
+
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel2}
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineDelayStep3}
+\paragraph{Delay Case - 40 sec w delay, 10 sec Pref Delay Results: } \ \\
+
+\includegraphics[width=\linewidth]{figures/\caseName Freq}
+
+\includegraphics[width=\linewidth]{figures/\caseName RACE}
+
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel1}
+
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel2}
+
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\end{document}
