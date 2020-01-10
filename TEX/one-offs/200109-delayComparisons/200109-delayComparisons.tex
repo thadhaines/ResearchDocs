@@ -8,7 +8,7 @@
 
 %% Header
 \rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
-\chead{Initial Six Machine Delay Scenario \\ 01-09-20}
+\chead{Initial Six Machine Delay Scenario \\ 01-10-20}
 \lhead{Research \\ }
 
 %\usepackage{graphicx}
@@ -19,32 +19,49 @@
 \paragraph{Scenario: } 
 Two area, six machine system loss of generation event. \\
 % six machine system
-\includegraphics[width=\linewidth]{../../models/sixMachine/sixMachine}
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=.7\linewidth]{../../models/sixMachine/sixMachine}
+	\caption{Six machine system.}
+	\label{fig: six machine}
+\end{figure}
+
 
 Governed machines are: G1, G2 `1', G3, G4.\\
-Governor time constants identical for all machines and have no deadband.\\
-AGC signals are sent every 5 seconds.\\
+Governor time constants are identical for all machines and no deadbands are used.\\
+PI filtered AGC signals are sent every 5 seconds to G1 and G3.\\
 
-At t = 2, G2 `2', steps down its Pm output by 20\%.\\
+At t = 2, G2 `2', steps its mechanical power output $P_M$ down by 20\%.\\
 
-All system settings are the same in both cases, with the exception of added governor delays on G3.\\
+All system settings are the same in test cases, with the exception of governor delays/filters on G3.\\
 % tgov delay
 
-\includegraphics[width=\linewidth]{../../models/tgov1/tgov1DBdelay}
-\\
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=\linewidth]{../../models/tgov1/tgov1DBdelay}
+	\caption{Governor model with optional delays and deadbands indicated by a *.}
+	\label{fig: modified tgov}
+\end{figure}
 
-Input $\Delta \omega_{PU}$ is delayed by 40 seconds and any changes to $P_{REF}$ are delayed by 10 seconds.
+Input $\Delta \omega_{PU}$ was delayed by 40 seconds and any changes to $P_{REF}$ were delayed by 10 seconds. \\
+Low pass filtering of $\omega$ using a 30 second time constant was also tested.
 
-\paragraph{Summary Results:} The delayed governor generates a second frequency perturbance 40 seconds after the first frequency drop caused by the loss of generation.
-The delay also introduces minor oscillations in frequency that are eventually damped out.
-Additionally, the delay case has a larger frequency nadir and takes longer to cross zero than the no delay case.
+\paragraph{Results:} The delayed governor response generates a second frequency perturbance 40 seconds after the first frequency event caused by the loss of generation.
+The delay also introduces minor oscillations in frequency that are eventually damped out by other governor action.
+Valve travel is increased by the delayed governor response.
+However, the use of a lowpass filter can lessen frequency effects and actually reduce valve travel.
 
-Valve travel is increased by roughly 50\% due to the delayed governor action.
+Regardless of filtering, the delay causes a larger frequency nadir.
+
+
 \pagebreak
 
 \newcommand{\caseName}{SixMachineDelayStep1}
-\paragraph{Base Case - No Delay Results:} \ \\
-
+\paragraph{Base Case Results:} \ \\
+No Delay or filtering.
+\\
 \includegraphics[width=\linewidth]{figures/\caseName Freq}
 
 \includegraphics[width=\linewidth]{figures/\caseName RACE}
@@ -55,8 +72,9 @@ Valve travel is increased by roughly 50\% due to the delayed governor action.
 
 \pagebreak
 \renewcommand{\caseName}{SixMachineDelayStep3}
-\paragraph{Delay Case - 40 sec w delay, 10 sec Pref Delay Results: } \ \\
-
+\paragraph{Delay Case Results: } \ \\
+40 sec $\Delta \omega_{PU}$ delay, 10 sec $P_{ref}$ Delay.
+\\
 \includegraphics[width=\linewidth]{figures/\caseName Freq}
 
 \includegraphics[width=\linewidth]{figures/\caseName RACE}
@@ -64,6 +82,21 @@ Valve travel is increased by roughly 50\% due to the delayed governor action.
 \includegraphics[width=\linewidth]{figures/\caseName ValveTravel1}
 
 \includegraphics[width=\linewidth]{figures/\caseName ValveTravel2}
+
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineDelayStep4}
+\paragraph{Filtered Delay Case Results: } \ \\
+40 sec $\Delta \omega_{PU}$ delay with a 30 sec low pass filter time constant, 10 sec  $P_{ref}$ Delay.
+\\
+\includegraphics[width=\linewidth]{figures/\caseName Freq}
+
+\includegraphics[width=\linewidth]{figures/\caseName RACE}
+
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel1}
+
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel2}
+
 
 
 %\paragraph{'Soft Goals':}
