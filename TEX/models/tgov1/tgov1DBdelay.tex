@@ -58,10 +58,10 @@
 		% sum 1
 		\node [sum, right=of input] (sum1) {$\Sigma$};
 		% delay block w
-		\node [block, right=of sum1,label=17:*] (delay1) {$\dfrac{e^{-\$D_A}}{1+\$T_A}$};
+		\node [block, above=of sum1,label=17:*] (delay1) {$\dfrac{e^{-\$D_A}}{1+\$T_A}$};
 		
 		% delta w node and label
-		\coordinate [right=of delay1]  (deltaw) {};
+		\coordinate [right=of sum1]  (deltaw) {};
 		\node [above=-.8em of deltaw,label={$\Delta\omega_{PU}$}]  (deltaWlabel){};
 		
 		% Hz Deadband
@@ -87,16 +87,16 @@
 		% Pm out
 		\node [output, right=of sum2, label=$P_M$] (output) {};
 		% w and pref in
-		\node [input, name=omega, above= of sum1,label={[label distance=.1cm]0:$\omega_{PU}$} ] {};
+		\node [input, name=omega, above= of delay1,label={[label distance=.1cm]0:$\omega_{PU}$} ] {};
 		\node [input, name=Pref, above= of delay2,label={[label distance=.1cm]0:$P_{\text{ref}}$} ] {};
 
 		% connecting lines
 		\draw [draw,->] (input) -- node[pos=0.8] {$+$} (sum1); % straight connecting line
-		\draw [->] (omega) -- node[pos=0.8] {$-$} (sum1);
+		\draw [->] (omega) --(delay1);
+		\draw [->] (delay1) -- node[pos=0.8] {$-$} (sum1);
 		\draw [->] (Pref) -- (delay2);
 		\draw [->] (delay2) -- node[pos=0.8] {$+$} (sumP);
-		\draw [->] (sum1) -- (delay1) ;
-		\draw [->] (delay1) -- (deadband) ;
+		\draw [->] (sum1) -- (deadband) ;
 		\draw [->] (deadband) -- (gain) ;
 		\draw [->] (gain) -- (sumP) ;
 		\draw [->] (sumP) -- (mwcap) ;
