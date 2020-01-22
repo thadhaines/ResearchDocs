@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Six Machine Delay Scenario \\ 01-21-20}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\paragraph{Scenario: } 
+Two area, six machine system loss of generation event. \\
+Initially, $\approx$100 MW are being sent from Area 1 to Area 2 over the lines between bus 8 and 9.\\
+
+% six machine system
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=.85\linewidth]{../../models/sixMachine/sixMachine}
+	\caption{Six machine system.}
+	\label{fig: six machine}
+\end{figure}
+
+
+Governed machines are: G1, G2 `1', G3, G4.\\
+Governor time constants and generator inertia and MVA rating are identical for all machines.\\
+No governor deadbands are used.\\
+In cases that have AGC, PI filtered AGC signals are sent every 5 seconds to G1 and G3.\\
+
+At t = 2, Generator 5 steps its mechanical power output $P_M$ down by 50 MW.\\
+
+All system settings are the same in each test case unless noted otherwise.\\
+% tgov delay
+
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=.9\linewidth]{../../models/tgov1/tgov1DBdelay}
+	\caption{Governor model with optional delays and deadbands indicated by a *.}
+	\label{fig: modified tgov}
+\end{figure}
+
+For cases using delay, input $\Delta \omega_{PU}$ was delayed by 40 seconds and any changes to $P_{REF}$ were delayed by 10 seconds.
+
+\paragraph{Results:} 
+Delaying a governor response increased the frequency nadir and introduces a second frequency perturbance roughly 40 seconds after the first frequency event caused by the loss of generation.
+Non-delayed governor action is required to eventually remove the frequency oscillations caused by the delayed governor response.
+This is seen regardless of AGC action.
+If there are equal amounts of delayed and non-delayed governor response, the system begins to oscillate.
+
+\newcommand{\scrunch}{-.8em}
+\newcommand{\caseName}{casename}
+
+\newcommand{\resultPres}{%
+\includegraphics[width=\linewidth]{figures/\caseName Freq}
+\vspace{\scrunch}
+\includegraphics[width=\linewidth]{figures/\caseName RACE}
+\vspace{\scrunch}
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel1}
+\vspace{\scrunch}
+\includegraphics[width=\linewidth]{figures/\caseName ValveTravel2}
+\vspace{\scrunch}
+\includegraphics[width=\linewidth]{figures/\caseName BranchMWflow8to9}
+}
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineDelayStep2}
+\paragraph{No Delay, No AGC Results: } \ \\
+50 MW generation drop - No AGC or delayed governor response.
+\\
+\resultPres
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineDelayStep4}
+\paragraph{Delay Governor, No AGC Results: } \ \\
+Governor 1 has a 40 sec $\Delta \omega_{PU}$ delay.
+\\
+\resultPres
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineDelayStep1}
+
+\paragraph{AGC, No Delay Case Results:} \ \\
+No Delay or filtering. AGC signals sent to Gen 1 and 3 every 5 seconds.
+\\
+\resultPres
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineDelayStep3}
+\paragraph{AGC with Delay Case Results: } \ \\
+Generator 1 has a 40 sec $\Delta \omega_{PU}$ delay and a 10 sec $P_{ref}$ delay.
+\\
+\resultPres
+
+\pagebreak
+\renewcommand{\caseName}{SixMachineDelayStep5}
+\paragraph{Equal  Delayed and Non-Delayed Governed Capacity: } \ \\
+Governors are on Generator 1 and 3. Governor 1 in Area 1 is delayed. AGC is disabled.
+\\
+\resultPres
+
+
+\end{document}
