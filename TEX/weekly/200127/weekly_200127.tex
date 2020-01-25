@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Research Update \\ Week of January 27th, 2020}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Thesis Schedule:}
+	\begin{enumerate}
+\itemsep0em 
+		\item `First Draft' thesis to Donnelly and Southergill Week of\textbf{ Feb 10}.
+		\item Revised thesis to Committee week of \\ \textbf{Mar 9} (pre-spring break).
+		\item Thesis Defense week of \textbf{April 13}.
+		\item Final thesis and docs to Southergill week of \textbf{April 20}.
+\item Other tasks:
+\subitem Complete other graduation forms
+\subitem Book room for defense
+\subitem Get EIT references
+\end{enumerate}
+
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+\itemsep0em 
+\item Updated branch flow plots for mini WECC validations
+\item Thesis with validation sent to Donnelly
+\item Delay governor results for Six Machine
+\item Delay governor results for Mini WECC
+\item MW flow plots created
+\item Transformer agent created \\ (very similar to branch agent)
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/ |
+
+\vfill\null
+\columnbreak
+	
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\itemsep0em 
+		\item Accumulate Portland trip materials.
+		\item Create daily load cycle results
+		\item Solidify test cases for engineering problem
+		\item Update Code flowchart and finalize code% to aid in further development.
+		\item Thesis work 
+
+\end{enumerate}
+
+
+\begin{comment}
+
+\paragraph{Proposed MiniWECC test cases:} \ \\
+duration: 4-6 hours
+\begin{itemize}
+	\itemsep0em 
+\item system noise 
+\item wind generation ramps 
+\item daily load cycle (during peak/valley transition)
+\end{itemize}
+
+Control varaitions:\\
+Normal gov deadband and large gov deadband \\
+Fast (seconds) and slow (minutes) AGC
+\\ Three cases: 
+\begin{itemize}
+	\itemsep0em 
+\item normal gov, Slow AGC
+\item normal gov, Fast AGC
+\item large gov, Fast AGC
+\end{itemize}
+
+Experimental Measures:
+\begin{itemize}
+\itemsep 0em
+\item Valve movement
+\item NERC mandate adherence
+\end{itemize}
+\end{comment}
+		%\item Keep Goals and Requests in mind.
+
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+\itemsep0em 
+	\item Meeting with Dan to bring up to date on LTD progress?
+	
+	\item Cases to focus on for thesis?
+	\subitem gov Vs AGC?
+	\subitem delays?
+	\end{enumerate}
+	
+
+
+
+\begin{comment}
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Bring wind into simulation \\ (ramp ungoverned generators?)
+
+
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Find best/correct way to trip gens in PSLF from python.
+\item Account for different types of loads better. (exponential load model) % read from dyd
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, \ldots
+
+		\item Move away from reliance on GE
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+\end{comment}
+
+\vfill\null
+\end{multicols}
+
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\end{document}
