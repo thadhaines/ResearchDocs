@@ -40,6 +40,7 @@
 \item Delay governor results for Mini WECC
 \item MW flow plots created
 \item Transformer agent created \\ (very similar to branch agent)
+\item Daily load cycle results \\ (test of generation and load control agents)
 
 		\item GitHub updated:\\
 		\verb|https://github.com/thadhaines/ |
@@ -52,7 +53,6 @@
 	\begin{enumerate}
 		\itemsep0em 
 		\item Accumulate Portland trip materials.
-		\item Create daily load cycle results
 		\item Solidify test cases for engineering problem
 		\item Update Code flowchart and finalize code% to aid in further development.
 		\item Thesis work 
@@ -104,6 +104,15 @@ Experimental Measures:
 	
 
 
+\paragraph{Daily Cycle Agent Test} \ \\
+
+Each data point representing 1 hour was set to act every 15 seconds.
+Generation and load agents only acting on Area 2.
+Governors are disabled for the entire system.
+
+\includegraphics[width=\linewidth]{figures/sixMachineDailyCTRLAreaPload}
+\includegraphics[width=\linewidth]{figures/sixMachineDailyCTRLAreaPm}
+\includegraphics[width=\linewidth]{figures/sixMachineDailyCTRLAreaPe}
 
 \begin{comment}
 \paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
