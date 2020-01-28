@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Mini WECC Delay Scenario \\ 01-28-20}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\paragraph{Scenario: } 
+Using the three area mini WECC system, Figure \ref{fig: miniWECC}, a 200 MW step event was simulated in the South (Area 3) at $t=2$.
+Initially, $\approx$2545 MW are being sent South over the COI.
+MW flows from Bus 89 to Area 3 are compared for both a 200 MW load step and a -200 MW generation step.
+Additionally, $\omega$ input to three generators in the North (Area 1) were delayed by 40 seconds.
+The combined MW capacity of the generators with delay is 16,900 MW, which is $\approx$40\% of the area governed capacity or $\approx$13.8\% of the total system governed capacity.
+
+% six machine system
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[height=6.5 in]{../../../paint.net/miniWECC_split/miniWECC_split03}
+	\caption{Three Area Mini WECC system.}
+	\label{fig: miniWECC}
+\end{figure}
+
+\paragraph{Results:} 
+In a system of this size,
+delaying governor response has negligible effect on frequency nadir, however, the delay introduces a second frequency perturbance roughly 40 seconds after the first frequency event that leads to a slight MW flow over response from $t=1$ to $t= 1.5$ minutes.
+Additionally, while the frequency response appears essentially the same between load step and generation step cases, MW flow is approximately 25 MW larger during a load step.
+
+\pagebreak
+\paragraph{Base Case - Load Step +200 MW} \ \\
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep1Freq}
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep1MWflow89to38-90-110}
+
+\paragraph{Delay Case - Load Step +200 MW} \ \\
+Input $\omega$ was delayed by 40 seconds.
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep2Freq}
+
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep2MWflow89to38-90-110}
+
+\pagebreak
+
+\paragraph{Base Case AGC -  Load Step +200 MW} \ \\
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep1AGCFreq}
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep1AGCMWflow89to38-90-110}
+
+\paragraph{Delay Case AGC - Load Step +200 MW} \ \\
+Input $\omega$ was delayed by 40 seconds, Pref delayed by 10 seconds.
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep2AGCFreq}
+
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep2AGCMWflow89to38-90-110}
+
+\pagebreak
+
+\paragraph{Base Case - Generation step -200 MW}\ \\
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep3Freq}
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep3MWflow89to38-90-110}
+
+\paragraph{Delay Case - Generation step -200 MW} \ \\
+Input $ \omega$ was delayed by 40 seconds.
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep4Freq}
+
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep4MWflow89to38-90-110}
+
+\pagebreak
+
+\paragraph{Base Case AGC -   Generation step -200 MW} \ \\
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep3AGCFreq}
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep3AGCMWflow89to38-90-110}
+
+\paragraph{Delay Case AGC -  Generation step -200 MW} \ \\
+Input $\omega$ was delayed by 40 seconds, Pref delayed by 10 seconds.
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep4AGCFreq}
+
+
+\includegraphics[width=\linewidth]{figures/miniWECCDelayStep4AGCMWflow89to38-90-110}
+
+
+\end{document}
