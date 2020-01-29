@@ -18,16 +18,18 @@
 \begin{document}
 \paragraph{Scenario: } 
 Using the three area mini WECC system, Figure \ref{fig: miniWECC}, a 200 MW step event was simulated in the South (Area 3) at $t=2$.
-Initially, $\approx$2545 MW are being sent South over the COI.
+Initially, $\approx$2545 MW are being sent South over route 66 (COI).
 MW flows from Bus 89 to Area 3 are compared for both a 200 MW load step and a -200 MW generation step.
 Additionally, $\omega$ input to three generators in the North (Area 1) were delayed by 40 seconds.
 The combined MW capacity of the generators with delay is 16,900 MW, which is $\approx$40\% of the area governed capacity or $\approx$13.8\% of the total system governed capacity.
+AGC was also tested with signals being sent every 25 seconds to multiple generators in each area.
+In cases with delay, Pref signals were delayed by 10 seconds.
 
 % six machine system
 \begin{figure}[!ht]
 	\centering
 	\footnotesize
-	\includegraphics[height=6.5 in]{../../../paint.net/miniWECC_split/miniWECC_split03}
+	\includegraphics[height=6 in]{../../../paint.net/miniWECC_split/miniWECC_split03}
 	\caption{Three Area Mini WECC system.}
 	\label{fig: miniWECC}
 \end{figure}
@@ -36,6 +38,7 @@ The combined MW capacity of the generators with delay is 16,900 MW, which is $\a
 In a system of this size,
 delaying governor response has negligible effect on frequency nadir, however, the delay introduces a second frequency perturbance roughly 40 seconds after the first frequency event that leads to a slight MW flow over response from $t=1$ to $t= 1.5$ minutes.
 Additionally, while the frequency response appears essentially the same between load step and generation step cases, MW flow is approximately 25 MW larger during a load step.
+This increase in line flow is more apparent in AGC cases where the line flow does not return to its original level.
 
 \pagebreak
 \paragraph{Base Case - Load Step +200 MW} \ \\
