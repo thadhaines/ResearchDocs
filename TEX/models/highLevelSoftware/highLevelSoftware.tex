@@ -68,7 +68,7 @@
 		% python init
 		\node [block, right=of user,label=\textbf{PSLTDSim} ] (python) {\shortstack{{\scriptsize Python and IronPython}\\ Initialize simulation environment}};
 		% python loop
-		\node [block, below=of python,] (pythonloop1) {\shortstack{Perform dynamic calculations\\Execute perturbances}};
+		\node [block, below=of python,] (pythonloop1) {\shortstack{Perform dynamic calculations\\Execute contingencies, perturbances, etc.}};
 		
 		\node [block, below=of pythonloop1,] (pythonloop2) {\shortstack{Handle PSLF communication}};
 		
@@ -76,6 +76,7 @@
 		
 		% sim over decision
 		\node (simOver) [decision, below =of pythonloop3,text width=3cm] {Simulation Over?};
+		%\coordinate (noPoint) [left =of simOver] {};
 		
 		% python output
 		\node [block, below=of simOver,] (pythonoutput) {\shortstack{Output data \\ Generate plots}};
@@ -97,8 +98,8 @@
 		
 		% pf convergence bad
 		\draw [->] (simOver) --  node[anchor=east] {Yes} (pythonoutput);
-		\draw (simOver.west) -- node[anchor=north] {No} ($(simOver.west) + (-1,0)$);
-		\draw [->] ($(simOver.west) + (-1,0)$) |- (pythonloop1.west);
+		\draw (simOver.west) -- node[anchor=north] {No} ($(simOver.west) + (-2,0)$);
+		\draw [->] ($(simOver.west) + (-2,0)$) |-  (pythonloop1.west);
 
 	\end{tikzpicture} 
 \end{document}

@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Initial Definite Time Controller Results\\ 02-03-20}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\paragraph{Scenario: } Six machine 2 hour `virtual' ramp. Loads and/or generation begin  20\% 45 minute ramp up at $t=10$ minutes, hold for 10 minutes when $t=55$ minutes, then reduce 20\% over 45 minutes.
+
+\vspace{1em}
+Definite time controllers act on bus 8 and 9 shunts to keep bus voltage within the 1.0-1.04 PU range.
+Additionally, MVAR branch flow was tested as a shunt trigger.
+
+AGC is sent to generators 1 and 3 every 30 and 45 seconds respectively.
+
+\vspace{1em}
+A third ramp was conducted without the ramping of load for a more realistic scenario.
+
+
+% six machine system
+\begin{figure}[!ht]
+	\centering
+	\footnotesize
+	\includegraphics[width=\linewidth]{../../../TEX/models/sixMachine/sixMachine}
+	\caption{Two Area Six Machine System.}
+	\label{fig: six machine}
+\end{figure}
+
+\paragraph{Results:} 
+Definite time controller appears to function as desired.
+PSLTDSim could be used for capacitor switching coordination.
+When load and generation ramps together odd frequency `blips' occur when shunts are switched.
+When load is not ramped with generation, AGC forces generator 3 to a very low power generation point.
+
+
+\newcommand{\caseName}{def}
+\newcommand{\scrunch}{\vspace{-.8em}}
+\pagebreak
+\paragraph{CASE 1: Voltage control on shunts only. Generation and Load Ramp} \ \\
+\renewcommand{\caseName}{sixMachineWindramp1}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysShuntV}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName MVarflow8to9}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysShuntMVAR}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysPePmLoad2}
+
+\pagebreak
+\paragraph{CASE 1: Voltage and Qbr control on shunts. Generation and Load Ramp} \ \\
+\renewcommand{\caseName}{sixMachineWindramp2}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysShuntV}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName MVarflow8to9}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysShuntMVAR}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysPePmLoad2}
+
+\pagebreak
+\paragraph{CASE 3: Voltage control on shunts only. Generation Ramp only} \ \\
+\renewcommand{\caseName}{sixMachineWindramp3}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysShuntV}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName MVarflow8to9}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysShuntMVAR}
+\scrunch
+\includegraphics[width=\linewidth]{figures/\caseName sysPePmLoad2}
+
+\end{document}
