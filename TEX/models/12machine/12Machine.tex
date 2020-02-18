@@ -33,6 +33,7 @@
 
 
 \newcommand{\ctkSZ}{/tikz/circuitikz/bipoles/length=.6cm,}
+\newcommand{\csize}{1.5}
 \begin{document}
 	
 	\begin{tikzpicture} [american voltages,scale=.8, 
@@ -44,18 +45,34 @@
 		% Main Horizontal row
 		\node[gen] (G1) at (0,0){};
 		\coordinate[right = .5cm of G1](bus1) {};
-		\newcommand{\csize}{1.5}
-		\foreach \a/\b/\c in {1/6/\csize, 6/7/\csize, 7/8/\csize, 8/9/\csize*2, 9/10/\csize, 10/11/\csize, 11/3/\csize}
+
+		\node[gen, below of=G1] (G2) {};
+		\coordinate[right = .5cm of G2](bus2) {};
+		\coordinate[above right = .5cm of bus2](bus10) {};
+
+		% a = bus number start, b= bus name, c = space between
+		\foreach \a/\b/\c in {10/11/\csize, 11/12/\csize,  12/13/\csize*2, 13/14/\csize, 14/15/\csize, }
+		\coordinate[right = \c cm of bus\a] (bus\b) {};
+
+		% Vertical draw buses
+		\foreach \busNum in {1,2}
+		\draw[ultra thick] ([yshift=-0.8cm]bus\busNum.south) -- ([yshift=+0.8cm]bus\busNum.north);
+
+\begin{comment}
+		% a = bus number start, b= bus name, c = space between
+		\foreach \a/\b/\c in {10/11/\csize, 11/12/\csize,  12/13/\csize*2, 13/14/\csize, 14/15\csize, }
 		\coordinate[right = \c cm of bus\a](bus\b) {};
 		\node[gen, right =.5 cm of bus3](G3) {};
 
 		% Area Split Line
-		\coordinate (areaSplitTop) at at ( $(bus8)!0.5!(bus9)+(0,2)$ ){};
-		\coordinate (areaSplitBtm) at at ( $(bus8)!0.5!(bus9)+(0,-4.5)$ ){};
+		\coordinate (areaSplitTop) at at ( $(bus12)!0.5!(bus13)+(0,2)$ ){};
+		\coordinate (areaSplitBtm) at at ( $(bus12)!0.5!(bus13)+(0,-4.5)$ ){};
 		\draw [dashed] (areaSplitTop) -- (areaSplitBtm);
 		\draw ($(areaSplitTop) +(.75,-.2)$) node {\scriptsize{Area 2}}; 
 		\draw ($(areaSplitTop) +(-.75,-.2)$) node {\scriptsize{Area 1}}; 
 		
+
+
 		% Second row
 		\coordinate (bus2) at ( $(bus6)!0.5!(bus7)+(0,-2.5)$ ){};
 		\coordinate (bus5) at ( $(bus10)!0.25!(bus11)+(0,-2.5)$ ){};
@@ -144,6 +161,8 @@
 		% gen labels on same bus
 		\draw ($(G21)+ (-1.6,0)$) node (G21){\large G2 `1'};
 		\draw ($(G22)+ (1.6,0)$) node (G22){\large G2 `2'};
+
+\end{comment}
 	\end{tikzpicture}
 \begin{comment}	
 	\begin{tikzpicture} 
