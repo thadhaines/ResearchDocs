@@ -1,0 +1,167 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%% Pointer to 'default' preamble, other reusable files
+\input{../../thad_preamble.tex}
+\input{../../thad_cmds.tex}
+
+%% Header
+\rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
+\chead{Research Update \\ Week of February 24th, 2020}
+\lhead{Research \\ }
+
+%\usepackage{graphicx}
+%\graphicspath{ {figures/} }
+%\newcommand{\caseName}{ }
+
+\begin{document}
+\begin{multicols}{2}
+\raggedright
+	\paragraph{Thesis Schedule:}
+	\begin{enumerate}
+\itemsep0em 
+		\item Revised thesis to Committee week of \\ \textbf{Mar 9} (pre-spring break).
+		\item Thesis Defense week of \textbf{April 13}.
+		\item Final thesis and docs to Southergill week of \textbf{April 20}.
+\item Other tasks:
+\subitem Complete other graduation forms
+\subitem Book room for defense
+\subitem Get EIT references
+\end{enumerate}
+
+	\paragraph{Recent Progress:}
+	\begin{enumerate}
+\itemsep0em 
+\item Thesis `draft' sent to Southergill for format check. Apparently as long as the margins are 1", everything looks fine.
+\item Thesis `draft' sent to Donnelly
+\item Software documentation created from sections of thesis.
+\item Definite Time Controller (DTC) Agent created and tested.
+\item Modifiable system H tested
+\item 12 machine system created
+\item Initial WECC step frequency results
+
+		\item GitHub updated:\\
+		\verb|https://github.com/thadhaines/ |\\
+(includes draft thesis and software docs)
+
+\vfill\null
+\columnbreak
+	
+	\end{enumerate}
+\paragraph{Current Tasks:}
+	\begin{enumerate}
+		\itemsep0em 
+		\item Test DTC capabilities with Governors
+			\subitem Given BPA issue is believed to be a step of governor Pref based on frequency deviation that occurs on a timer. i.e. $P_{ref} = P_{ref0} + \dfrac{\Delta \omega}{R}M_{base} $ every $x$ seconds.
+			\subitem A simple six machine scenario is being built to show test this hypothesis. 
+		\item Figure out how to do WECC data validation
+			\subitem .chf too big to load into MATLAB
+			\subitem Python .mat file has issues being imported into MATLAB (too many nested structures?)
+		\item Solidify test cases for engineering problem
+		\item Update Code flowchart and finalize code% to aid in further development.
+		\item Thesis work 
+
+\end{enumerate}
+
+
+\begin{comment}
+
+\paragraph{Proposed MiniWECC test cases:} \ \\
+duration: 4-6 hours
+\begin{itemize}
+	\itemsep0em 
+\item system noise 
+\item wind generation ramps 
+\item daily load cycle (during peak/valley transition)
+\end{itemize}
+
+Control varaitions:\\
+Normal gov deadband and large gov deadband \\
+Fast (seconds) and slow (minutes) AGC
+\\ Three cases: 
+\begin{itemize}
+	\itemsep0em 
+\item normal gov, Slow AGC
+\item normal gov, Fast AGC
+\item large gov, Fast AGC
+\end{itemize}
+
+Experimental Measures:
+\begin{itemize}
+\itemsep 0em
+\item Valve movement
+\item NERC mandate adherence
+\end{itemize}
+\end{comment}
+		%\item Keep Goals and Requests in mind.
+
+
+	\paragraph{Current Questions:}
+	\begin{enumerate}
+\itemsep0em 
+	\item BPA response to GDACs info request?
+	\end{enumerate}
+	
+
+
+\begin{comment}
+\paragraph{Future Tasks:} %(Little to No Progress since last time / Things coming down the pipe)
+	\begin{enumerate}
+		
+		\item Add import mirror / bypass mirror init sequence option to prevent repeated mirror creations.
+
+		\item Bring wind into simulation \\ (ramp ungoverned generators?)
+
+
+		
+	\end{enumerate}
+\paragraph{Future Work: (not by me)}
+\begin{itemize}
+\item Find best/correct way to trip gens in PSLF from python.
+\item Account for different types of loads better. (exponential load model) % read from dyd
+\item Work to incorporate Matt's \emph{Suggested Use Cases} into simulation.
+		\begin{itemize}
+		\item Add Shunt Group Agent
+		\item Work to Define Definite Time Controller user input
+		\end{itemize} 
+
+
+		\item Investigate ULTC action.
+
+		\item Create an agent for every object: \\ ULTC, SVD, \ldots
+
+		\item Move away from reliance on GE
+		
+\end{itemize}
+
+\paragraph{Matt Requests:}
+\begin{enumerate}
+		\item Enable multiple dyd files to overwrite / replace previously defined agents/parameters
+		\item Allow for variable time steps.
+\end{enumerate}
+\end{comment}
+
+\vfill\null
+\end{multicols}
+
+
+\pagebreak
+\paragraph{12 Machine} System is essentially the six machine system with twice as many generators.\\
+
+\includegraphics[width=\linewidth]{../../models/12machine/12Machine}
+
+\paragraph{WECC step Results} Due to data issues, a more `get er done' approach was taken to depict the frequency output from PSDS and LTD on top of each other.
+
+\includegraphics[width=\linewidth]{figures/weccStep}
+
+The LTD software models only 20 tgov1 models with time constants from the dyd out the total 2,243 governors present (i.e. less than 1\% of LTD governors have the same time constants as PSDS).
+
+From the frequency response, it is assumed that there are many more governors with hydro characteristics in the WECC dyd than are cast in the LTD simulation.
+%\paragraph{'Soft Goals':}
+%	\begin{enumerate}
+%	\item Write Thesis 2020
+%	\end{enumerate}
+		
+
+\end{document}
