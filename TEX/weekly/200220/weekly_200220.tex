@@ -53,12 +53,21 @@
 	\begin{enumerate}
 		\itemsep0em 
 		\item Test DTC capabilities with Governors
-			\subitem Given BPA issue is believed to be a step of governor Pref based on frequency deviation that occurs on a timer. i.e. $P_{ref} = P_{ref0} + \dfrac{\Delta \omega}{R}M_{base} $ every $x$ seconds.
-			\subitem A simple six machine scenario is being built to show test this hypothesis. 
+\begin{itemize}
+			\item Given BPA issue is believed to be a step of governor Pref based on frequency deviation that occurs on a timer. i.e. $P_{ref} = P_{ref0} + \dfrac{\Delta \omega}{R}M_{base} $ every $x$ seconds.
+			\item A simple six machine scenario is being built to show test this hypothesis.  
+\end{itemize}
+
 		\item Figure out how to do WECC data validation
-			\subitem .chf too big to load into MATLAB
-			\subitem Python .mat file has issues being imported into MATLAB (too many nested structures?)
+\begin{itemize}
+			\item .chf too big to load into MATLAB
+			\item Python .mat file has issues being imported into MATLAB (too many nested structures?)
+\end{itemize}
+
 		\item Solidify test cases for engineering problem
+\item Test `soft trip' where $ P = Q_{min}= Q_{max} = 0$.
+\item Add ability to change Qmin/Qmax of PSLF system via PSLTDSim
+
 		\item Update Code flowchart and finalize code% to aid in further development.
 		\item Thesis work 
 
@@ -162,6 +171,57 @@ From the frequency response, it is assumed that there are many more governors wi
 %	\begin{enumerate}
 %	\item Write Thesis 2020
 %	\end{enumerate}
-		
 
+\pagebreak
+% code
+\paragraph{Initial DTC BPA results} Attempt at recreating GDACS control phenomena via given machine output.
+Six machine system used, results show that method used not exactly correct.
+Initial thought is that $\Delta \omega$ applied `twice' to Pref.
+
+% results...
+\begin{minipage}{.49\linewidth}
+\includegraphics[width=\linewidth]{figures/f}
+\end{minipage}%
+\begin{minipage}{.49\linewidth}
+\includegraphics[width=\linewidth]{figures/pe}
+\end{minipage}
+\centering
+\includegraphics[width=.8\linewidth]{../../models/tgov1/tgov1DBdelay}
+
+\begin{lstlisting}[language=Python]
+# Perturbances
+mirror.sysPerturbances = [
+    'gen 5 : step Pm 20 -100 rel', # Step generator down
+    ]
+
+# Definite Time Controller Definitions
+mirror.DTCdict = {
+    'bpaTest' : {
+        'RefAgents' : {
+            'ra1' : 'mirror : f',
+            'ra2' : 'gen 2 1 : R', 
+            'ra3' : 'gen 2 1 : Pref0',
+            'ra4' : 'gen 2 1 : Mbase',
+            },# end Referenc Agents
+        'TarAgents' : {
+            'tar1' : 'gen 2 1 : Pref',
+            }, # end Target Agents
+        'Timers' : {
+            'set' :{ # set Pref
+                'logic' : "(ra1 > 0)", # should always eval as true
+                'actTime' : 24, # seconds of true logic before act
+                'act' : "tar1 = ra3 + (1-ra1)/(ra2) * ra4  ", # step 
+                #'act' : "tar1 +=  (1-ra1)/ra2 * ra4 ", # step 
+            },# end set
+            'reset' :{ # not used
+                'logic' : "0",
+                'actTime' : 30, # seconds of true logic before act
+                'act' : "0", # set any target On target = 0
+            },# end reset
+            'hold' : 0, # minimum time between actions
+            }, # end timers
+        },# end bpaTest
+    }# end DTCdict
+
+\end{lstlisting}
 \end{document}
