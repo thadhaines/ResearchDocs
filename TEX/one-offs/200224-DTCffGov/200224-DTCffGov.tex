@@ -17,17 +17,15 @@
 
 \begin{document}
 \paragraph{Initial Definite Time Controller (DTC) BPA Result Summary} \ \\
-Using a six machine system, results show that the method of stepping Pref while also gaining input $\Delta\omega_{PU}$ produces similar generator output action provided by BPA as an 'undesirable' response.
+Using a six machine system with 0.5 second time step, simulation results show that the method of stepping Pref while also gaining input $\Delta\omega_{PU}$ produces similar generator output action provided by BPA as an 'undesirable' response.
 Remaining differences believed to be caused by differences in model size, time constants, and actual 'feed-forward' action.
 
 % results...
 %\begin{minipage}{.49\linewidth}
-\includegraphics[width=\linewidth]{figures/f}
-%\end{minipage}%
-%\begin{minipage}{.49\linewidth}
-\includegraphics[width=\linewidth]{figures/pe}
-%\end{minipage}
-
+\newcommand{\caseName}{sixMachineGovDTC}
+\includegraphics[width=\linewidth]{figures/\caseName Fcomp}
+\includegraphics[width=\linewidth]{figures/\caseName Gen2Pe}
+\includegraphics[width=\linewidth]{figures/\caseName Gen2Pm}
 %\includegraphics[width=.8\linewidth]{figures/givenData}
 
 
