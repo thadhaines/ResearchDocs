@@ -37,33 +37,13 @@
 \begin{document}
 	\begin{tikzpicture}[auto, node distance=1cm,>=triangle 45]
 
-		% Lowpass
+		% Delay and lowPass
 		\node [input, name=input1, ] {};
-		\node [block, right=of input1] (lowpass) {$\dfrac{1}{1+\$T_1}$};
+		\node [block, right=of input1] (lowpass) {$\dfrac{e^{-\$D_1}}{1+\$T_1}$};
 		\node [output, right=of lowpass] (output1) {};
 		\draw [->] (input1) -- (lowpass) ;
 		\draw [->] (lowpass) -- (output1) ;
 
-		% integrator
-		\node [input, name=input,right=1cm of output1] {};
-		\node [block, right=of input] (integrator) {$\dfrac{K_i}{\$}$};
-		\node [output, right=of integrator] (output) {};
-		\draw [->] (input) -- (integrator) ;
-		\draw [->] (integrator) -- (output) ;
-		
-		% PI
-		\node [input, name=input2,  right=1cm of output] {};
-		\node [block, right=of input2] (PI) {$K_p\dfrac{\$+a}{\$}$};
-		\node [output, right=of PI] (output2) {};
-		\draw [->] (input2) -- (PI) ;
-		\draw [->] (PI) -- (output2) ;
-		
-		% Delay and lowPass
-		%\node [input, name=input3, right =1cm of output2] {};
-		%\node [block, right=of input3] (delay) {$\dfrac{e^{-\$D_1}}{1+\$T_1}$};
-		%\node [output, right=of delay] (output3) {};
-		%\draw [->] (input3) -- (delay) ;
-		%\draw [->] (delay) -- (output3) ;
 	
 	\end{tikzpicture} 
 \end{document}
