@@ -39,7 +39,7 @@
 
 		% Delay and lowPass
 		\node [input, name=input1, ] {};
-		\node [block, right=of input1] (lowpass) {$\dfrac{e^{-\$D_1}}{1+\$T_1}$};
+		\node [block, right=of input1] (lowpass) {$K_1\dfrac{e^{-\$D_1}}{1+\$T_1}$};
 		\node [output, right=of lowpass] (output1) {};
 		\draw [->] (input1) -- (lowpass) ;
 		\draw [->] (lowpass) -- (output1) ;
