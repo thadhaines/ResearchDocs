@@ -70,7 +70,7 @@
 			\shortstack{
 			Performs dynamic calculations.\\
 			Generates system estimate.\\
-			\ \\
+			--------------------\\
 			Receives solution.\\
 			Logs data.}
 		%\end{minipage}
@@ -81,7 +81,10 @@
 			%\begin{minipage}{2in}
 				\shortstack{
 				Has PSLF API.\\
-				Acts as middle man.}
+				Acts as middle man.\\
+				--------------------\\
+				Checks validity of dispatch.\\
+				Creates new estimate if necessary.}
 			%\end{minipage}
 	};
 		
@@ -91,25 +94,28 @@
 			\shortstack{
 			Recieves system estimate.\\
 			Solves power flow.\\
+			--------------------\\
 			Sends solution.}
 			%\end{minipage}	
 	};
 
-\coordinate[below=1cm of PY3.south west] (est left);
-\coordinate[right=2cm of est left,label={[anchor=north]above:AMQP Power-flow estimate}] (est right);	
+% 'legend'
+\coordinate[below=0.5cm of PY3.south west] (est left);
+\coordinate[right=2cm of est left,label={[anchor=north]above:AMQP power-flow estimate}] (est right);	
 \draw [->, magenta, ultra thick] (est left) -- (est right);	
 
-\coordinate[below=0.75cm of est left] (soln left);
-\coordinate[right=2cm of soln left, label={[anchor=north]above:AMQP Power-flow solution}] (soln right);	
-\draw [->, green, ultra thick] (soln left) -- (soln right);	
+\coordinate[below=0.5cm of PSLF.south west] (soln left);
+\coordinate[right=2cm of soln left, label={[anchor=north]above:AMQP power-flow solution}] (soln right);	
+\draw [<-, green, ultra thick] (soln left) -- (soln right);	
 
-		\draw [->, magenta, ultra thick] (PY3) -- (IPY);
-		\draw [->,magenta, ultra thick] (IPY) -- (PSLF);
+\draw [->, magenta, ultra thick]  ($(PY3.east)+ (0,0.4)$) --  ($(IPY.west)+ (0,0.4)$);
+\draw [->,magenta, ultra thick] ($(IPY.east)+ (0,0.4)$) -- ($(PSLF.west)+ (0,0.4)$);
+
+\draw [<-, green, ultra thick]  ($(PY3.east)+ (0,-0.4)$) --  ($(IPY.west)+ (0,-0.4)$);
+\draw [<-,green, ultra thick] ($(IPY.east)+ (0,-0.4)$) -- ($(PSLF.west)+ (0,-0.4)$);
 		
-		\draw[->,green, ultra thick] (PSLF.south)  .. controls +(down:1cm) and +(down:1cm)
-		.. ($(IPY.south)+ (0.5,0)$);
-		\draw[->,green, ultra thick] ($(IPY.south)+ (-0.5,0)$)  .. controls +(down:1cm) and +(down:1cm)
-		.. (PY3.south);
+		%\draw[->,green, ultra thick] (PSLF.south)  .. controls +(down:1cm) and +(down:1cm) .. ($(IPY.south)+ (0.5,0)$);
+		%\draw[->,green, ultra thick] ($(IPY.south)+ (-0.5,0)$)  .. controls +(down:1cm) and +(down:1cm)		.. (PY3.south);
 		
 		% pf convergence bad
 		%\draw [->] (simOver) --  node[anchor=east] {Yes} (pythonoutput);
