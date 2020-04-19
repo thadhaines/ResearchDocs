@@ -36,15 +36,15 @@
 \begin{tikzpicture}[node distance=1.5cm, font=\large] 
 % Placement of nodes
 \node (start) [terminal] {Run Simulation};
-\node (init) [subprocess, right of=start,xshift=4cm] {Initialize LTD System};
+\node (init) [subprocess, right of=start,xshift=4cm] {Initialize PSLTDSim};
 \node (tStep) [process, right of=init,xshift=4cm] {\Large$t = t+t_{step}$};
 \node (dyStep) [process, below of=tStep,text width=5cm] {Step Dynamic Agents};
 \node (PeEst) [process, below of=dyStep,text width=5cm] {\Large$P_{e,i}(t) = P_{m,i}(t)$};
 \node (stepPert) [process, below of=PeEst, text width=5cm] {Step Perturbance Agents};
 \node (sumPertPm) [process, below of=stepPert, text width=5cm] {\Large$\Sigma\Delta P_{pert}(t)$, $\Sigma P_{m}(t)$};
 \node (calcPacc)[process, below of=sumPertPm,  text width=9cm] {\Large$P_{acc, sys} = \Sigma P_m(t)-\Sigma P_e(t-1)- \Sigma \Delta P_{pert}(t)$};
-\node (distPe) [subprocess, below of=calcPacc,yshift=-.1cm, text width=8.6cm] { Distribrute \Large$P_{acc, sys}$ \large to LTD};
-\node (updatePSLF) [process, below of=distPe, yshift=-.2cm] {Update PSLF System};
+\node (distPe) [subprocess, below of=calcPacc,yshift=-.1cm, text width=8.6cm] { Distribrute \Large$P_{acc, sys}$ \large in PSLTDSim};
+\node (updatePSLF) [process, below of=distPe, yshift=-.2cm] {Update PSLF};
 \node (runPF) [process, below of=updatePSLF,text width=4cm] {Run Power-Flow};
 
 %Convergence nodes
@@ -54,23 +54,23 @@
 \node (slackErr) [decision, below of=pfConv, yshift=-1.3cm, text width=3cm] {Slack Error?};
 \node (slackTol) [process, right of=slackErr, xshift=6.5cm, text width = 5cm] {Distribute Slack Error \\ \Large$P_{acc, sys} = P_{SlackError}$};
 
-\node (updateLTD) [process, below of=slackErr,yshift=-0.75cm] {Update LTD System};
+\node (updateLTD) [process, below of=slackErr,yshift=-0.75cm] {Update PSLTDSim};
 \node (sumPe) [process,below of=updateLTD] {\Large$\Sigma P_{e,i}(t)$};
 \node (log) [process, below of=sumPe, text width = 4cm] {Step Logging Agents};
 \node (loop) [decision, below of=log, yshift=-.75cm, text width=3cm] {\Large$t<t_{end}$ ?};
 \node (dataOut) [terminal, below of=loop, yshift=-.75cm] {Output Data};
 
 %% Note nodes AND edges
-\node [note, left of=updatePSLF, node distance =10cm,text width=5cm](note1){Ensure PSLF has newest \Large $P_{e,i}$ and $V_{set}$};
+\node [note, left of=updatePSLF, node distance =10cm,text width=5cm](note1){Ensure PSLF has newest \Large $P_{e,EST,i}$ and $V_{i}$};
 \draw [arrow,dotted] (note1) -- (updatePSLF);
 
 \node [note, left of=updateLTD, node distance =10cm, text width=5cm](note2){Use most recent power-flow solutions of: \Large $P_{e,i}\  V_i\  \delta_i \ Q_i$};
 \draw [arrow,dotted] (note2) -- (updateLTD);
 
-\node [note, left of=stepPert, node distance =10cm, text width=5cm](note3){Agents responsible for updating any altered PSLF and LTD parameter};
+\node [note, left of=stepPert, node distance =10cm, text width=5cm](note3){Agents responsible for updating any altered parameter};
 \draw [arrow,dotted] (note3) -- (stepPert);
 
-\node [note, left of=dyStep, node distance =10cm, text width=5cm](note4){Solve and integrate ODEs};
+\node [note, left of=dyStep, node distance =10cm, text width=5cm](note4){Apply nuermical methods to ODEs};
 \draw [arrow,dotted] (note4) -- (dyStep);
 
 \node [note, right of=PeEst, node distance =7.5cm, text width=5cm](note5){Begin next $P_{e,i}(t)$ estimate };
@@ -79,7 +79,7 @@
 \node [note, right of=log, node distance =7.5cm, text width=5cm](note6){Agents responsible for keeping track of history values.};
 \draw [arrow,dotted] (note6) -- (log);
 
-\node [note, left of=distPe, node distance =10cm, text width=5cm](note7){\Large$P_{e,i}= P_{e,i} +P_{acc, sys}\frac{H_i}{H_{sys}}$};
+\node [note, left of=distPe, node distance =10cm, text width=6cm](note7){\Large$P_{e,EST,i}= P_{e,i} +P_{acc, sys}\frac{H_i}{H_{sys}}$};
 \draw [arrow,dotted] (note7) -- (distPe);
 
 % Placement of edges

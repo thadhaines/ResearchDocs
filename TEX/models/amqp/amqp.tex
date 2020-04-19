@@ -100,19 +100,25 @@
 	};
 
 % 'legend'
-\coordinate[below=0.5cm of PY3.south west] (est left);
+\coordinate[below=0.5cm of PY3] (est left);
 \coordinate[right=2cm of est left,label={[anchor=north]above:AMQP power-flow estimate}] (est right);	
 \draw [->, magenta, ultra thick] (est left) -- (est right);	
 
-\coordinate[below=0.5cm of PSLF.south west] (soln left);
+\coordinate[right=1.5in of est right] (soln left);
 \coordinate[right=2cm of soln left, label={[anchor=north]above:AMQP power-flow solution}] (soln right);	
 \draw [<-, green, ultra thick] (soln left) -- (soln right);	
 
+\coordinate[right=1.5in of soln right] (api left);
+\coordinate[right=2cm of api left, label={[anchor=north]above:PSLF API communication}] (api right);	
+\draw [->, black, ultra thick] (api left) -- (api right);	
+
+
+
 \draw [->, magenta, ultra thick]  ($(PY3.east)+ (0,0.4)$) --  ($(IPY.west)+ (0,0.4)$);
-\draw [->,magenta, ultra thick] ($(IPY.east)+ (0,0.4)$) -- ($(PSLF.west)+ (0,0.4)$);
+\draw [->,black, ultra thick] ($(IPY.east)+ (0,0.4)$) -- ($(PSLF.west)+ (0,0.4)$);
 
 \draw [<-, green, ultra thick]  ($(PY3.east)+ (0,-0.4)$) --  ($(IPY.west)+ (0,-0.4)$);
-\draw [<-,green, ultra thick] ($(IPY.east)+ (0,-0.4)$) -- ($(PSLF.west)+ (0,-0.4)$);
+\draw [<-,black, ultra thick] ($(IPY.east)+ (0,-0.4)$) -- ($(PSLF.west)+ (0,-0.4)$);
 		
 		%\draw[->,green, ultra thick] (PSLF.south)  .. controls +(down:1cm) and +(down:1cm) .. ($(IPY.south)+ (0.5,0)$);
 		%\draw[->,green, ultra thick] ($(IPY.south)+ (-0.5,0)$)  .. controls +(down:1cm) and +(down:1cm)		.. (PY3.south);
