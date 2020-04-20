@@ -19,18 +19,18 @@ n = 8; % <- Must always be EVEN for hw output to work
 
 %% Function specific inlines
 %trig
-f = @(x,y) -sin(2*pi*x)
+f = @(x,c) -sin(2*pi*x)+c
 fp = @(x,y) -2*pi*cos(2*pi*x)
-findC = @(x,y) y+2*pi*cos(2*pi*x) 
+findC = @(x,y) y+2*pi*sin(2*pi*x) 
 
-% % %exp
+% % % %exp
 A = 1
 intervalLength = 2;
 f = @(x,c) A*exp(A*x)+c
 fp = @(x,y) exp(A*x)
 findC = @(x,y) y-A*exp(A*x) 
-
-% % %log
+% 
+% % % %log
 A = 10
 ic=[1,1]
 f = @(x,c) A*log(x)+c
