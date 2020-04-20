@@ -51,6 +51,19 @@ def rk45(fp, x0, y0, ts):
     k4 = fp(x0 +ts, y0+ts*k3)    
     return y0 + ts/6*(k1+2*k2+2*k3+k4)
 
+def trapezoidalPost(x,y):
+    """
+    x = list of x values
+    y = list of y values
+    Returns integral of y over x.
+    Assumes full lists / ran post simulation
+    """
+    integral = 0
+    for ndx in range(1,len(x)):
+        integral+= (y[ndx]+y[ndx-1])/2 * (x[ndx]-x[ndx-1])
+    return integral
+    
+
 # Case Selection
 for caseN in range(0,3):
 
@@ -58,8 +71,8 @@ for caseN in range(0,3):
         # Trig example
         caseName = 'Sinusodial Example'
         tStart =0
-        tEnd = 1
-        numPoints = 4
+        tEnd = 1.5
+        numPoints = 6
         blkFlag = False # for holding plots open
 
         ic = [0,0] # initial condition x,y
@@ -143,10 +156,8 @@ for caseN in range(0,3):
             # Required to handle first step when a -2 index doesn't exist
             cv['yAB'] = adams2( fp, cv['t'], cv['yAB'], t[-1], yAB[-1], ts )
 
-
-        # Runge-Kutta via solve IVP...
+        # Runge-Kutta via solve IVP.
         soln = solve_ivp(fp, (cv['t'], cv['t']+ts), [cv['ySI']])
-        
         
         # Log calculated results
         yE.append(cv['yE'])
@@ -159,7 +170,6 @@ for caseN in range(0,3):
         # ensure correct cv
         cv['ySI'] = ySI[-1]
     
-
         # Increment and log time
         cv['t'] += ts
         t.append(cv['t'])
@@ -167,6 +177,7 @@ for caseN in range(0,3):
     # Generate Plot
     fig, ax = plt.subplots()
     ax.set_title('Approximation Comparison\n' + caseName)
+    
     #Plot all lines
     ax.plot(tExact,yExact,
             c=[0,0,0],
@@ -177,6 +188,7 @@ for caseN in range(0,3):
             markersize=10,
             fillstyle='none',
             linestyle=':',
+            c=[1,.647,0],
             label="solve_ivp")    
     ax.plot(t,yE,
             marker='o',
@@ -200,14 +212,27 @@ for caseN in range(0,3):
 
     # Format Plot
     fig.set_dpi(150)
-    fig.set_size_inches(9/2, 2.5)
+    fig.set_size_inches(9, 2.5)
     ax.set_xlim(min(t), max(t))
-    ax.grid(True)
-    ax.legend(loc='best',  ncol=3, fontsize='x-small' )
+    ax.grid(True, alpha=0.25)
+    ax.legend(loc='best',  ncol=3)
     fig.tight_layout()    
     plt.show(block = blkFlag)
     plt.pause(0.00001)
 
+    # Trapezoidal Integration
+    exactI = trapezoidalPost(tExact,yExact)
+    SIint = trapezoidalPost(tSI,ySI)
+    Eint = trapezoidalPost(t,yE)
+    RKint = trapezoidalPost(t,yRK)
+    ABint = trapezoidalPost(t,yAB)
+
+    print("\nMethod: Total\t Absolute Error")
+    print("Exact: \t%f\t%f" % (exactI ,abs(exactI-exactI)))
+    print("SI: \t%f\t%f" % (SIint,abs(exactI-SIint)))
+    print("RK4: \t%f\t%f" % (RKint,abs(exactI-RKint)))
+    print("AB2: \t%f\t%f" % (ABint,abs(exactI-ABint)))
+    print("Euler: \t%f\t%f" % (Eint,abs(exactI-Eint)))
 
 
 

@@ -29,38 +29,103 @@ and explain how agents currently handle the integration of running values.
 % options to integrate frequency from the combined swing equation
 \paragraph{Combined Swing Equation Solutions}
 The options included in PSLTDSim to solve the combined swing equation for a new system frequency are Euler, Adams-Bashforth, and Runge-Kutta.
-Each of these methods are numerical approximations that provide an accurate approximation to the solution of an initial value problem XXXrefBoyceDiprima.
-Each method is briefly introduced and the actual code used to solve the combined swing equation is explained.
+Each of these methods are numerical approximations that provide an \emph{approximation} to the solution of an initial value problem.
+Method functions presented below were adapted from XXXrefBoyceDiprima.
+%Each method is briefly introduced and the actual code used to solve the combined swing equation is explained.
 
 \paragraph{Euler Method}
 Of the of integration methods available to solve system frequency, the Euler method is the simplest.
-Using generic math variables, to find the next $y$ value given some function $f(t, y)$ is
+In general terms, to find the next $y$ value given some function $f(t, y)$ is
 
 \begin{equation}{\label{eq: generic euler} }
 y_{n+1} = y_n + f(t_n, y_n)t_s,
 \end{equation}%\eqcaption{Euler Method}
 \noindent where $t_s$ is desired time step.
-The next value of $y$ is simply a projection along a line tangent to the derivative at time $t$.
-The accuracy of this approximation method is related to the time step size.
+The next value of $y$ is simply a projection along a line tangent to $f$ at time $t$.
+It should be noted that the accuracy of approximation methods is often related to the time step size.
 
-\paragraph{RK45 via solve\_ivp}
-For a more robust integration, a runge kutta method may be employed via the scipy solve\_ivp function.
+\paragraph{Runge-Kutta Method}
+Improving on the Euler method, the Runge-Kutta method combines numerous projections as a weighted average to find the next $y$ value.
+The fourth order four-stage Runge-Kutta method is shown as Equation \ref{eq: rk45 int}. 
 \begin{equation}{\label{eq: rk45 int} }
 \begin{aligned}
-    k1 &= f(t_n, \ y_n)\\
-    k2 &= f(t_n+t_s/2, \ y_n+t_s/2*k1)\\
-    k3 &= f(t_n+t_s/2, \ y_n+t_s/2*k2)\\
-    k4 &= f(t_n+t_s, \ y_n+t_s*k3)\\
-    y_{n+1} &= y_n + t_s/6*(k1+2*k2+2*k3+k4)    
+    k_1 &= f(t_n, \ y_n)\\
+    k_2 &= f(t_n+t_s/2, \ y_n+t_s k_1/2)\\
+    k_3 &= f(t_n+t_s/2, \ y_n+t_s k_2/2)\\
+    k_4 &= f(t_n+t_s, \ y_n+t_sk_3)\\
+    y_{n+1} &= y_n + t_s(k_1+2k_2+2k_3+k_4)/6
     \end{aligned}
-\end{equation}%\eqcaption{Adams-Bashforth Integration}
+\end{equation}%\eqcaption{Fourth Order Four-Stage Runge-Kutta}
 
-\paragraph{Adams Bashforth}
-An adams bashforth method is a multi-step method that uses more than just the single previous data point (as the Euler and RK method did)
-%mirror.cv['f'] = f + 1.5*mirror.timeStep*fdot  -0.5*mirror.timeStep*mirror.r_fdot[mirror.cv['dp']-1]
+\noindent It can be seen that $k_1$ and $k_4$ are on either side of the interval of approximation defined by the time step $ts$, and $k_2$ and $k_3$ represent midpoints.
+
+\paragraph{Adams-Bashforth Method}
+Unlike previously introduced methods, the Adams-Bashforth method requires data from previous time steps.
+Methods of this nature are sometimes referred to as multistep or predictor-corrector methods.
+A two-step approximation is described in Equation \ref{eq: ab int}, however, larger step methods do exist.
+
 \begin{equation}{\label{eq: ab int} }
-y_{n+1} = y_n + 1.5*f(t_n, y_n)t_s- 0.5*f(t_{n-1}, y_{n-1})t_s
-\end{equation}%\eqcaption{Adams-Bashforth Integration}
+y_{n+1} = y_n + t_s \left( 1.5 f(t_n, y_n) - 0.5 f(t_{n-1}, y_{n-1}) \right)
+\end{equation}%\eqcaption{Two-Step Adams-Bashforth}
+
+\noindent Regardless of the number of steps,  the Adams-Bashforth methods utilize a  weighted combination of values similar to the Runge-Kutta method, but using only previous data.
+
+%mirror.cv['f'] = f + 1.5*mirror.timeStep*fdot  -0.5*mirror.timeStep*mirror.r_fdot[mirror.cv['dp']-1]
+
+
+\paragraph{Scipy solve\_ivp}
+The Scipy solve\_ipv function is capable of numerically integrating ODEs.
+
+
+% https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html
+\paragraph{Trapezoidal Integration}
+To integrate known values generated each time step, a trapezoidal integration method is used.
+Given some value $x(t)$, the trapezoidal method states that
+
+\begin{equation}{\label{eq: trapezoidal int} }
+\int_{t-t_s}^{t_s}x(t) \text{d}t \approx t_s\left( x(t)+x(t-ts) \right)/2,
+\end{equation}%\eqcaption{Trapezoidal Integration}
+where $t_s$ is the time step used between calculated values of $x$.
+Visually, this method can be thought of connecting the two $y$ values with a straight line, then calculating the area of the trapezoid formed between.
+This technique is used in a variety of agents, such as the BA agent for IACE, and the window integrator agent. 
+
+\paragraph{Python Code Example}
+To compare the resulting approximates from each method a Python script was created.
+
+
+\paragraph{Approximation Result Comparisons}
+Using the code i
+
+\begin{figure}[H]
+	\centering
+	\footnotesize
+	\includegraphics[width=\linewidth]{figures/sinEx}
+	\caption{Approximation comparison of a sinusoidal function.}
+	\label{fig: sin ex}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\footnotesize
+	\includegraphics[width=\linewidth]{figures/expEx}
+	\caption{Approximation comparison of an exponential function.}
+	\label{fig: exp ex}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\footnotesize
+	\includegraphics[width=\linewidth]{figures/logEx}
+	\caption{Approximation comparison of a logarithmic function.}
+	\label{fig: log ex}
+\end{figure}
+
+
+
+
+
+
 
 % used to solve state space equations used in governor dynamics
 \paragraph{sig.lsim}
@@ -69,14 +134,4 @@ This is used in all dynamic processes of PSLTDSim including governor states, fil
 
 % process to transform simple laplace blocks to state space
 
-
-\paragraph{Trapezoidal Integration}
-To integrate known values generated each time step, a trapezoidal integration method is used.
-Given some value $x(t)$ and an integration accumulator variable $xInt$, the trapezoidal method estimates that
-
-\begin{equation}{\label{eq: trapezoidal int} }
-xInt = xInt + ( x(t)+x(t-ts) )/2 * ts,
-\end{equation}%\eqcaption{Trapezoidal Integration}
-where $ts$ is the time step used between calculated values of $x$.
-This technique is used in a variety of agents, such as the BA agent for IACE, and the window integrator agent. 
 \end{document}
