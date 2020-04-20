@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{report}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 
@@ -16,7 +16,8 @@
 %\newcommand{\caseName}{ }
 
 \begin{document}
-\paragraph{Numerical Techniques} % this will change to chapter in thesis
+\chapter{Numerical Techniques}\label{appendix: numericalTech}
+
 PSLTDSim utilizes a variety of numerical techniques to perform integration involved with dynamic agents.
 Some of the employed methods are coded `by hand', while others utilize Python packages.
 This appendix is meant to 
@@ -27,13 +28,13 @@ and explain how agents currently handle the integration of running values.
 
 
 % options to integrate frequency from the combined swing equation
-\paragraph{Combined Swing Equation Solutions}
+\section{Combined Swing Equation Solutions}
 The options included in PSLTDSim to solve the combined swing equation for a new system frequency are Euler, Adams-Bashforth, and Runge-Kutta.
 Each of these methods are numerical approximations that provide an \emph{approximation} to the solution of an initial value problem.
-Method functions presented below were adapted from XXXrefBoyceDiprima.
+Method functions presented below were adapted from \cite{BoyceDiprima}.
 %Each method is briefly introduced and the actual code used to solve the combined swing equation is explained.
 
-\paragraph{Euler Method}
+\subsection{Euler Method}
 Of the of integration methods available to solve system frequency, the Euler method is the simplest.
 In general terms, to find the next $y$ value given some function $f(t, y)$ is
 
@@ -44,7 +45,7 @@ y_{n+1} = y_n + f(t_n, y_n)t_s,
 The next value of $y$ is simply a projection along a line tangent to $f$ at time $t$.
 It should be noted that the accuracy of approximation methods is often related to the time step size.
 
-\paragraph{Runge-Kutta Method}
+\subsection{Runge-Kutta Method}
 Improving on the Euler method, the Runge-Kutta method combines numerous projections as a weighted average to find the next $y$ value.
 The fourth order four-stage Runge-Kutta method is shown as Equation \ref{eq: rk45 int}. 
 \begin{equation}{\label{eq: rk45 int} }
@@ -59,7 +60,7 @@ The fourth order four-stage Runge-Kutta method is shown as Equation \ref{eq: rk4
 
 \noindent It can be seen that $k_1$ and $k_4$ are on either side of the interval of approximation defined by the time step $ts$, and $k_2$ and $k_3$ represent midpoints.
 
-\paragraph{Adams-Bashforth Method}
+\subsection{Adams-Bashforth Method}
 Unlike previously introduced methods, the Adams-Bashforth method requires data from previous time steps.
 Methods of this nature are sometimes referred to as multistep or predictor-corrector methods.
 A two-step approximation is described in Equation \ref{eq: ab int}, however, larger step methods do exist.
@@ -73,12 +74,12 @@ y_{n+1} = y_n + t_s \left( 1.5 f(t_n, y_n) - 0.5 f(t_{n-1}, y_{n-1}) \right)
 %mirror.cv['f'] = f + 1.5*mirror.timeStep*fdot  -0.5*mirror.timeStep*mirror.r_fdot[mirror.cv['dp']-1]
 
 
-\paragraph{Scipy solve\_ivp}
+\subsection{Scipy solve\_ivp}
 The Scipy solve\_ipv function is capable of numerically integrating ODEs.
 
 
 % https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html
-\paragraph{Trapezoidal Integration}
+\section{Trapezoidal Integration}
 To integrate known values generated each time step, a trapezoidal integration method is used.
 Given some value $x(t)$, the trapezoidal method states that
 
@@ -89,17 +90,17 @@ where $t_s$ is the time step used between calculated values of $x$.
 Visually, this method can be thought of connecting the two $y$ values with a straight line, then calculating the area of the trapezoid formed between.
 This technique is used in a variety of agents, such as the BA agent for IACE, and the window integrator agent. 
 
-\paragraph{Python Code Example}
+\section{Python Code Example}
 To compare the resulting approximates from each method a Python script was created.
 
 
-\paragraph{Approximation Result Comparisons}
+\subsection{Approximation Result Comparisons}
 Using the code i
 
 \begin{figure}[H]
 	\centering
 	\footnotesize
-	\includegraphics[width=\linewidth]{figures/sinEx}
+	\includegraphics[width=\linewidth]{numTech/sinEx}
 	\caption{Approximation comparison of a sinusoidal function.}
 	\label{fig: sin ex}
 \end{figure}
@@ -107,7 +108,7 @@ Using the code i
 \begin{figure}[H]
 	\centering
 	\footnotesize
-	\includegraphics[width=\linewidth]{figures/expEx}
+	\includegraphics[width=\linewidth]{numTech/expEx}
 	\caption{Approximation comparison of an exponential function.}
 	\label{fig: exp ex}
 \end{figure}
@@ -116,21 +117,22 @@ Using the code i
 \begin{figure}[H]
 	\centering
 	\footnotesize
-	\includegraphics[width=\linewidth]{figures/logEx}
+	\includegraphics[width=\linewidth]{numTech/logEx}
 	\caption{Approximation comparison of a logarithmic function.}
 	\label{fig: log ex}
 \end{figure}
 
 
-
-
-
-
-
 % used to solve state space equations used in governor dynamics
-\paragraph{sig.lsim}
+\section{sig.lsim}
 To process a signal through a Laplace block, the block is first transformed into state space matrices and then inserted into sig.lsim for a linear simulation.
 This is used in all dynamic processes of PSLTDSim including governor states, filter and delay blocks.
+\begin{itemize}
+\item Laplace block to SS
+\item what lsim is actually doing
+\item wind up avoidance
+\item examples
+\end{itemize}
 
 % process to transform simple laplace blocks to state space
 
