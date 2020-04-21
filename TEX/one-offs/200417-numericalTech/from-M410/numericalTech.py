@@ -80,6 +80,8 @@ for caseN in range(0,3):
         f = lambda x,c: -np.sin(2*np.pi*x)+c
         findC = lambda x,y: y+2*np.pi*np.sin(2*np.pi*x)
 
+        calcInt = 1/(2*np.pi)*np.cos(2*np.pi*1.5)-1/(2*np.pi)
+
     elif caseN ==1:
         # Exp example
         caseName = 'Exponential Example'
@@ -88,11 +90,12 @@ for caseN in range(0,3):
         numPoints = 4
         blkFlag = False # for holding plots open
 
-        A = 1
         ic = [0,0] # initial condition x,y
-        fp = lambda x, y: np.exp(A*x)
-        f = lambda x,c: A*np.exp(A*x)+c
-        findC = lambda x, y: y-A*np.exp(A*x)
+        fp = lambda x, y: np.exp(x)
+        f = lambda x,c: np.exp(x)+c
+        findC = lambda x, y: y-np.exp(x)
+
+        calcInt = np.exp(2)-3 # when A = 1
 
     else:
         # Log example
@@ -102,11 +105,12 @@ for caseN in range(0,3):
         numPoints = 4
         blkFlag = True # for holding plots open
 
-        A = 10
         ic = [1,1] # initial condition x,y
-        fp = lambda x, y: A/x
-        f = lambda x,c: A*np.log(x)+c
-        findC = lambda x, y: y-A*np.log(x)
+        fp = lambda x, y: 1/x
+        f = lambda x,c: np.log(x)+c
+        findC = lambda x, y: y-np.log(x)
+
+        calcInt = 3*np.log(3)
 
     # Find C from integrated equation for exact soln
     c = findC(ic[0], ic[1])
@@ -125,7 +129,7 @@ for caseN in range(0,3):
     ts = (tEnd-tStart)/numPoints
 
     # Calculate exact solution
-    tExact = np.linspace(tStart,tEnd, 100)
+    tExact = np.linspace(tStart,tEnd, 10000)
     yExact = f(tExact, c)
 
     # Initialize running value lists
@@ -227,12 +231,12 @@ for caseN in range(0,3):
     RKint = trapezoidalPost(t,yRK)
     ABint = trapezoidalPost(t,yAB)
 
-    print("\nMethod: Total\t Absolute Error")
-    print("Exact: \t%f\t%f" % (exactI ,abs(exactI-exactI)))
-    print("SI: \t%f\t%f" % (SIint,abs(exactI-SIint)))
-    print("RK4: \t%f\t%f" % (RKint,abs(exactI-RKint)))
-    print("AB2: \t%f\t%f" % (ABint,abs(exactI-ABint)))
-    print("Euler: \t%f\t%f" % (Eint,abs(exactI-Eint)))
+    print("\nMethod: Trapezoidal Int\t Absolute Error from calculated")
+    print("Exact: \t%.9f\t%.9f" % (exactI ,abs(calcInt-exactI)))
+    print("SI: \t%.9f\t%.9f" % (SIint,abs(calcInt-SIint)))
+    print("RK4: \t%.9f\t%.9f" % (RKint,abs(calcInt-RKint)))
+    print("AB2: \t%.9f\t%.9f" % (ABint,abs(calcInt-ABint)))
+    print("Euler: \t%.9f\t%.9f" % (Eint,abs(calcInt-Eint)))
 
 
 
