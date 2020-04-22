@@ -1,17 +1,12 @@
 """
-File meant to show numerical integration applied via python
-should essentially be the same as the matlab file(s)
-
+File meant to show classical numerical integration applied via python
 Structured in a way that is more related to the simulation method in PSLTDSim
-
 
 lambda is the python equivalent of matlab anonymous functions
 """
 # Package Imports
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
-from scipy import signal
 
 # Method Definitions
 def euler(fp, x0, y0, ts):
@@ -64,7 +59,7 @@ def trapezoidalPost(x,y):
     
 
 # Case Selection
-for caseN in range(4,5):#range(0,3):
+for caseN in range(0,3):
 
     if caseN == 0:
         # Trig example
@@ -111,7 +106,7 @@ for caseN in range(4,5):#range(0,3):
 
         calcInt = 3*np.log(3) # Calculated integral
         
-    elif caseN == 3:
+    else:
         # step input Integrator example
         caseName = 'Step Input Integrator Example'
         tStart =0
@@ -126,25 +121,6 @@ for caseN in range(4,5):#range(0,3):
 
         calcInt = 0.5*(tEnd**2) # Calculated integral
 
-    else:
-        # step input Low pass example
-        caseName = 'Step Input Low Pass Example'
-        tStart =0
-        tEnd = 2
-        numPoints = 16
-        blkFlag = True # for holding plots open
-
-        A = 0.25
-        U = 1.0
-        ic = [0,0] # initial condition x,y
-        fp = lambda x, y: (U-y)/A
-        f = lambda x,c: (U*x/A)/(1+x/A)+ c
-        findC = lambda x, y: 0#y-x/A*(U-y)
-
-        system = signal.lti([1],[A,1])
-
-        calcInt = U*tEnd-A*U*np.log(tEnd+A) # Calculated integral
-
     # Find C from integrated equation for exact soln
     c = findC(ic[0], ic[1])
 
@@ -155,8 +131,6 @@ for caseN in range(4,5):#range(0,3):
         'yE': ic[1],
         'yRK': ic[1],    
         'yAB': ic[1],
-        'ySI': ic[1],
-        'yLS': ic[1],
         }
 
     # Calculate time step
@@ -171,19 +145,11 @@ for caseN in range(4,5):#range(0,3):
     yE=[]
     yRK =[]
     yAB = []
-    # solve ivp
-    ySI = []
-    tSI = []
-    # lsim
-    yLS = []
-    xLS = []
 
     t.append(cv['t'])
     yE.append(cv['yE'])
     yRK.append(cv['yRK'])
-    yAB.append(cv['yAB'])
-    yLS.append(cv['yLS'])
-    xLS.append(cv['yLS'])    
+    yAB.append(cv['yAB'])  
 
     # Start Simulation
     while cv['t']< tEnd:
@@ -200,27 +166,11 @@ for caseN in range(4,5):#range(0,3):
             # Required to handle first step when a -2 index doesn't exist
             cv['yAB'] = adams2( fp, cv['t'], cv['yAB'], t[-1], yAB[-1], ts )
 
-        # Runge-Kutta via solve IVP.
-        soln = solve_ivp(fp, (cv['t'], cv['t']+ts), [cv['ySI']])
-
-        # Use lsim...
-        if caseN >= 4:
-            tout, y, x = signal.lsim(system, [U,U], [0,ts], xLS[-1])
-            cv['yLS']=y[-1]
-            yLS.append(cv['yLS'])
-            xLS.append(x[-1]) # this is the state
             
         # Log calculated results
         yE.append(cv['yE'])
         yRK.append(cv['yRK'])
         yAB.append(cv['yAB'])
-        
-        
-        # handle solve_ivp data output
-        ySI += list(soln.y[-1])
-        tSI += list(soln.t)
-        # ensure correct cv
-        cv['ySI'] = ySI[-1]
     
         # Increment and log time
         cv['t'] += ts
@@ -235,13 +185,6 @@ for caseN in range(4,5):#range(0,3):
             c=[0,0,0],
             linewidth=2,
             label="Exact")
-    ax.plot(tSI,ySI,
-            marker='x',
-            markersize=10,
-            fillstyle='none',
-            linestyle=':',
-            c=[1,.647,0],
-            label="solve_ivp")    
     ax.plot(t,yE,
             marker='o',
             fillstyle='none',
@@ -261,33 +204,25 @@ for caseN in range(4,5):#range(0,3):
             linestyle=':',
             c =[0,1,0],
             label="AB2")
-    ax.plot(t,yLS,
-            marker='+',
-            fillstyle='none',
-            linestyle=':',
-            c =[0,1,1],
-            label="lsim")
 
     # Format Plot
     fig.set_dpi(150)
     fig.set_size_inches(9, 2.5)
     ax.set_xlim(min(t), max(t))
     ax.grid(True, alpha=0.25)
-    ax.legend(loc='best',  ncol=3)
+    ax.legend(loc='best',  ncol=2)
     fig.tight_layout()    
     plt.show(block = blkFlag)
     plt.pause(0.00001)
 
     # Trapezoidal Integration
     exactI = trapezoidalPost(tExact,yExact)
-    SIint = trapezoidalPost(tSI,ySI)
     Eint = trapezoidalPost(t,yE)
     RKint = trapezoidalPost(t,yRK)
     ABint = trapezoidalPost(t,yAB)
 
     print("\nMethod: Trapezoidal Int\t Absolute Error from calculated")
     print("Exact: \t%.9f\t%.9f" % (exactI ,abs(calcInt-exactI)))
-    print("SI: \t%.9f\t%.9f" % (SIint,abs(calcInt-SIint)))
     print("RK4: \t%.9f\t%.9f" % (RKint,abs(calcInt-RKint)))
     print("AB2: \t%.9f\t%.9f" % (ABint,abs(calcInt-ABint)))
     print("Euler: \t%.9f\t%.9f" % (Eint,abs(calcInt-Eint)))

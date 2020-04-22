@@ -8,132 +8,27 @@
 
 %% Header
 \rhead{Thad Haines \\ Page \thepage\ of \pageref{LastPage}}
-\chead{Numerical Techniques \\ 04-17-20}
-\lhead{Thesis Addendums \\ }
+\chead{Numerical Techniques \\ 04-17-20 to 4-XX-20}
+\lhead{Thesis Addendum \\ }
 
 %\usepackage{graphicx}
 %\graphicspath{ {figures/} }
 %\newcommand{\caseName}{ }
 
+% for code listings with color 10/17/19
+\usepackage{minted}
+\usepackage{xcolor}
+
+%clean up doc
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}  % remove chapter X from chapter heading
+\titlespacing*{\chapter}{0em}{-2em}{1em} % condesnse space around chapter title
+\usepackage{etoolbox}
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+% Handle thesis specific functions
+\newcommand{\eqcaption}{ }
+
 \begin{document}
-\chapter{Numerical Techniques}\label{appendix: numericalTech}
-
-PSLTDSim utilizes a variety of numerical techniques to perform integration involved with dynamic agents.
-Some of the employed methods are coded `by hand', while others utilize Python packages.
-This appendix is meant to 
-provide more detail on available integration methods for system frequency,
-cover how Laplace style block diagrams are computed by PSLTDSim, 
-and explain how agents currently handle the integration of running values.
-
-
-
-% options to integrate frequency from the combined swing equation
-\section{Combined Swing Equation Solutions}
-The options included in PSLTDSim to solve the combined swing equation for a new system frequency are Euler, Adams-Bashforth, and Runge-Kutta.
-Each of these methods are numerical approximations that provide an \emph{approximation} to the solution of an initial value problem.
-Method functions presented below were adapted from \cite{BoyceDiprima}.
-%Each method is briefly introduced and the actual code used to solve the combined swing equation is explained.
-
-\subsection{Euler Method}
-Of the of integration methods available to solve system frequency, the Euler method is the simplest.
-In general terms, to find the next $y$ value given some function $f(t, y)$ is
-
-\begin{equation}{\label{eq: generic euler} }
-y_{n+1} = y_n + f(t_n, y_n)t_s,
-\end{equation}%\eqcaption{Euler Method}
-\noindent where $t_s$ is desired time step.
-The next value of $y$ is simply a projection along a line tangent to $f$ at time $t$.
-It should be noted that the accuracy of approximation methods is often related to the time step size.
-
-\subsection{Runge-Kutta Method}
-Improving on the Euler method, the Runge-Kutta method combines numerous projections as a weighted average to find the next $y$ value.
-The fourth order four-stage Runge-Kutta method is shown as Equation \ref{eq: rk45 int}. 
-\begin{equation}{\label{eq: rk45 int} }
-\begin{aligned}
-    k_1 &= f(t_n, \ y_n)\\
-    k_2 &= f(t_n+t_s/2, \ y_n+t_s k_1/2)\\
-    k_3 &= f(t_n+t_s/2, \ y_n+t_s k_2/2)\\
-    k_4 &= f(t_n+t_s, \ y_n+t_sk_3)\\
-    y_{n+1} &= y_n + t_s(k_1+2k_2+2k_3+k_4)/6
-    \end{aligned}
-\end{equation}%\eqcaption{Fourth Order Four-Stage Runge-Kutta}
-
-\noindent It can be seen that $k_1$ and $k_4$ are on either side of the interval of approximation defined by the time step $ts$, and $k_2$ and $k_3$ represent midpoints.
-
-\subsection{Adams-Bashforth Method}
-Unlike previously introduced methods, the Adams-Bashforth method requires data from previous time steps.
-Methods of this nature are sometimes referred to as multistep or predictor-corrector methods.
-A two-step approximation is described in Equation \ref{eq: ab int}, however, larger step methods do exist.
-
-\begin{equation}{\label{eq: ab int} }
-y_{n+1} = y_n + t_s \left( 1.5 f(t_n, y_n) - 0.5 f(t_{n-1}, y_{n-1}) \right)
-\end{equation}%\eqcaption{Two-Step Adams-Bashforth}
-
-\noindent Regardless of the number of steps,  the Adams-Bashforth methods utilize a  weighted combination of values similar to the Runge-Kutta method, but using only previous data.
-
-%mirror.cv['f'] = f + 1.5*mirror.timeStep*fdot  -0.5*mirror.timeStep*mirror.r_fdot[mirror.cv['dp']-1]
-
-
-\subsection{Scipy solve\_ivp}
-The Scipy solve\_ipv function is capable of numerically integrating ODEs.
-
-
-% https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html
-\section{Trapezoidal Integration}
-To integrate known values generated each time step, a trapezoidal integration method is used.
-Given some value $x(t)$, the trapezoidal method states that
-
-\begin{equation}{\label{eq: trapezoidal int} }
-\int_{t-t_s}^{t_s}x(t) \text{d}t \approx t_s\left( x(t)+x(t-ts) \right)/2,
-\end{equation}%\eqcaption{Trapezoidal Integration}
-where $t_s$ is the time step used between calculated values of $x$.
-Visually, this method can be thought of connecting the two $y$ values with a straight line, then calculating the area of the trapezoid formed between.
-This technique is used in a variety of agents, such as the BA agent for IACE, and the window integrator agent. 
-
-\section{Python Code Example}
-To compare the resulting approximates from each method a Python script was created.
-
-
-\subsection{Approximation Result Comparisons}
-Using the code i
-
-\begin{figure}[H]
-	\centering
-	\footnotesize
-	\includegraphics[width=\linewidth]{numTech/sinEx}
-	\caption{Approximation comparison of a sinusoidal function.}
-	\label{fig: sin ex}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\footnotesize
-	\includegraphics[width=\linewidth]{numTech/expEx}
-	\caption{Approximation comparison of an exponential function.}
-	\label{fig: exp ex}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\footnotesize
-	\includegraphics[width=\linewidth]{numTech/logEx}
-	\caption{Approximation comparison of a logarithmic function.}
-	\label{fig: log ex}
-\end{figure}
-
-
-% used to solve state space equations used in governor dynamics
-\section{sig.lsim}
-To process a signal through a Laplace block, the block is first transformed into state space matrices and then inserted into sig.lsim for a linear simulation.
-This is used in all dynamic processes of PSLTDSim including governor states, filter and delay blocks.
-\begin{itemize}
-\item Laplace block to SS
-\item what lsim is actually doing
-\item wind up avoidance
-\item examples
-\end{itemize}
-
-% process to transform simple laplace blocks to state space
-
+% file meant to more easily build wip appendix
+\input{../../../../Thesis/template/appendix/numericalTech}
 \end{document}
