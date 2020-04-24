@@ -36,10 +36,9 @@ def trapezoidalPost(x,y):
     for ndx in range(1,len(x)):
         integral+= (y[ndx]+y[ndx-1])/2 * (x[ndx]-x[ndx-1])
     return integral
-    
 
 # Case Selection
-for caseN in range(0,4):
+for caseN in range(0,3):
 
     if caseN == 0:
         # step input Integrator example
@@ -82,10 +81,10 @@ for caseN in range(0,4):
 
     else:
         # step multi order system
-        caseName = 'Step Input Multi-Order System Example'
+        caseName = 'Step Input Third Order System Example'
         tStart =0
         tEnd = 5
-        numPoints = 10
+        numPoints = 5
         blkFlag = True # for holding plots open
 
         U = 1
@@ -125,10 +124,7 @@ for caseN in range(0,4):
             alpha*(A*T0**2+B*T2**2+C*T4**2)
 
             )# Calculated integral
-
-    # Find C from integrated equation for exact soln
-    c = findC(ic[0], ic[1])
-
+        
     # Initialize current value dictionary
     # Shown to mimic PSLTDSim record keeping
     cv={
@@ -140,10 +136,6 @@ for caseN in range(0,4):
 
     # Calculate time step
     ts = (tEnd-tStart)/numPoints
-
-    # Calculate exact solution
-    tExact = np.linspace(tStart,tEnd, 1000)
-    yExact = f(tExact, c)
 
     # Initialize running value lists
     t=[]
@@ -158,7 +150,14 @@ for caseN in range(0,4):
     t.append(cv['t'])
     yRK.append(cv['yRK'])
     yLS.append(cv['yLS'])
-    xLS.append(cv['yLS'])    
+    xLS.append(cv['yLS'])
+
+    # Find C from integrated equation for exact soln
+    c = findC(ic[0], ic[1])
+
+    # Calculate exact solution
+    tExact = np.linspace(tStart,tEnd, 1000)
+    yExact = f(tExact, c)
 
     # Start Simulation
     while cv['t']< tEnd:
@@ -207,7 +206,7 @@ for caseN in range(0,4):
             fillstyle='none',
             linestyle=':',
             c=[1,0,1],
-            label="RK45")
+            label="RK4")
     ax.plot(tSI,ySI,
             marker='x',
             markersize=10,

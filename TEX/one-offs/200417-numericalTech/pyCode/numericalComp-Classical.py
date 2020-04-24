@@ -197,7 +197,7 @@ for caseN in range(0,3):
             fillstyle='none',
             linestyle=':',
             c=[1,0,1],
-            label="RK45")
+            label="RK4")
     ax.plot(t,yAB,
             marker='s',
             fillstyle='none',
