@@ -39,7 +39,7 @@ def trapezoidalPost(x,y):
     
 
 # Case Selection
-for caseN in range(0,2):#range(0,3):
+for caseN in range(0,4):
 
     if caseN == 0:
         # step input Integrator example
@@ -50,7 +50,8 @@ for caseN in range(0,2):#range(0,3):
         blkFlag = False # for holding plots open
 
         U = 1
-        ic = [0,0] # initial condition x,y
+        initState = 0
+        ic = [0,initState] # initial condition x,y
         fp = lambda x, y: 1
         f = lambda x, c: x+c
         findC = lambda x, y: y-x
@@ -59,17 +60,18 @@ for caseN in range(0,2):#range(0,3):
 
         calcInt = 0.5*(tEnd**2) # Calculated integral
 
-    else:
+    elif caseN == 1:
         # step input Low pass example
         caseName = 'Step Input Low Pass Example'
         tStart =0
         tEnd = 2
         numPoints = 4
-        blkFlag = True # for holding plots open
+        blkFlag = False # for holding plots open
 
         A = 0.25
         U = 1.0
-        ic = [0,0] # initial condition x,y
+        initState = 0
+        ic = [0,initState] # initial condition x,y
         fp = lambda x, y: 1/A*np.exp(-x/A)# via table
         f = lambda x, c: -np.exp(-x/A) +c
         findC = lambda x, y : y+np.exp(-x/A)
@@ -77,6 +79,52 @@ for caseN in range(0,2):#range(0,3):
         system = signal.lti([1],[A,1])
 
         calcInt = tEnd + A*np.exp(-tEnd/A)-A # Calculated integral
+
+    else:
+        # step multi order system
+        caseName = 'Step Input Multi-Order System Example'
+        tStart =0
+        tEnd = 5
+        numPoints = 10
+        blkFlag = True # for holding plots open
+
+        U = 1
+        T0 = 0.4
+        T2 = 4.5
+        T1 = 5
+        T3 = -1
+        T4 = 0.5
+
+        alphaNum = (T1*T3)
+        alphaDen = (T0*T2*T4)
+        alpha = alphaNum/alphaDen
+
+        num = alphaNum*np.array([1, 1/T1+1/T3, 1/(T1*T3)])
+        den  = alphaDen*np.array([1, 1/T4+1/T0+1/T2, 1/(T0*T4)+1/(T2*T4)+1/(T0*T2),
+                         1/(T0*T2*T4)])
+    
+        # PFE
+        A = ((1/T1-1/T0)*(1/T3-1/T0))/((1/T2-1/T0)*(1/T4-1/T0))
+        B = ((1/T1-1/T2)*(1/T3-1/T2))/((1/T0-1/T2)*(1/T4-1/T2))
+        C = ((1/T1-1/T4)*(1/T3-1/T4))/((1/T0-1/T4)*(1/T2-1/T4))
+        
+        initState = 0 # for steady state start
+        ic = [0,0] # initial condition x,y
+        fp = lambda x, y: alpha*(A*np.exp(-x/T0)+B*np.exp(-x/T2)+C*np.exp(-x/T4))
+        f = lambda x, c: alpha*(-T0*A*np.exp(-x/T0)-T2*B*np.exp(-x/T2)-T4*C*np.exp(-x/T4))+c
+        findC = lambda x, y : alpha*(A*T0+B*T2+C*T4)
+
+        system = signal.lti(num,den)
+        
+        c = findC(ic[0], ic[1])
+        calcInt = (
+            alpha*A*T0**2*np.exp(-tEnd/T0) +
+            alpha*B*T2**2*np.exp(-tEnd/T2) +
+            alpha*C*T4**2*np.exp(-tEnd/T4) +
+            c*tEnd -
+            alpha*(A*T0**2+B*T2**2+C*T4**2)
+
+            )# Calculated integral
 
     # Find C from integrated equation for exact soln
     c = findC(ic[0], ic[1])
@@ -122,7 +170,11 @@ for caseN in range(0,2):#range(0,3):
         soln = solve_ivp(fp, (cv['t'], cv['t']+ts), [cv['ySI']])
 
         # lsim solution
-        tout, ylsim, xlsim = signal.lsim(system, [U,U], [0,ts], xLS[-1])            
+        if cv['t'] > 0:
+            tout, ylsim, xlsim = signal.lsim(system, [U,U], [0,ts], xLS[-1])
+        else:
+            tout, ylsim, xlsim = signal.lsim(system, [U,U], [0,ts], initState)
+
         # Log calculated results
         yRK.append(cv['yRK'])
         
