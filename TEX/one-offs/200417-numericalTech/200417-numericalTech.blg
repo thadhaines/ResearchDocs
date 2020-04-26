@@ -1,5 +1,5 @@
-[0] Config.pm:304> INFO - This is Biber 2.13
+[0] Config.pm:304> INFO - This is Biber 2.12
 [0] Config.pm:307> INFO - Logfile is '200417-numericalTech.blg'
-[22] biber-MSWIN64:315> INFO - === 
-[292] Utils.pm:316> ERROR - Cannot find '200417-numericalTech.bcf'!
-[292] Biber.pm:114> INFO - ERRORS: 1
+[26] biber-MSWIN64:315> INFO - === 
+[383] Utils.pm:209> ERROR - Cannot find control file '200417-numericalTech.bcf'! - Did latex run successfully on your .tex file before you ran biber?
+[383] Biber.pm:114> INFO - ERRORS: 1

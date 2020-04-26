@@ -39,6 +39,7 @@ def trapezoidalPost(x,y):
 
 # Case Selection
 for caseN in range(0,3):
+    blkFlag = False # for holding plots open
 
     if caseN == 0:
         # step input Integrator example
@@ -46,7 +47,6 @@ for caseN in range(0,3):
         tStart =0
         tEnd = 4
         numPoints = 4
-        blkFlag = False # for holding plots open
 
         U = 1
         initState = 0
@@ -54,9 +54,7 @@ for caseN in range(0,3):
         fp = lambda x, y: 1
         f = lambda x, c: x+c
         findC = lambda x, y: y-x
-
         system = signal.lti([1],[1,0])
-
         calcInt = 0.5*(tEnd**2) # Calculated integral
 
     elif caseN == 1:
@@ -65,7 +63,6 @@ for caseN in range(0,3):
         tStart =0
         tEnd = 2
         numPoints = 4
-        blkFlag = False # for holding plots open
 
         A = 0.25
         U = 1.0
@@ -74,9 +71,7 @@ for caseN in range(0,3):
         fp = lambda x, y: 1/A*np.exp(-x/A)# via table
         f = lambda x, c: -np.exp(-x/A) +c
         findC = lambda x, y : y+np.exp(-x/A)
-
         system = signal.lti([1],[A,1])
-
         calcInt = tEnd + A*np.exp(-tEnd/A)-A # Calculated integral
 
     else:
@@ -84,7 +79,7 @@ for caseN in range(0,3):
         caseName = 'Step Input Third Order System Example'
         tStart =0
         tEnd = 5
-        numPoints = 5
+        numPoints = 5*2
         blkFlag = True # for holding plots open
 
         U = 1
@@ -112,9 +107,7 @@ for caseN in range(0,3):
         fp = lambda x, y: alpha*(A*np.exp(-x/T0)+B*np.exp(-x/T2)+C*np.exp(-x/T4))
         f = lambda x, c: alpha*(-T0*A*np.exp(-x/T0)-T2*B*np.exp(-x/T2)-T4*C*np.exp(-x/T4))+c
         findC = lambda x, y : alpha*(A*T0+B*T2+C*T4)
-
         system = signal.lti(num,den)
-        
         c = findC(ic[0], ic[1])
         calcInt = (
             alpha*A*T0**2*np.exp(-tEnd/T0) +
@@ -122,7 +115,6 @@ for caseN in range(0,3):
             alpha*C*T4**2*np.exp(-tEnd/T4) +
             c*tEnd -
             alpha*(A*T0**2+B*T2**2+C*T4**2)
-
             )# Calculated integral
         
     # Initialize current value dictionary
@@ -133,9 +125,6 @@ for caseN in range(0,3):
         'ySI': ic[1],
         'yLS': ic[1],
         }
-
-    # Calculate time step
-    ts = (tEnd-tStart)/numPoints
 
     # Initialize running value lists
     t=[]
@@ -151,10 +140,11 @@ for caseN in range(0,3):
     yRK.append(cv['yRK'])
     yLS.append(cv['yLS'])
     xLS.append(cv['yLS'])
-
+    
+    # Calculate time step
+    ts = (tEnd-tStart)/numPoints
     # Find C from integrated equation for exact soln
     c = findC(ic[0], ic[1])
-
     # Calculate exact solution
     tExact = np.linspace(tStart,tEnd, 1000)
     yExact = f(tExact, c)
@@ -238,7 +228,10 @@ for caseN in range(0,3):
     RKint = trapezoidalPost(t,yRK)
     LSint = trapezoidalPost(t,yLS)
 
-    print("\nMethod: Trapezoidal Int\t Absolute Error from calculated")
+    print("\n%s" % caseName)
+    print("time step:  %.2f" % ts)
+    print("Method: Trapezoidal Int\t Absolute Error from calculated")
+    print("Calc: \t%.9f\t%.9f" % (calcInt ,abs(calcInt-calcInt)))    
     print("Exact: \t%.9f\t%.9f" % (exactI ,abs(calcInt-exactI)))    
     print("RK4: \t%.9f\t%.9f" % (RKint,abs(calcInt-RKint)))
     print("SI: \t%.9f\t%.9f" % (SIint,abs(calcInt-SIint)))

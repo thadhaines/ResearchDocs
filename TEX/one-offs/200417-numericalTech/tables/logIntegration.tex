@@ -1,0 +1,28 @@
+% Testing of external table build for \input later
+\begin{singlespace}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{@{} l l l  @{}} 	
+		\toprule % @ signs to remove extra L R space
+		\footnotesize % this will affect the table font (makse it 10pt)
+		\raggedright % for non justified table text
+		Method	&		Result & Absolute Error		\\
+		\midrule		
+%
+%Logarithmic Example
+%time step:  1.00
+%Method: Trapezoidal Int	 Absolute Error from calculated
+Calulated& 	5.545177444&	0.000000000\\
+Exact& 	5.545177439&	0.000000006\\
+RK4& 	5.488293651&	0.056883794\\
+AB2& 	6.000000000&	0.454822556\\
+Euler& 	6.416666667&	0.871489222\\
+%
+		\bottomrule
+	\end{tabular}
+	\caption{Trapezoidal integration results of logarithmic function using an $x$ step of 1.}
+	\label{tab: log exp res}
+\end{table}
+\end{singlespace}
+	
+	

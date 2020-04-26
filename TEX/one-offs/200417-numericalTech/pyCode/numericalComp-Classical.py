@@ -60,69 +60,51 @@ def trapezoidalPost(x,y):
 
 # Case Selection
 for caseN in range(0,3):
-
+    blkFlag = False # for holding plots open
     if caseN == 0:
         # Trig example
         caseName = 'Sinusodial Example'
         tStart =0
-        tEnd = 1.5
-        numPoints = 6
-        blkFlag = False # for holding plots open
+        tEnd = 3
+        numPoints = 6*2
 
         ic = [0,0] # initial condition x,y
         fp = lambda x, y: -2*np.pi*np.cos(2*np.pi*x)
         f = lambda x,c: -np.sin(2*np.pi*x)+c
-        findC = lambda x,y: y+2*np.pi*np.sin(2*np.pi*x)
-
-        calcInt = 1/(2*np.pi)*np.cos(2*np.pi*1.5)-1/(2*np.pi)
+        findC = lambda x,y: y+np.sin(2*np.pi*x)
+        c = findC(ic[0],ic[1])
+        calcInt = ( 1/(2*np.pi)*np.cos(2*np.pi*tEnd)+c*tEnd -
+                    1/(2*np.pi)*np.cos(2*np.pi*ic[0])-c*ic[0] ) 
 
     elif caseN == 1:
         # Exp example
         caseName = 'Exponential Example'
         tStart =0
-        tEnd = 2
-        numPoints = 4
-        blkFlag = False # for holding plots open
+        tEnd = 3
+        numPoints = 3
 
         ic = [0,0] # initial condition x,y
         fp = lambda x, y: np.exp(x)
         f = lambda x,c: np.exp(x)+c
         findC = lambda x, y: y-np.exp(x)
-
-        calcInt = np.exp(2)-3 # Calculated integral
+        c= findC(ic[0],ic[1])
+        calcInt = np.exp(tEnd)+c*tEnd-np.exp(ic[0])+c*ic[0]
 
     elif caseN == 2:
         # Log example
         caseName = 'Logarithmic Example'
         tStart =1
-        tEnd = 3
-        numPoints = 4
+        tEnd = 4
+        numPoints = 3
         blkFlag = True # for holding plots open
 
         ic = [1,1] # initial condition x,y
         fp = lambda x, y: 1/x
         f = lambda x,c: np.log(x)+c
         findC = lambda x, y: y-np.log(x)
-
-        calcInt = 3*np.log(3) # Calculated integral
-        
-    else:
-        # step input Integrator example
-        caseName = 'Step Input Integrator Example'
-        tStart =0
-        tEnd = 4
-        numPoints = 4
-        blkFlag = True # for holding plots open
-
-        ic = [0,0] # initial condition x,y
-        fp = lambda x, y: 1
-        f = lambda x,c: x+c
-        findC = lambda x, y: y-x
-
-        calcInt = 0.5*(tEnd**2) # Calculated integral
-
-    # Find C from integrated equation for exact soln
-    c = findC(ic[0], ic[1])
+        c= findC(ic[0],ic[1])
+        calcInt = (tEnd*np.log(tEnd)- tEnd +c*tEnd -
+                   ic[0]*np.log(ic[0])+ ic[0] -c*ic[0]) 
 
     # Initialize current value dictionary
     # Shown to mimic PSLTDSim record keeping
@@ -135,7 +117,8 @@ for caseN in range(0,3):
 
     # Calculate time step
     ts = (tEnd-tStart)/numPoints
-
+    # Find C from integrated equation for exact soln
+    c = findC(ic[0], ic[1])
     # Calculate exact solution
     tExact = np.linspace(tStart,tEnd, 10000)
     yExact = f(tExact, c)
@@ -221,7 +204,10 @@ for caseN in range(0,3):
     RKint = trapezoidalPost(t,yRK)
     ABint = trapezoidalPost(t,yAB)
 
-    print("\nMethod: Trapezoidal Int\t Absolute Error from calculated")
+    print("\n%s" % caseName)
+    print("time step:  %.2f" % ts)
+    print("Method: Trapezoidal Int\t Absolute Error from calculated")
+    print("Calc: \t%.9f\t%.9f" % (calcInt ,abs(calcInt-calcInt)))
     print("Exact: \t%.9f\t%.9f" % (exactI ,abs(calcInt-exactI)))
     print("RK4: \t%.9f\t%.9f" % (RKint,abs(calcInt-RKint)))
     print("AB2: \t%.9f\t%.9f" % (ABint,abs(calcInt-ABint)))
