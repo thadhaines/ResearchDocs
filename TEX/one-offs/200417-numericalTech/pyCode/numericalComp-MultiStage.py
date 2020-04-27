@@ -28,7 +28,7 @@ def trapezoidalPost(x,y):
 # step multi order system
 tStart =0
 tEnd = 7
-numPoints = 7*2
+numPoints = 7*1
 blkFlag = True # for holding plots open
 
 U = 1
@@ -212,6 +212,8 @@ fig.set_size_inches(9, 2.5)
 ax.set_xlim(min(t), max(t))
 ax.grid(True, alpha=0.25)
 ax.legend(loc='lower right',  ncol=1)
+ax.set_ylabel('y Value')
+ax.set_xlabel('Time [seconds]')
 fig.tight_layout()    
 plt.show(block = False)
 plt.pause(0.00001)

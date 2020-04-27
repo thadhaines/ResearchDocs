@@ -79,7 +79,7 @@ for caseN in range(0,3):
         caseName = 'Step Input Third Order System Example'
         tStart =0
         tEnd = 5
-        numPoints = 5*2
+        numPoints = 5*1
         blkFlag = True # for holding plots open
 
         U = 1
@@ -218,6 +218,8 @@ for caseN in range(0,3):
     ax.set_xlim(min(t), max(t))
     ax.grid(True, alpha=0.25)
     ax.legend(loc='best',  ncol=2)
+    ax.set_ylabel('y Value')
+    ax.set_xlabel('Time [seconds]')
     fig.tight_layout()    
     plt.show(block = blkFlag)
     plt.pause(0.00001)

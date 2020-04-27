@@ -63,7 +63,7 @@ for caseN in range(0,3):
     blkFlag = False # for holding plots open
     if caseN == 0:
         # Trig example
-        caseName = 'Sinusodial Example'
+        caseName = 'Sinusoidal Example'
         tStart =0
         tEnd = 3
         numPoints = 6*2
@@ -194,6 +194,8 @@ for caseN in range(0,3):
     ax.set_xlim(min(t), max(t))
     ax.grid(True, alpha=0.25)
     ax.legend(loc='best',  ncol=2)
+    ax.set_ylabel('y Value')
+    ax.set_xlabel('x Value')
     fig.tight_layout()    
     plt.show(block = blkFlag)
     plt.pause(0.00001)

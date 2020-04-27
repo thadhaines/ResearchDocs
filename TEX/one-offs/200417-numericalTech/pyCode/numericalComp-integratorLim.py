@@ -112,28 +112,28 @@ ax.plot(t,yLS,
         fillstyle='none',
         linestyle='--',
         c=[0.6,0.6,0.6],
-        label="BLy")
+        label="Case 1 Output")
 ax.plot(t,xLS,
         marker='o',
         markersize=5,
         fillstyle='none',
         linestyle='',
         c=[0.6,0.6,0.6],
-        label="BLx") 
+        label="Case 1 State") 
 ax.plot(t,yLSlim,
         #marker='+',
         markersize=10,
         fillstyle='none',
         linestyle=':',
         c =[1,0,1],
-        label="CLy")
+        label="Case 2 Output")
 ax.plot(t,xLSlim,
         marker='s',
         markersize=5,
         fillstyle='none',
         linestyle='',
         c =[1,0,1],
-        label="CLx")
+        label="Case 2 State")
 ax.step(t,r_U,
         #marker='s',
         #markersize=5,
@@ -148,6 +148,8 @@ fig.set_size_inches(9, 2.5)
 ax.set_xlim(min(t), max(t))
 ax.grid(True, alpha=0.25)
 ax.legend(loc='best',  ncol=3)
+ax.set_ylabel('y Value')
+ax.set_xlabel('Time [seconds]')
 fig.tight_layout()    
 plt.show(block = True)
 plt.pause(0.00001)
